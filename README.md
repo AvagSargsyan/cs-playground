@@ -1,10 +1,10 @@
 # CS Playground
 
-**Interactive computer science lessons for students aged 15–18.** I built this demo for my application to the Computer Science Teacher role at UWC Dilijan.
+**Interactive computer science lessons for students aged 15–18.** Built for demo purposes for UWC Dilijan.
 
 **Live demo:** https://cs-playground-demo.vercel.app
 
-> This is a personal demo project. It is **not** an official UWC Dilijan website.
+> This is a demo project. It is **not** an official UWC Dilijan website.
 
 Students learn three foundational ideas (**sorting algorithms**, **binary search** and **recursion**) through the same three stages:
 

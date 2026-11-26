@@ -33,7 +33,7 @@ test('every page says it is a demo by the author and not an official UWC site', 
   for (const path of ['/', '/sorting/learn', '/about']) {
     await page.goto(path)
     await expect(page.locator('header')).toContainText('Demo by Avag Sargsyan')
-    await expect(page.locator('footer')).toContainText('not an official UWC Dilijan website')
+    await expect(page.locator('footer')).toContainText('Not an official UWC Dilijan website')
   }
 })
 

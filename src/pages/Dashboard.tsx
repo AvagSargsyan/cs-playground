@@ -19,8 +19,7 @@ function Intro() {
         <strong>Explore</strong> it step by step, and <strong>Practice</strong> with exercises.
       </p>
       <p className={s.author}>
-        Made by {SITE.author} as part of an application for the {SITE.role} position at{' '}
-        {SITE.school}. Not an official {SITE.school} website.{' '}
+        Built by {SITE.author} for demo purposes for {SITE.school}.{' '}
         <Link to="/about">About this demo</Link>
       </p>
     </section>
