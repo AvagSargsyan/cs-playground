@@ -1,0 +1,94 @@
+/*
+ * Design tokens. The palette and typography follow the UWC Dilijan website
+ * (uwcdilijan.org: theme main.css + custom.css). See .claude/PLAN.md §2.
+ */
+:root {
+  /* Core brand */
+  --uwc-blue: #0064a7;
+  --uwc-blue-dark: #004f84;
+  --uwc-blue-tint: #e5eff6;
+  --uwc-teal: #00807b;
+  --uwc-teal-tint: #e0f0ef;
+  --uwc-orange: #f45b21;
+  --uwc-orange-tint: #fde9e0;
+  --uwc-raspberry: #c83461;
+  --uwc-raspberry-tint: #f8e4ea;
+
+  /* Fact-tile palette, used as module identity colors */
+  --tile-bordo: #901c45;
+  --tile-green: #00918b;
+  --tile-purple: #69256d;
+  --tile-darkblue: #0c445b;
+  --tile-ochre: #c06331;
+  --tile-yellow: #fcbc05;
+
+  /* Neutrals */
+  --ink: #252525;
+  --ink-heading: #252b33;
+  --ink-muted: #5c5c5c;
+  --navy-deep: #0c161f;
+  --border: #dce0e9;
+  --border-strong: #cfcfcf;
+  --surface: #ffffff;
+  --surface-alt: #f7f8fb;
+  --surface-sunken: #eceef0;
+  --muted: #cfcfcf;
+
+  /* Semantic */
+  --color-link: var(--uwc-blue);
+  --color-success: var(--uwc-teal);
+  --color-success-bg: var(--uwc-teal-tint);
+  --color-error: var(--uwc-raspberry);
+  --color-error-bg: var(--uwc-raspberry-tint);
+  --focus-ring: var(--uwc-orange);
+
+  /* Algorithm visual states (same in every module, §2.1) */
+  --state-default: #99c1dc;
+  --state-active: var(--uwc-blue);
+  --state-compare: var(--uwc-orange);
+  --state-swap: var(--uwc-raspberry);
+  --state-merge: var(--tile-purple);
+  --state-sorted: var(--uwc-teal);
+  --state-mid: var(--uwc-orange);
+  --state-eliminated: var(--muted);
+  --state-base: var(--uwc-teal);
+
+  /* Module identity */
+  --module-sorting: var(--tile-bordo);
+  --module-search: var(--tile-green);
+  --module-recursion: var(--tile-purple);
+  --module-teachers: var(--tile-darkblue);
+  --module-about: var(--tile-ochre);
+
+  /* Typography */
+  --font-heading: 'Raleway', Georgia, serif;
+  --font-body: 'Cabin', system-ui, sans-serif;
+  --font-code: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Shape: square-ish like the UWC site */
+  --radius-sm: 2px;
+  --radius: 4px;
+  --border-inset: inset 0 0 0 1px var(--border);
+  --shadow-lift: 0 6px 20px rgba(12, 22, 31, 0.08);
+
+  /* Spacing & layout */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --content-width: 1200px;
+  --reading-width: 760px;
+  --gutter: 16px;
+
+  --hero-gradient: linear-gradient(180deg, rgba(12, 22, 31, 0) 0%, #0c161f 100%);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 32px;
+  }
+}

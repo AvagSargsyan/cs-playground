@@ -1,0 +1,22 @@
+# Planning docs and local AI config: never pushed
+/.claude/
+/CLAUDE.md
+
+# Env files
+.env
+.env*
+!.env.example
+
+# Dependencies / build
+node_modules
+dist
+
+# Tests
+playwright-report
+test-results
+coverage
+
+# Editors / OS
+/.idea/*
+.DS_Store
+*.local
