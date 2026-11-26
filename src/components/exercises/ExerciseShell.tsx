@@ -180,7 +180,7 @@ export function PracticeRunner({
   const go = (i: number) => {
     setFinished(false)
     setCurrent(i)
-    topRef.current?.scrollIntoView({ block: 'start' })
+    topRef.current?.scrollIntoView?.({ block: 'start' })
   }
 
   const solved = exercises.filter((e) => records[e.id]?.completed).length
