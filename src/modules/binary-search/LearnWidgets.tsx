@@ -23,7 +23,7 @@ export function Walkthrough({
             <span className={l.walkNo}>{i + 1}</span>
             {st.title}
           </p>
-          <div className={l.walkCells}>
+          <div className={l.walkCells} tabIndex={0}>
             <CellArray view={st.view} size="sm" label={`Step ${i + 1}`} />
           </div>
           <p className={l.walkNote}>{st.note}</p>

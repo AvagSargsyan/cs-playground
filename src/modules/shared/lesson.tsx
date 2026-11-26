@@ -213,7 +213,7 @@ export function DataTable({
   rows: ReactNode[][]
 }) {
   return (
-    <div className={s.tableWrap}>
+    <div className={s.tableWrap} tabIndex={0} role="region" aria-label="Table">
       <table className={s.table}>
         {caption && <caption>{caption}</caption>}
         <thead>

@@ -86,7 +86,7 @@ export function Teachers() {
         <h2 id="ib" className={s.h2}>
           Alignment with IB DP Computer Science
         </h2>
-        <div className={s.tableWrap}>
+        <div className={s.tableWrap} tabIndex={0} role="region" aria-label="IB alignment table">
           <table className={s.table}>
             <thead>
               <tr>
