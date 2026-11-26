@@ -1,0 +1,39 @@
+.walk {
+  display: grid;
+  gap: var(--space-3);
+  list-style: none;
+  margin: var(--space-4) 0;
+  padding: 0;
+}
+.walkStep {
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--border-inset);
+}
+.walkTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-3);
+  font-weight: 600;
+  color: var(--ink-heading);
+}
+.walkNo {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--module-color, var(--uwc-teal));
+  color: #fff;
+  font-size: 0.78rem;
+}
+.walkCells {
+  overflow-x: auto;
+}
+.walkNote {
+  margin: var(--space-3) 0 0;
+  font-size: 0.92rem;
+}

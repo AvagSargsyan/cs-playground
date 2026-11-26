@@ -1,0 +1,503 @@
+/* ---------------- Cell array ---------------- */
+.cells {
+  /* Cells shrink to fit the row (container query units); below 28px they wrap instead. */
+  container-type: inline-size;
+  --max-cell: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3) 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+@media (min-width: 700px) {
+  .cells {
+    --max-cell: 46px;
+  }
+}
+.cellsSm {
+  --max-cell: 34px;
+}
+@media (min-width: 700px) {
+  .cellsSm {
+    --max-cell: 38px;
+  }
+}
+.cells > li {
+  --cell: max(28px, min(var(--max-cell), calc(100cqw / var(--n, 10) - 8px)));
+}
+.slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 2px;
+}
+/* The active search range is drawn as a tinted band with rounded ends, so it reads as a bracket. */
+.slotRange {
+  background: var(--uwc-blue-tint);
+}
+.slotRangeStart {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  box-shadow: inset 3px 0 0 var(--uwc-blue);
+}
+.slotRangeEnd {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: inset -3px 0 0 var(--uwc-blue);
+}
+.slotRangeStart.slotRangeEnd {
+  box-shadow:
+    inset 3px 0 0 var(--uwc-blue),
+    inset -3px 0 0 var(--uwc-blue);
+}
+.index {
+  font-size: 0.7rem;
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.cellWrap {
+  display: inline-flex;
+}
+.cellButton {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.cellButton:hover .cell {
+  box-shadow: inset 0 0 0 2px var(--uwc-blue);
+}
+.cell {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: var(--cell);
+  height: var(--cell);
+  margin: 0 2px;
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1.5px var(--border-strong);
+  font-weight: 700;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-heading);
+  transition:
+    background-color 0.25s,
+    color 0.25s,
+    opacity 0.25s,
+    box-shadow 0.25s;
+}
+.cellsSm .cell {
+  font-size: 0.85rem;
+}
+.cells > li .cell {
+  font-size: min(0.95rem, calc(var(--cell) * 0.4));
+}
+.cell-range {
+  box-shadow: inset 0 0 0 1.5px var(--uwc-blue);
+}
+.cell-mid,
+.cell-current {
+  background: var(--uwc-orange);
+  color: #fff;
+  box-shadow: none;
+}
+.cell-found {
+  background: var(--uwc-teal);
+  color: #fff;
+  box-shadow: none;
+}
+.cell-eliminated {
+  opacity: 0.45;
+  color: var(--ink-muted);
+  background: repeating-linear-gradient(135deg, #dcd8d0 0 3px, #f4f2ee 3px 7px);
+  box-shadow: none;
+}
+.cellsFailed .cell-eliminated {
+  opacity: 0.35;
+}
+.foundTick {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--uwc-teal);
+  box-shadow: 0 0 0 1.5px var(--uwc-teal);
+  font-size: 0.7rem;
+}
+.markers {
+  display: flex;
+  gap: 2px;
+  min-height: 18px;
+}
+.marker {
+  display: inline-grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 3px;
+  border-radius: 5px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #fff;
+}
+.marker-L,
+.marker-R {
+  background: var(--uwc-blue);
+}
+.marker-M {
+  background: var(--uwc-orange);
+}
+
+/* ---------------- Legend swatches ---------------- */
+.swatchRange {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  background: var(--uwc-blue-tint);
+  box-shadow: inset 0 0 0 1.5px var(--uwc-blue);
+}
+
+/* ---------------- Learn helpers ---------------- */
+.compareRows {
+  display: grid;
+  gap: var(--space-4);
+}
+.rowLabel {
+  margin: 0 0 var(--space-2);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-heading);
+}
+.termList {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-4) 0;
+  padding: 0;
+  list-style: none;
+}
+.termList li {
+  display: grid;
+  grid-template-columns: 6.5em 1fr;
+  gap: var(--space-3);
+  align-items: baseline;
+}
+.term {
+  flex: none;
+  min-width: 5.5em;
+  font-weight: 700;
+  color: var(--ink-heading);
+}
+.halving {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin: var(--space-4) 0;
+  padding: 0;
+  list-style: none;
+  font-variant-numeric: tabular-nums;
+}
+.halving li {
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  box-shadow: var(--border-inset);
+  font-size: 0.9rem;
+}
+.halving li:last-child {
+  background: var(--uwc-teal-tint);
+  box-shadow: inset 0 0 0 1.5px var(--uwc-teal);
+  font-weight: 700;
+}
+
+/* Guess my number */
+.game {
+  margin: var(--space-4) 0;
+  padding: var(--space-5);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--border-inset);
+}
+.gameForm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+.gameForm label {
+  display: grid;
+  gap: var(--space-1);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+.gameForm input {
+  width: 7em;
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1.5px var(--border-strong);
+  font-size: 1.15rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.gameRange {
+  position: relative;
+  height: 14px;
+  margin: var(--space-4) 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--surface-sunken);
+  overflow: hidden;
+}
+.gameRangeFill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--uwc-blue);
+  border-radius: var(--radius-pill);
+  transition:
+    left 0.3s,
+    width 0.3s;
+}
+.gameRangeLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+.guesses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.guesses li {
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-alt);
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+}
+.gameFeedback {
+  margin: var(--space-3) 0 0;
+  font-weight: 600;
+  color: var(--ink-heading);
+}
+
+/* ---------------- Explore ---------------- */
+.inlineRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+.customInput {
+  width: min(100%, 300px);
+}
+.error {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--uwc-raspberry);
+  font-weight: 500;
+}
+.targetInput {
+  width: 6em;
+}
+.visualHint {
+  margin: var(--space-3) 0 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+.compareSection h2 {
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+}
+.compareLead {
+  max-width: var(--reading-width);
+}
+.raceRows {
+  display: grid;
+  gap: var(--space-4);
+  margin: var(--space-4) 0;
+}
+.raceRow {
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--border-inset);
+}
+.raceHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+.raceTitle {
+  margin: 0;
+  font-weight: 700;
+  color: var(--ink-heading);
+}
+.raceCount {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.2rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-heading);
+}
+.raceCount small {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+}
+.raceMessage {
+  margin: var(--space-3) 0 0;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  min-height: 1.5em;
+}
+.bigTry {
+  margin-top: var(--space-5);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius);
+  background: var(--surface-alt);
+}
+.bigTry p {
+  margin-bottom: var(--space-3);
+}
+.bigResults {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+.bigResult {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  box-shadow: var(--border-inset);
+}
+.bigResult dt {
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+}
+.bigResult dd {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.4rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------- Practice ---------------- */
+.exerciseCells {
+  padding: var(--space-4) var(--space-2);
+  border-radius: var(--radius);
+  background: var(--surface-alt);
+  overflow-x: auto;
+}
+.exerciseCellsSpaced {
+  margin-bottom: var(--space-4);
+}
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  list-style: none;
+  font-size: 0.95rem;
+}
+.facts li {
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-alt);
+}
+.facts strong {
+  font-variant-numeric: tabular-nums;
+}
+.pickCell {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 52px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.pickCell small {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+.pickCellOut {
+  opacity: 0.4;
+}
+.stepRow {
+  display: flex;
+  gap: var(--space-3);
+  align-items: baseline;
+  padding: var(--space-3) var(--space-4);
+  font-size: 0.92rem;
+  text-align: left;
+  min-width: min(100%, 560px);
+}
+.stepNo {
+  flex: none;
+  font-weight: 700;
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+.runPanel {
+  display: grid;
+  gap: var(--space-3);
+}
+.runStatus {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--uwc-blue-tint);
+  font-weight: 500;
+}
+.runHint {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--uwc-raspberry-tint);
+  font-size: 0.92rem;
+}
+.runActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.runScore {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+}
+
+/* Keeps the cell row vertically centred inside the shared playground box. */
+.visualInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 228px;
+}
