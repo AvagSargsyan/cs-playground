@@ -1,0 +1,303 @@
+.page {
+  padding-top: var(--space-7);
+  max-width: 920px;
+}
+.crumbs {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  margin-bottom: var(--space-3);
+}
+.crumbs a {
+  color: var(--ink-muted);
+}
+.kicker {
+  margin: 0 0 var(--space-2);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--module-color, var(--uwc-teal));
+}
+.title {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  margin-bottom: var(--space-4);
+}
+.lead {
+  max-width: 700px;
+  font-size: 1.08rem;
+  margin-bottom: var(--space-5);
+}
+.section {
+  padding-top: var(--space-6);
+}
+.block {
+  margin-top: var(--space-6);
+  break-inside: avoid;
+}
+.h2 {
+  font-size: 1.4rem;
+  margin-bottom: var(--space-3);
+}
+.h3 {
+  font-size: 1.05rem;
+  margin-bottom: var(--space-2);
+}
+.text {
+  max-width: 700px;
+}
+.list {
+  max-width: 700px;
+  margin: 0 0 var(--space-4);
+  padding-left: 1.3em;
+}
+.list li + li {
+  margin-top: var(--space-2);
+}
+.twoCol {
+  display: grid;
+  gap: 0 var(--space-6);
+}
+@media (min-width: 760px) {
+  .twoCol {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.twoCol > .block {
+  margin-top: var(--space-6);
+}
+
+/* Approach */
+.approach {
+  display: grid;
+  gap: var(--space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+@media (min-width: 760px) {
+  .approach {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.approach li {
+  padding: var(--space-4);
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--border-inset);
+}
+.approachStage {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--ink-heading);
+}
+.primm {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.82rem;
+  color: var(--uwc-teal);
+}
+.approachText {
+  margin: 0;
+  font-size: 0.93rem;
+  color: var(--ink-muted);
+}
+
+/* Lesson links */
+.lessonLinks {
+  display: grid;
+  gap: var(--space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.lessonLink {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-4) var(--space-5);
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow:
+    var(--border-inset),
+    inset 4px 0 0 var(--module-color);
+  text-decoration: none;
+  color: var(--ink);
+}
+.lessonLink:hover {
+  box-shadow:
+    var(--border-inset),
+    inset 4px 0 0 var(--module-color),
+    var(--shadow-soft);
+}
+.lessonNumber {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--module-color);
+}
+.lessonTitle {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--ink-heading);
+}
+.lessonSummary {
+  font-size: 0.93rem;
+  color: var(--ink-muted);
+}
+
+/* Table */
+.tableWrap {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--border-inset);
+  background: var(--surface);
+}
+.table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.table th,
+.table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+.table thead th {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+.table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+.table tbody th {
+  font-weight: 600;
+  white-space: nowrap;
+}
+.theme {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+}
+.note {
+  margin-top: var(--space-3);
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  max-width: 700px;
+}
+
+/* Module notes */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--border-inset);
+}
+.actionsLabel {
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+}
+.stageLink {
+  font-weight: 600;
+}
+.actions button {
+  margin-left: auto;
+}
+.misconceptions {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+}
+.misconceptions > div {
+  padding: var(--space-4);
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--border-inset);
+  break-inside: avoid;
+}
+.misconceptions dt {
+  font-weight: 600;
+  color: var(--ink-heading);
+  margin-bottom: var(--space-1);
+}
+.misconceptions dd {
+  margin: 0;
+  font-size: 0.93rem;
+  color: var(--ink-muted);
+}
+.plan {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 2px solid var(--border);
+}
+.plan li {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: var(--space-3);
+  padding: var(--space-3) 0 var(--space-3) var(--space-4);
+  break-inside: avoid;
+}
+.planTime {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--module-color, var(--uwc-teal));
+  font-variant-numeric: tabular-nums;
+}
+.planTitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-1);
+  font-weight: 600;
+  color: var(--ink-heading);
+}
+.planLink {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.planText {
+  margin: 0;
+  font-size: 0.95rem;
+}
+.tag {
+  display: inline-block;
+  padding: 0 8px;
+  margin-right: var(--space-1);
+  border-radius: var(--radius-pill);
+  background: var(--surface-sunken);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+@media print {
+  .page {
+    padding-top: 0;
+    max-width: none;
+  }
+  .title {
+    font-size: 22pt;
+  }
+  .block {
+    margin-top: 14pt;
+  }
+  .misconceptions > div,
+  .approach li,
+  .lessonLink,
+  .tableWrap {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+  .plan li {
+    grid-template-columns: 70pt 1fr;
+  }
+}
