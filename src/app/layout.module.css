@@ -1,6 +1,5 @@
 /* ---------------- Header ---------------- */
 .header {
-  border-top: 4px solid var(--uwc-blue);
   border-bottom: 1px solid var(--border);
 }
 .navInner {

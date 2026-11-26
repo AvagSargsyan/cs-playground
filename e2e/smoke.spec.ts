@@ -113,3 +113,15 @@ test('an unknown lesson stage shows the 404 page without the stage bar', async (
   await expect(page.getByRole('navigation', { name: 'Lesson stages' })).toHaveCount(0)
   await expect(page).toHaveTitle(/Page not found/)
 })
+
+test('“On this page” highlights the section being read', async ({ page, isMobile }) => {
+  test.skip(isMobile, 'The list is only shown on wide screens')
+  await page.setViewportSize({ width: 1280, height: 900 })
+  await page.goto('/recursion/learn#no-base-case')
+  const toc = page.getByRole('navigation', { name: 'On this page' })
+  await expect(toc.locator('[aria-current="location"]')).toHaveText(
+    'What if there is no base case?',
+  )
+  await page.evaluate(() => window.scrollTo(0, 0))
+  await expect(toc.locator('[aria-current="location"]')).toHaveText('What is a function?')
+})

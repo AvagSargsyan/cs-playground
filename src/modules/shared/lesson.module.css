@@ -47,12 +47,22 @@
 }
 .toc a {
   display: block;
+  margin-left: -2px;
   padding-left: var(--space-3);
+  border-left: 2px solid transparent;
   color: var(--ink-muted);
   text-decoration: none;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 .toc a:hover {
   color: var(--uwc-blue);
+}
+.toc a.tocActive {
+  color: var(--module-color, var(--uwc-blue));
+  border-left-color: var(--module-color, var(--uwc-blue));
+  font-weight: 600;
 }
 .endHint {
   margin-top: var(--space-5);

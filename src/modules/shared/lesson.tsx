@@ -53,6 +53,17 @@ export function LearnPage({
   const allAnswered = [...questions].every((q) => answers.has(q))
   useMarkStageDone(moduleId, 'learn', reachedEnd && allAnswered)
   const ctx = useMemo(() => ({ register, answered }), [register, answered])
+  const tocItems = useMemo<[string, string][]>(
+    () => (toc && toc.length > 0 ? [...toc, ['references', 'References']] : []),
+    [toc],
+  )
+  const activeId = useActiveSection(tocItems.map(([id]) => id).join(' '))
+
+  // The lesson loads after the browser has tried to jump to a #section link, so do it here.
+  useEffect(() => {
+    const id = decodeURIComponent(window.location.hash.slice(1))
+    if (id) document.getElementById(id)?.scrollIntoView()
+  }, [])
 
   return (
     <LearnContext.Provider value={ctx}>
@@ -68,13 +79,19 @@ export function LearnPage({
             </p>
           )}
         </div>
-        {toc && toc.length > 0 && (
+        {tocItems.length > 0 && (
           <nav className={s.toc} aria-label="On this page">
             <p className={s.tocTitle}>On this page</p>
             <ol>
-              {[...toc, ['references', 'References'] as [string, string]].map(([id, label]) => (
+              {tocItems.map(([id, label]) => (
                 <li key={id}>
-                  <a href={`#${id}`}>{label}</a>
+                  <a
+                    href={`#${id}`}
+                    className={id === activeId ? s.tocActive : undefined}
+                    aria-current={id === activeId ? 'location' : undefined}
+                  >
+                    {label}
+                  </a>
                 </li>
               ))}
             </ol>
@@ -83,6 +100,43 @@ export function LearnPage({
       </div>
     </LearnContext.Provider>
   )
+}
+
+/**
+ * The section currently being read: the last one whose top has scrolled past the upper third of
+ * the window. At the very bottom of the page, the last section wins. `idList` is space-separated.
+ */
+function useActiveSection(idList: string) {
+  const [active, setActive] = useState<string | null>(null)
+  useEffect(() => {
+    const ids = idList.split(' ').filter(Boolean)
+    if (ids.length === 0) return
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const line = window.innerHeight * 0.3
+      let current = ids[0]
+      for (const id of ids) {
+        const el = document.getElementById(id)
+        if (el && el.getBoundingClientRect().top <= line) current = id
+      }
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2
+      setActive(atBottom ? ids[ids.length - 1] : current)
+    }
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [idList])
+  return active
 }
 
 function EndMarker({ onReach }: { onReach: () => void }) {
