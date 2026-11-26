@@ -109,12 +109,12 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
         </p>
         <ExampleGrid
           items={[
-            { icon: '📚', title: 'Books on a shelf', text: 'By title, author or height.' },
-            { icon: '📝', title: 'Exam scores', text: 'From the highest mark to the lowest.' },
-            { icon: '🛒', title: 'Online shop', text: '“Price: low to high”.' },
-            { icon: '🌍', title: 'Countries', text: 'By population or by area.' },
-            { icon: '🚆', title: 'Train timetable', text: 'By departure time.' },
-            { icon: '📇', title: 'Contacts', text: 'Names from A to Z.' },
+            { title: 'Books on a shelf', text: 'By title, author or height.' },
+            { title: 'Exam scores', text: 'From the highest mark to the lowest.' },
+            { title: 'Online shop', text: '“Price: low to high”.' },
+            { title: 'Countries', text: 'By population or by area.' },
+            { title: 'Train timetable', text: 'By departure time.' },
+            { title: 'Contacts', text: 'Names from A to Z.' },
           ]}
         />
         <Callout kind="predict">

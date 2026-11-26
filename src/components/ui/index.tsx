@@ -73,13 +73,6 @@ export function Chip({
 }
 
 type CalloutKind = 'info' | 'didyouknow' | 'warning' | 'tip' | 'predict'
-const calloutIcon: Record<CalloutKind, string> = {
-  info: 'ℹ️',
-  didyouknow: '💡',
-  warning: '⚠️',
-  tip: '✅',
-  predict: '🤔',
-}
 const calloutDefaultTitle: Record<CalloutKind, string> = {
   info: 'Note',
   didyouknow: 'Did you know?',
@@ -99,10 +92,7 @@ export function Callout({
 }) {
   return (
     <aside className={cx(s.callout, s[`callout-${kind}`])}>
-      <div className={s.calloutTitle}>
-        <span aria-hidden="true">{calloutIcon[kind]}</span>
-        {title ?? calloutDefaultTitle[kind]}
-      </div>
+      <div className={s.calloutTitle}>{title ?? calloutDefaultTitle[kind]}</div>
       {children}
     </aside>
   )

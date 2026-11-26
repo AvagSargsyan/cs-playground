@@ -87,8 +87,8 @@
   white-space: nowrap;
 }
 .chipDemo {
-  background: var(--uwc-orange-tint);
-  color: #a63a0f;
+  background: var(--uwc-blue-tint);
+  color: var(--uwc-blue-dark);
 }
 .chipIb {
   background: var(--uwc-blue-tint);

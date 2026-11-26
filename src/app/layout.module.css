@@ -1,5 +1,6 @@
 /* ---------------- Header ---------------- */
 .header {
+  border-top: 4px solid var(--uwc-blue);
   border-bottom: 1px solid var(--border);
 }
 .navInner {
@@ -105,9 +106,9 @@
 /* ---------------- Footer ---------------- */
 .footer {
   margin-top: var(--space-8);
-  border-top: 1px solid var(--border);
+  background: var(--navy);
   font-size: 0.86rem;
-  color: var(--ink-muted);
+  color: #d3deea;
 }
 .footerInner {
   display: flex;
@@ -128,7 +129,7 @@
   margin: 0;
 }
 .footerLinks a {
-  color: var(--ink);
+  color: #ffffff;
 }
 
 .main {

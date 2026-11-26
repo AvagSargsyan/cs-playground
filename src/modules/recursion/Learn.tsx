@@ -90,22 +90,18 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
         <ExampleGrid
           items={[
             {
-              icon: '🪆',
               title: 'Nesting dolls',
               text: 'Open a doll and find a smaller doll. Stop at the solid one.',
             },
             {
-              icon: '📦',
               title: 'Boxes inside boxes',
               text: 'To find a key, open the box. If there is another box inside, do the same again.',
             },
             {
-              icon: '🪜',
               title: 'Walking down stairs',
               text: 'Go down one step, then “walk down the stairs” again. Stop at the ground floor.',
             },
             {
-              icon: '📁',
               title: 'Folders in folders',
               text: 'Counting files in a folder means counting the files in each folder inside it.',
             },

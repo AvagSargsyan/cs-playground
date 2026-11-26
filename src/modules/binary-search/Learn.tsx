@@ -55,22 +55,18 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
         <ExampleGrid
           items={[
             {
-              icon: '📖',
               title: 'A word in a dictionary',
               text: 'English, Armenian, Spanish or Japanese: dictionaries are sorted, so you open near the right letter instead of reading from page 1.',
             },
             {
-              icon: '📱',
               title: 'A name in your contacts',
               text: 'Contacts are sorted alphabetically, so you can jump straight to the right part of the list.',
             },
             {
-              icon: '📄',
               title: 'A page in a book',
               text: 'Looking for page 214? You open somewhere in the middle and move forwards or backwards.',
             },
             {
-              icon: '🛒',
               title: 'A product by price',
               text: 'In an online shop sorted by price, finding items around €20 is quick because cheaper ones come first.',
             },

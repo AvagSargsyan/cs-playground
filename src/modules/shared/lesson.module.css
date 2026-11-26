@@ -172,16 +172,10 @@
   padding: 0;
 }
 .example {
-  display: flex;
-  gap: var(--space-3);
-  padding: var(--space-4);
-  background: var(--surface);
-  border-radius: var(--radius);
-  box-shadow: var(--border-inset);
-}
-.exampleIcon {
-  font-size: 1.6rem;
-  line-height: 1;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-alt);
+  border-left: 3px solid var(--module-color, var(--uwc-blue));
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 .exampleTitle {
   margin: 0 0 var(--space-1);

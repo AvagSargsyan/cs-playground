@@ -1,7 +1,7 @@
 /*
- * Design tokens. The color accents come from the UWC Dilijan palette (blue, teal, orange,
- * raspberry and the fact-tile colors). Typography, shapes and layout are CS Playground's own,
- * so the site reads as a personal demo rather than a UWC page. See .claude/PLAN.md §2.
+ * Design tokens. Colors follow the UWC Dilijan palette: white pages, UWC blue as the main accent,
+ * navy for text, and teal, raspberry and orange for algorithm states. Typography (Lexend and
+ * Noto Sans, which also covers Armenian) and layout are CS Playground's own.
  */
 :root {
   /* Accents (UWC Dilijan palette) */
@@ -24,18 +24,19 @@
   --tile-ochre: #c06331;
   --tile-yellow: #fcbc05;
 
-  /* Neutrals: warm "paper" tones, CS Playground's own */
-  --ink: #26292e;
-  --ink-heading: #1b1e23;
-  --ink-muted: #62666d;
-  --paper: #fbfaf7;
+  /* Neutrals: clean white with cool blue-grey tones */
+  --ink: #1f2b38;
+  --ink-heading: #0e2a47;
+  --ink-muted: #556270;
+  --paper: #ffffff;
   --surface: #ffffff;
-  --surface-alt: #f4f2ee;
-  --surface-sunken: #ebe8e2;
-  --border: #e4e0d8;
-  --border-strong: #cfcac0;
-  --muted: #cfcfcf;
-  --grid-dot: #e2ddd3;
+  --surface-alt: #f2f6fa;
+  --surface-sunken: #e6edf4;
+  --border: #dbe3eb;
+  --border-strong: #b9c5d1;
+  --muted: #cdd3d9;
+  --grid-dot: #dde4ec;
+  --navy: #0e2a47;
 
   /* Semantic */
   --color-link: var(--uwc-blue);
@@ -43,7 +44,7 @@
   --color-success-bg: var(--uwc-teal-tint);
   --color-error: var(--uwc-raspberry);
   --color-error-bg: var(--uwc-raspberry-tint);
-  --focus-ring: var(--uwc-orange);
+  --focus-ring: var(--uwc-blue);
 
   /* Algorithm visual states (same in every module, §2.1) */
   --state-default: #9fc2dc;
@@ -65,17 +66,17 @@
   --module-about: var(--tile-ochre);
 
   /* Typography */
-  --font-heading: 'Space Grotesk', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Lexend', system-ui, sans-serif;
+  --font-body: 'Noto Sans', system-ui, sans-serif;
   --font-code: 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Shape: soft and rounded */
-  --radius-sm: 8px;
-  --radius: 14px;
-  --radius-pill: 999px;
+  /* Shape: crisp, lightly rounded */
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-pill: 4px;
   --border-inset: inset 0 0 0 1px var(--border);
-  --shadow-soft: 0 1px 2px rgba(27, 30, 35, 0.05), 0 4px 16px rgba(27, 30, 35, 0.05);
-  --shadow-lift: 0 2px 4px rgba(27, 30, 35, 0.06), 0 12px 32px rgba(27, 30, 35, 0.09);
+  --shadow-soft: 0 1px 2px rgba(14, 42, 71, 0.06);
+  --shadow-lift: 0 2px 8px rgba(14, 42, 71, 0.1);
 
   /* Spacing & layout */
   --space-1: 4px;

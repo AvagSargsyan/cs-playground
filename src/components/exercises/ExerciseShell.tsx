@@ -223,7 +223,7 @@ export function PracticeRunner({
 
       {finished ? (
         <div className={s.finished} role="status">
-          <h3>Practice complete 🎉</h3>
+          <h3>Practice complete</h3>
           <p>
             You solved {solved} of {exercises.length} exercises. You can retry any of them to
             improve your score; every retry gives you a fresh problem where possible.

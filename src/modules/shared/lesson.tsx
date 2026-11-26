@@ -229,19 +229,12 @@ export function StepFrames({
   )
 }
 
-/** A grid of real-world example cards (emoji/icon + title + one sentence). */
-export function ExampleGrid({
-  items,
-}: {
-  items: { icon: ReactNode; title: ReactNode; text: ReactNode }[]
-}) {
+/** A grid of real-world example cards (title + one sentence). */
+export function ExampleGrid({ items }: { items: { title: ReactNode; text: ReactNode }[] }) {
   return (
     <ul className={s.examples}>
       {items.map((it, i) => (
         <li key={i} className={s.example}>
-          <span className={s.exampleIcon} aria-hidden="true">
-            {it.icon}
-          </span>
           <div>
             <p className={s.exampleTitle}>{it.title}</p>
             <p className={s.exampleText}>{it.text}</p>
