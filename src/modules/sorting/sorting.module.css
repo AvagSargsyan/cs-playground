@@ -1,0 +1,524 @@
+/* ---------------- Bars visualizer ---------------- */
+.bars {
+  display: grid;
+  gap: var(--space-2);
+}
+.barsTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 28px;
+  gap: var(--space-3);
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+.keyChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--uwc-orange-tint);
+  color: #a63a0f;
+  font-weight: 600;
+}
+.columns {
+  display: grid;
+  gap: 4px;
+  align-items: end;
+}
+.col {
+  display: grid;
+  grid-template-rows: 18px 1fr auto 8px;
+  min-width: 0;
+  text-align: center;
+}
+.marker {
+  font-size: 0.72rem;
+  line-height: 18px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.barArea {
+  display: flex;
+  align-items: flex-end;
+  height: 200px;
+}
+.compact .barArea {
+  height: 130px;
+}
+.bar {
+  width: 100%;
+  min-height: 4px;
+  border-radius: 6px 6px 2px 2px;
+  background: var(--state-default);
+}
+.dim {
+  opacity: 0.4;
+}
+.st-compare {
+  background: var(--state-compare);
+}
+.st-swap {
+  background: var(--state-swap);
+}
+.st-candidate {
+  background: var(--uwc-blue);
+}
+.st-sorted {
+  background: var(--state-sorted);
+}
+.st-merge {
+  background: #d9c6db;
+  outline: 2px dashed var(--state-merge);
+  outline-offset: -2px;
+}
+.mk-compare {
+  color: var(--uwc-orange);
+}
+.mk-swap {
+  color: var(--uwc-raspberry);
+}
+.mk-candidate {
+  color: var(--uwc-blue);
+}
+.mk-sorted {
+  color: var(--uwc-teal);
+}
+.value {
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  padding-top: 2px;
+}
+.range {
+  margin-top: 2px;
+}
+.inRange {
+  border-bottom: 3px solid var(--state-active);
+}
+.rangeStart {
+  border-left: 3px solid var(--state-active);
+  border-bottom-left-radius: 3px;
+}
+.rangeEnd {
+  border-right: 3px solid var(--state-active);
+  border-bottom-right-radius: 3px;
+}
+.auxRow {
+  display: grid;
+  gap: 4px;
+  margin-top: var(--space-2);
+}
+.auxLabel {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  margin: var(--space-2) 0 0;
+}
+.auxCell {
+  display: grid;
+  place-items: center;
+  height: 30px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--surface-alt);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+.auxFilled {
+  background: #efe3f0;
+  box-shadow: inset 0 0 0 2px var(--state-merge);
+  color: var(--tile-purple);
+}
+.auxNext {
+  box-shadow: inset 0 0 0 2px var(--state-merge);
+  border-style: dashed;
+}
+
+/* ---------------- Setup bar ---------------- */
+.sizeRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.sizeRow output {
+  min-width: 2ch;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.customRow {
+  display: flex;
+  gap: var(--space-2);
+}
+.customRow input {
+  width: 15em;
+  max-width: 100%;
+}
+.error {
+  color: #a3214a;
+  font-size: 0.85rem;
+}
+
+/* ---------------- Below the playground ---------------- */
+.belowSection {
+  margin-top: var(--space-7);
+}
+.belowSection > p {
+  max-width: var(--reading-width);
+}
+.race {
+  display: grid;
+  gap: var(--space-4);
+  margin: var(--space-4) 0;
+}
+@media (min-width: 800px) {
+  .race {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.racer {
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--border-inset);
+  min-width: 0;
+}
+.racerHead {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+.racerHead select {
+  min-height: 36px;
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+  background: var(--surface);
+  font-weight: 600;
+}
+.racerStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin: var(--space-3) 0 0;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+.racerStats strong {
+  color: var(--ink-heading);
+}
+.finished {
+  color: #005e5a;
+  font-weight: 600;
+}
+
+/* Results chart */
+.chart {
+  display: grid;
+  gap: var(--space-4);
+  margin: var(--space-4) 0;
+  padding: var(--space-5);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--border-inset);
+}
+.chartRow {
+  display: grid;
+  gap: var(--space-1);
+}
+@media (min-width: 700px) {
+  .chartRow {
+    grid-template-columns: 140px 1fr;
+    align-items: center;
+  }
+}
+.chartName {
+  font-weight: 600;
+  color: var(--ink-heading);
+}
+.chartBars {
+  display: grid;
+  gap: 4px;
+}
+.chartBar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  white-space: nowrap;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+.chartFill {
+  height: 14px;
+  min-width: 2px;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+.fillCompare {
+  background: var(--state-compare);
+}
+.fillMoves {
+  background: var(--state-swap);
+}
+.chartKey {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+.chartKey span::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  border-radius: 3px;
+  vertical-align: -1px;
+}
+.keyCompare::before {
+  background: var(--state-compare);
+}
+.keyMoves::before {
+  background: var(--state-swap);
+}
+
+/* ---------------- Learn ---------------- */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--space-2);
+  margin: var(--space-4) 0;
+}
+.fact {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+}
+.fact dt {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+}
+.fact dd {
+  margin: 0;
+  font-weight: 700;
+  color: var(--ink-heading);
+}
+.uses {
+  display: grid;
+  gap: var(--space-3);
+}
+@media (min-width: 700px) {
+  .uses {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.uses h4 {
+  margin-bottom: var(--space-2);
+  font-size: 1rem;
+}
+.uses ul {
+  margin: 0;
+  padding-left: 1.2em;
+  font-size: 0.95rem;
+}
+
+/* Sorting around the world */
+.world {
+  margin: var(--space-4) 0;
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--border-inset);
+}
+.worldCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+.worldCol select {
+  width: 100%;
+  min-height: 38px;
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+  background: var(--surface);
+  font-weight: 600;
+}
+.world .worldList {
+  list-style: none;
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  counter-reset: w;
+}
+.worldList li {
+  counter-increment: w;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 4px var(--space-2);
+  border-radius: 6px;
+  background: var(--surface-alt);
+  font-size: 0.95rem;
+}
+.worldList li::before {
+  content: counter(w);
+  width: 1.6em;
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  text-align: right;
+}
+.worldList .moved {
+  background: #fbefe6;
+  box-shadow: inset 3px 0 0 var(--tile-ochre);
+}
+.worldNote {
+  margin: var(--space-3) 0 0;
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+}
+
+/* ---------------- Practice ---------------- */
+.question {
+  font-weight: 500;
+  color: var(--ink-heading);
+}
+.decision {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+.moveFeedback {
+  min-height: 2.6em;
+  margin: var(--space-3) 0 0;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+}
+.moveRight {
+  background: var(--uwc-teal-tint);
+}
+.moveWrong {
+  background: var(--uwc-raspberry-tint);
+}
+.progressLine {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  margin: 0 0 var(--space-2);
+}
+.pickBar {
+  display: grid;
+  gap: 4px;
+}
+.pickCell {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  justify-items: center;
+  width: 44px;
+  height: 120px;
+  padding: 6px 4px 4px;
+}
+.pickCell span:first-child {
+  align-self: end;
+  width: 26px;
+  border-radius: 5px 5px 2px 2px;
+  background: var(--state-default);
+}
+.pickCell span:last-child {
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.pickSorted span:first-child {
+  background: var(--state-sorted);
+}
+.pickCompare span:first-child {
+  background: var(--state-compare);
+}
+.pickKey span:first-child {
+  background: var(--uwc-orange);
+}
+.replay {
+  margin-bottom: var(--space-4);
+}
+.twoPart {
+  display: grid;
+  gap: var(--space-4);
+}
+.twoPart fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.twoPart legend {
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  color: var(--ink-heading);
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 46px;
+  padding: var(--space-2) var(--space-4);
+  margin-bottom: var(--space-2);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--border-inset);
+  cursor: pointer;
+}
+.option input {
+  accent-color: var(--uwc-blue);
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+.optionPicked {
+  box-shadow: inset 0 0 0 2px var(--uwc-blue);
+}
+.optionRight {
+  box-shadow: inset 0 0 0 2px var(--uwc-teal);
+  background: var(--uwc-teal-tint);
+}
+.optionWrong {
+  box-shadow: inset 0 0 0 2px var(--uwc-raspberry);
+  background: var(--uwc-raspberry-tint);
+}
+.traceList {
+  margin: 0;
+  padding-left: 1.4em;
+  font-size: 0.9rem;
+  max-height: 260px;
+  overflow-y: auto;
+}
+.scenario {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  margin-bottom: var(--space-4);
+}
+.scenario > :last-child {
+  margin-bottom: 0;
+}
+
+.manualBars {
+  width: min(100%, 340px);
+}
+.manualBars svg {
+  width: 100%;
+}
