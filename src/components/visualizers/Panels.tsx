@@ -1,4 +1,4 @@
-import { Highlight, themes } from 'prism-react-renderer'
+import { Highlight, type PrismTheme } from 'prism-react-renderer'
 import type { ReactNode } from 'react'
 import type { CodeListing } from '../../engine/types'
 import { codeTabChanged, type CodeTab } from '../../store/preferencesSlice'
@@ -35,7 +35,7 @@ export type StatItem = { label: string; value: ReactNode; hint?: string; emphasi
 export function StatsPanel({ items, title = 'Statistics' }: { items: StatItem[]; title?: string }) {
   return (
     <section className={s.panel} aria-label={title}>
-      <h3 className={s.panelTitle}>{title}</h3>
+      <h2 className={s.panelTitle}>{title}</h2>
       <dl className={s.stats}>
         {items.map((it) => (
           <div
@@ -51,7 +51,7 @@ export function StatsPanel({ items, title = 'Statistics' }: { items: StatItem[];
             <dt>
               {it.label}
               {it.hint && (
-                <span className={s.hint} aria-label={it.hint}>
+                <span className={s.hint} role="img" aria-label={it.hint}>
                   {' '}
                   ⓘ
                 </span>
@@ -106,9 +106,20 @@ export function Swatch({
 
 /* ---------------------------------- Code panel ---------------------------------- */
 
-const theme = {
-  ...themes.github,
-  plain: { ...themes.github.plain, backgroundColor: 'transparent', color: '#252b33' },
+/**
+ * Own syntax colors: every token keeps at least 4.5:1 contrast on the code background
+ * (#f4f2ee), which the stock GitHub theme does not.
+ */
+const theme: PrismTheme = {
+  plain: { color: '#252b33', backgroundColor: 'transparent' },
+  styles: [
+    { types: ['comment'], style: { color: '#5e6570', fontStyle: 'italic' } },
+    { types: ['keyword', 'operator'], style: { color: '#9a1f4b' } },
+    { types: ['string', 'char'], style: { color: '#7a3b00' } },
+    { types: ['number', 'boolean', 'constant'], style: { color: '#005a87' } },
+    { types: ['function', 'class-name'], style: { color: '#5a2470' } },
+    { types: ['punctuation'], style: { color: '#3d434c' } },
+  ],
 }
 
 export function CodeBlock({
@@ -175,7 +186,7 @@ export function CodePanel({
   return (
     <section className={s.panel} aria-label={title}>
       <div className={s.codeHeader}>
-        <h3 className={s.panelTitle}>{title}</h3>
+        <h2 className={s.panelTitle}>{title}</h2>
         <Tabs<CodeTab>
           label="Code language"
           value={tab}

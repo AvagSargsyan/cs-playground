@@ -13,7 +13,8 @@ function FrameCard({ frame, active }: { frame: Frame; active: boolean }) {
         {frame.fn}({frame.arg})
       </code>
       {frame.pending && (
-        <span className={s.framePending} aria-label={`pending: ${frame.pending}`}>
+        <span className={s.framePending}>
+          <span className="visually-hidden">pending: </span>
           {frame.pending}
         </span>
       )}

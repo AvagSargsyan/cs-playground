@@ -80,7 +80,7 @@ export default function Explore({ moduleId }: { moduleId: ModuleId }) {
         <div className={s.exploreVisual}>
           <CallStack stack={state.stack} activeId={state.activeId} />
           {isCountdown ? (
-            <div className={s.console} aria-label="Printed output">
+            <div className={s.console} role="group" aria-label="Printed output">
               <p className={s.consoleTitle}>Output</p>
               <pre className={s.consoleBody}>
                 {state.output.length ? state.output.join('\n') : ' '}

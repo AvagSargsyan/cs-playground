@@ -35,7 +35,7 @@ function Header() {
     <header className={`${s.header} no-print`}>
       <nav aria-label="Main" className={`container ${s.navInner}`}>
         {/* The brand states on every page that this is a personal demo. */}
-        <Link to="/" className={s.brand} aria-label={`${SITE.name}, demo by ${SITE.author}, home`}>
+        <Link to="/" className={s.brand}>
           <BrandMark className={s.brandMark} size={32} />
           <span className={s.brandName}>
             {SITE.name}

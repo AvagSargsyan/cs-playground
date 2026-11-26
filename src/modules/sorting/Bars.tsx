@@ -87,7 +87,7 @@ export function Bars({
       {m && (
         <>
           <p className={s.auxLabel}>Merge buffer</p>
-          <div className={s.auxRow} style={cols} aria-label="Merge buffer">
+          <div className={s.auxRow} style={cols} role="group" aria-label="Merge buffer">
             {state.values.map((_, i) => {
               const lo = m.left[0]
               const inMerge = i >= lo && i <= m.right[1]

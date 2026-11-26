@@ -154,7 +154,11 @@ export function StackOverflowDemo() {
         </div>
       </div>
       <div className={s.overflow}>
-        <div className={cx(s.overflowStack, crashed && s.overflowCrashed)} aria-label="Call stack">
+        <div
+          className={cx(s.overflowStack, crashed && s.overflowCrashed)}
+          role="group"
+          aria-label="Call stack"
+        >
           {Array.from({ length: depth }, (_, i) => (
             <div key={i} className={s.overflowFrame}>
               countdown({3 - i})
@@ -245,7 +249,7 @@ export function MiniStack({
 }) {
   return (
     <div>
-      <div className={s.mini} aria-label="Call stack, top first">
+      <div className={s.mini} role="group" aria-label="Call stack, top first">
         {frames.length === 0 && <div className={s.miniFrame}>(empty)</div>}
         {[...frames].reverse().map((f, i) => (
           <div

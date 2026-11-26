@@ -56,7 +56,8 @@
 
   /* Module identity */
   --module-sorting: var(--tile-bordo);
-  --module-search: var(--tile-green);
+  /* Slightly darker than the fact-tile green so small text and white-on-green pass WCAG AA. */
+  --module-search: #00756f;
   --module-recursion: var(--tile-purple);
   --module-teachers: var(--tile-darkblue);
   --module-about: var(--tile-ochre);

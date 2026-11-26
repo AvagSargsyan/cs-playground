@@ -331,7 +331,7 @@
   width: 2.6em;
   padding-right: var(--space-3);
   text-align: right;
-  color: #9aa3ad;
+  color: #646b75;
   font-family: var(--font-code);
   font-size: 0.8rem;
 }
@@ -380,7 +380,7 @@
   flex: 1;
 }
 .grip {
-  color: #9aa3ad;
+  color: #646b75;
   letter-spacing: -2px;
 }
 .dragging {
@@ -481,7 +481,7 @@
   background: var(--uwc-blue-tint);
 }
 .slotEmpty {
-  color: #9aa3ad;
+  color: #646b75;
   font-weight: 400;
   font-size: 0.85rem;
 }

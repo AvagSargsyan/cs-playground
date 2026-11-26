@@ -56,7 +56,7 @@ function NextCall(p: ExerciseRenderProps) {
   ]
   return (
     <>
-      <div className={s.trace} aria-label="Calls so far">
+      <div className={s.trace} role="group" aria-label="Calls so far">
         {v.shown.map((k) => (
           <div key={k}>
             countdown({k}) → prints {k}
