@@ -1,0 +1,347 @@
+/* ---------------- Explore layout ---------------- */
+.setupIdea {
+  margin: 0;
+  align-self: center;
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+}
+.exploreVisual {
+  display: grid;
+  gap: var(--space-4);
+}
+@media (min-width: 640px) {
+  .exploreVisual {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+/* ---------------- Call stack ---------------- */
+.stackWrap {
+  min-width: 0;
+}
+.stackLabel {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 var(--space-2);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+.stack {
+  display: grid;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-height: 40px;
+}
+.stackEmpty {
+  margin: 0;
+  padding: var(--space-3);
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+}
+.stackBase {
+  height: 6px;
+  margin-top: var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--surface-sunken);
+}
+.frame {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  min-height: 46px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  box-shadow: inset 3px 0 0 var(--ink-muted);
+}
+.frameCall {
+  padding: 0;
+  background: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink-heading);
+}
+.framePending {
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+  padding: 1px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  box-shadow: var(--border-inset);
+}
+.frameReturn {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--tile-purple);
+}
+.frameStatus {
+  margin-left: auto;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+.frame-calling {
+  background: var(--uwc-blue-tint);
+  box-shadow: inset 3px 0 0 var(--uwc-blue);
+}
+.frame-calling .frameStatus {
+  color: var(--uwc-blue-dark);
+}
+.frame-base-case {
+  background: var(--uwc-teal-tint);
+  box-shadow: inset 3px 0 0 var(--state-base);
+}
+.frame-base-case .frameStatus {
+  color: #005e5a;
+}
+.frame-returning {
+  background: #f3ecf4;
+  box-shadow: inset 3px 0 0 var(--tile-purple);
+}
+.frame-returning .frameStatus {
+  color: var(--tile-purple);
+}
+.frameActive {
+  outline: 2px solid var(--module-color, var(--uwc-blue));
+  outline-offset: 1px;
+}
+
+/* ---------------- Console / result ---------------- */
+.console,
+.result {
+  min-width: 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+}
+.consoleTitle {
+  margin: 0 0 var(--space-2);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+.consoleBody {
+  margin: 0;
+  min-height: 7.5em;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ink-heading);
+}
+.resultValue {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--ink-heading);
+}
+.resultHint {
+  margin: var(--space-1) 0 0;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+/* ---------------- Learn: function machine ---------------- */
+.machine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  font-weight: 600;
+}
+.machineBox {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--module-color, var(--tile-purple));
+  color: #fff;
+  font-family: var(--font-code);
+  font-size: 0.9rem;
+}
+.machineValue {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  font-family: var(--font-code);
+  font-size: 0.9rem;
+}
+.arrow {
+  color: var(--ink-muted);
+}
+
+/* ---------------- Learn: nesting dolls ---------------- */
+.dolls {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: center;
+}
+.dollRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 150px;
+  flex-wrap: wrap;
+}
+.doll {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+.doll:disabled {
+  cursor: default;
+}
+.doll svg {
+  display: block;
+}
+.dollCaption {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+.dollStatus {
+  margin: 0;
+  max-width: 520px;
+  text-align: center;
+  font-weight: 500;
+}
+.dollActions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* ---------------- Learn: stack overflow demo ---------------- */
+.overflow {
+  display: grid;
+  gap: var(--space-3);
+}
+.overflowStack {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  gap: 3px;
+  /* Exactly DEMO_LIMIT frames fit, so the stack visibly hits the top when it overflows. */
+  height: calc(12 * 25px + 2 * var(--space-2));
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  overflow: hidden;
+  box-shadow: inset 0 3px 0 transparent;
+}
+.overflowCrashed {
+  box-shadow: inset 0 3px 0 var(--uwc-raspberry);
+}
+.overflowFrame {
+  flex: none;
+  height: 22px;
+  padding: 0 var(--space-3);
+  border-radius: 6px;
+  background: var(--uwc-raspberry-tint);
+  font-family: var(--font-code);
+  font-size: 0.76rem;
+  line-height: 22px;
+  color: var(--ink-heading);
+}
+.overflowError {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--uwc-raspberry-tint);
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+  color: #8f1d40;
+}
+.overflowActions {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+}
+.overflowGrid {
+  display: grid;
+  gap: var(--space-4);
+}
+@media (min-width: 720px) {
+  .overflowGrid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+/* ---------------- Learn: walkthrough frames ---------------- */
+.mini {
+  display: grid;
+  gap: 3px;
+}
+.miniFrame {
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: var(--surface);
+  box-shadow: var(--border-inset);
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+.miniActive {
+  box-shadow: inset 0 0 0 2px var(--module-color, var(--tile-purple));
+}
+.miniBase {
+  background: var(--uwc-teal-tint);
+}
+.miniOut {
+  margin-top: 4px;
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+
+/* ---------------- Practice helpers ---------------- */
+.trace {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  font-family: var(--font-code);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+.traceNext {
+  color: var(--uwc-orange);
+  font-weight: 700;
+}
+.part {
+  margin: var(--space-4) 0 var(--space-2);
+  font-weight: 600;
+  color: var(--ink-heading);
+}
+.unwind {
+  display: grid;
+  gap: var(--space-3);
+}
+.unwindList {
+  margin: 0;
+  padding-left: 1.2em;
+  font-family: var(--font-code);
+  font-size: 0.88rem;
+}
+.reveal {
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--uwc-blue-tint);
+}
+.reveal > :last-child {
+  margin-bottom: 0;
+}
