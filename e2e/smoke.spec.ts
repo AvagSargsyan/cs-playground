@@ -61,3 +61,18 @@ test('no horizontal scrolling on the homepage', async ({ page }) => {
   )
   expect(overflow).toBeLessThanOrEqual(0)
 })
+
+test.describe('every playground steps forward and back', () => {
+  for (const lesson of ['sorting', 'binary-search', 'recursion']) {
+    test(lesson, async ({ page }) => {
+      await page.goto(`/${lesson}/explore`)
+      const main = page.getByRole('group', { name: 'Playback controls' }).first()
+      await expect(main).toContainText('Step 1 /')
+      await main.getByRole('button', { name: /Next step/ }).click()
+      await main.getByRole('button', { name: /Next step/ }).click()
+      await expect(main).toContainText('Step 3 /')
+      await main.getByRole('button', { name: /Previous step/ }).click()
+      await expect(main).toContainText('Step 2 /')
+    })
+  }
+})

@@ -38,7 +38,16 @@ export function StatsPanel({ items, title = 'Statistics' }: { items: StatItem[];
       <h3 className={s.panelTitle}>{title}</h3>
       <dl className={s.stats}>
         {items.map((it) => (
-          <div key={it.label} className={cx(s.stat, it.emphasis && s.statEmphasis)} title={it.hint}>
+          <div
+            key={it.label}
+            // Long text values (e.g. "countdown(5)") get a full row instead of overflowing.
+            className={cx(
+              s.stat,
+              it.emphasis && s.statEmphasis,
+              typeof it.value === 'string' && it.value.length > 8 && s.statWide,
+            )}
+            title={it.hint}
+          >
             <dt>
               {it.label}
               {it.hint && (

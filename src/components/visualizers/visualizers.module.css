@@ -105,6 +105,15 @@
   gap: var(--space-3);
   margin: 0;
 }
+.stat {
+  min-width: 0;
+}
+.statWide {
+  grid-column: 1 / -1;
+}
+.stat dd {
+  overflow-wrap: anywhere;
+}
 .stat dt {
   font-size: 0.78rem;
   color: var(--ink-muted);

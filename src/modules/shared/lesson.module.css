@@ -92,6 +92,15 @@
 .prose li + li {
   margin-top: var(--space-1);
 }
+/* Grids built from lists (examples, step frames) are layout, not text lists. */
+.prose .examples,
+.prose .frames {
+  padding-left: 0;
+}
+.prose .examples li + li,
+.prose .frames li + li {
+  margin-top: 0;
+}
 .subSection {
   margin-top: var(--space-6);
   scroll-margin-top: var(--space-4);
