@@ -105,7 +105,8 @@
 .cell-mid,
 .cell-current {
   background: var(--uwc-orange);
-  color: #fff;
+  /* Dark text: white on orange is below 4.5:1. */
+  color: var(--ink-heading);
   box-shadow: none;
 }
 .cell-found {
@@ -114,13 +115,10 @@
   box-shadow: none;
 }
 .cell-eliminated {
-  opacity: 0.45;
-  color: var(--ink-muted);
+  /* Hatching marks "ruled out"; no fading, so the number stays readable. */
+  color: #4f535a;
   background: repeating-linear-gradient(135deg, #dcd8d0 0 3px, #f4f2ee 3px 7px);
   box-shadow: none;
-}
-.cellsFailed .cell-eliminated {
-  opacity: 0.35;
 }
 .foundTick {
   position: absolute;
@@ -158,6 +156,7 @@
 }
 .marker-M {
   background: var(--uwc-orange);
+  color: var(--ink-heading);
 }
 
 /* ---------------- Legend swatches ---------------- */
@@ -449,7 +448,11 @@
   color: var(--ink-muted);
 }
 .pickCellOut {
-  opacity: 0.4;
+  background: repeating-linear-gradient(135deg, #dcd8d0 0 3px, #f4f2ee 3px 7px);
+  color: #4f535a;
+}
+.pickCellOut small {
+  color: #4f535a;
 }
 .stepRow {
   display: flex;

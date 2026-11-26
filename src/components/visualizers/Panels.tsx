@@ -140,7 +140,7 @@ export function CodeBlock({
       language={language === 'python' ? 'python' : 'clike'}
     >
       {({ tokens, getLineProps, getTokenProps }) => (
-        <pre className={s.code} aria-label={label}>
+        <pre className={s.code} aria-label={label} tabIndex={0}>
           {tokens.map((line, i) => {
             const n = i + 1
             const active = n === activeLine

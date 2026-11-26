@@ -323,7 +323,7 @@
   line-height: 1.7;
 }
 .traceNext {
-  color: var(--uwc-orange);
+  color: var(--text-orange);
   font-weight: 700;
 }
 .part {

@@ -12,6 +12,8 @@
   --uwc-teal-tint: #e3f3f1;
   --uwc-orange: #f45b21;
   --uwc-orange-tint: #fff0e8;
+  /* Orange is too light for text; use this darker shade for orange-coloured words. */
+  --text-orange: #b23d0c;
   --uwc-raspberry: #c83461;
   --uwc-raspberry-tint: #fbe9ef;
 

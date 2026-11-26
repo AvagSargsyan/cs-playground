@@ -157,7 +157,7 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
         <p>
           Each algorithm below sorts the same kind of list. For each one you will see the idea, an
           illustrated example, the code, and how fast it is. In the pictures,{' '}
-          <strong style={{ color: 'var(--uwc-orange)' }}>▲ orange</strong> marks values being
+          <strong style={{ color: 'var(--text-orange)' }}>▲ orange</strong> marks values being
           compared, <strong style={{ color: 'var(--uwc-raspberry)' }}>⇄ red</strong> marks values
           being moved, and <strong style={{ color: 'var(--uwc-teal)' }}>✓ green</strong> marks
           values in their final place.

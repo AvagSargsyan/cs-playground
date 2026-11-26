@@ -82,7 +82,7 @@ export default function Explore({ moduleId }: { moduleId: ModuleId }) {
           {isCountdown ? (
             <div className={s.console} role="group" aria-label="Printed output">
               <p className={s.consoleTitle}>Output</p>
-              <pre className={s.consoleBody}>
+              <pre className={s.consoleBody} tabIndex={0}>
                 {state.output.length ? state.output.join('\n') : ' '}
               </pre>
             </div>

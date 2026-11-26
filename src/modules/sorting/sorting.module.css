@@ -75,7 +75,7 @@
   outline-offset: -2px;
 }
 .mk-compare {
-  color: var(--uwc-orange);
+  color: var(--text-orange);
 }
 .mk-swap {
   color: var(--uwc-raspberry);
