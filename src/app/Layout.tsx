@@ -77,7 +77,9 @@ function Footer() {
   return (
     <footer className={s.footer}>
       <div className={`container ${s.footerInner}`}>
-        <p className={s.footerNotice}>{DEMO_NOTICE}</p>
+        <p className={s.footerNotice}>
+          {DEMO_NOTICE} Visits are counted anonymously, without cookies.
+        </p>
         <p className={s.footerLinks}>
           <Link to="/about">About this demo</Link>
           <a href={SITE.linkedin} target="_blank" rel="noreferrer">

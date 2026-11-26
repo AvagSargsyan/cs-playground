@@ -71,7 +71,7 @@ export const TEACHER_NOTES: Record<ModuleId, TeacherNotes> = {
     misconceptions: [
       {
         belief: 'Bubble Sort is always slow.',
-        fix: 'Run the “Nearly sorted” preset in Explore: with the early exit it finishes in one pass.',
+        fix: 'Run the “Nearly sorted” preset in Explore: with the early exit it stops after one or two passes.',
       },
       {
         belief: 'More code means a slower algorithm.',

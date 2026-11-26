@@ -1,6 +1,6 @@
 import { Link, Navigate, NavLink, Outlet, useParams } from 'react-router'
 import { Chip, Duration } from '../components/ui'
-import { MODULES, STAGE_IDS, STAGE_LABELS, type ModuleId } from '../content/modules'
+import { isStageId, MODULES, STAGE_IDS, STAGE_LABELS, type ModuleId } from '../content/modules'
 import { useAppSelector } from '../store/hooks'
 import s from './module.module.css'
 
@@ -62,7 +62,7 @@ export function ModuleLayout({ moduleId }: { moduleId: ModuleId }) {
             <Duration minutes={meta.minutes} prefix="About " /> in total. Your progress is saved, so
             you can stop and come back later.
           </p>
-          {stage && <StageStepper moduleId={moduleId} />}
+          {isStageId(stage) && <StageStepper moduleId={moduleId} />}
         </div>
       </section>
       <Outlet />

@@ -75,6 +75,9 @@ describe('makeMistakeTask', () => {
         if (kind === 'unsorted') {
           expect(t.wrongRow).toBe(0)
           expect(isStrictlyIncreasing(t.values)).toBe(false)
+          // The target is in the list, but the search never lands on it.
+          expect(t.values).toContain(t.target)
+          expect(t.rows.slice(1).some((r) => r.round!.value === t.target)).toBe(false)
           continue
         }
         expect(isStrictlyIncreasing(t.values)).toBe(true)

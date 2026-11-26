@@ -4,11 +4,15 @@ import { ModuleLayout, ModuleIndex } from '../modules/ModuleLayout'
 import { StagePage } from '../modules/StagePage'
 import { Dashboard } from '../pages/Dashboard'
 import { NotFound } from '../pages/NotFound'
+import { PageLoader } from '../components/ui'
 import { Layout } from './Layout'
+import { RouteError } from './RouteError'
 
 export const router = createBrowserRouter([
   {
     element: <Layout />,
+    errorElement: <RouteError />,
+    hydrateFallbackElement: <PageLoader />,
     children: [
       { index: true, element: <Dashboard /> },
       ...MODULE_IDS.map((id) => ({

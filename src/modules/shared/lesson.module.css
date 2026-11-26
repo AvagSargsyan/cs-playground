@@ -343,7 +343,9 @@
 .field {
   display: grid;
   gap: var(--space-1);
+  grid-template-columns: minmax(0, 1fr);
   min-width: 0;
+  max-width: 100%;
 }
 .fieldLabel {
   font-size: 0.82rem;

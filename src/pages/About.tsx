@@ -9,7 +9,7 @@ const FUTURE_IDEAS: { heading: string; items: string[] }[] = [
     items: [
       'More IB topics: stacks and queues, linked lists, graphs and hashing.',
       'A “write it yourself” stage: run your own Python in the browser and compare it with the visualisation.',
-      'Armenian and Russian versions alongside English.',
+      'Support for more languages.',
     ],
   },
   {
@@ -17,13 +17,6 @@ const FUTURE_IDEAS: { heading: string; items: string[] }[] = [
     items: [
       'Share a set of exercises with a class through a short code, and see which questions the class found hardest.',
       'Printable worksheets and exam-style questions generated from the same exercises.',
-    ],
-  },
-  {
-    heading: 'For everyone',
-    items: [
-      'Spoken step-by-step descriptions for screen reader users.',
-      'Offline mode for classrooms with unreliable internet.',
     ],
   },
 ]

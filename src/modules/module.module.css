@@ -40,6 +40,8 @@
 
 /* Stage stepper: three connected pills */
 .stepperWrap {
+  /* Contains the screen-reader-only labels, which would otherwise widen the page. */
+  position: relative;
   overflow-x: auto;
   scrollbar-width: none;
 }

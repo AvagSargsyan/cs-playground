@@ -2,7 +2,7 @@ import type { ModuleId } from './modules'
 
 /*
  * References and further reading shown at the end of each Learn page and in the teacher notes.
- * Every link was checked by hand (November 2026). Free sources come first; the IB textbooks are
+ * Every link was opened in a browser and checked (November 2026). Free sources come first; the IB textbooks are
  * listed as further reading only, without chapter numbers, because their contents were not
  * checked page by page.
  */
@@ -34,8 +34,8 @@ const CS50_WEEK3: Reference = {
 
 const KHAN = 'Khan Academy (Thomas Cormen and Devin Balkcom)'
 const KHAN_BASE = 'https://www.khanacademy.org/computing/computer-science/algorithms'
-const ISAAC = 'Isaac Computer Science (Raspberry Pi Foundation and University of Cambridge)'
-const ISAAC_BASE = 'https://isaaccomputerscience.org/topics'
+const PYTHONDS = 'Brad Miller and David Ranum, Runestone Academy (free online textbook)'
+const PYTHONDS_BASE = 'https://runestone.academy/ns/books/published/pythonds'
 
 const TEXTBOOKS: ReferenceGroup = {
   heading: 'IB textbooks',
@@ -79,10 +79,16 @@ export const REFERENCES: Record<ModuleId, ReferenceGroup[]> = {
           note: 'Divide and conquer, merging, and why it runs in O(n log n).',
         },
         {
-          title: 'Sorting',
-          source: ISAAC,
-          url: `${ISAAC_BASE}/sorting`,
-          note: 'Free topic pages on Bubble, Insertion and Merge Sort.',
+          title: 'Problem Solving with Algorithms and Data Structures: Sorting and Searching',
+          source: PYTHONDS,
+          url: `${PYTHONDS_BASE}/SortSearch/toctree.html`,
+          note: 'Bubble, Selection, Insertion and Merge Sort in Python, with analysis.',
+        },
+        {
+          title: 'VisuAlgo: Sorting',
+          source: 'National University of Singapore',
+          url: 'https://visualgo.net/en/sorting',
+          note: 'Animations of each algorithm, step by step.',
         },
       ],
     },
@@ -107,10 +113,10 @@ export const REFERENCES: Record<ModuleId, ReferenceGroup[]> = {
           note: 'Big O and comparing how functions grow.',
         },
         {
-          title: 'Searching',
-          source: ISAAC,
-          url: `${ISAAC_BASE}/searching`,
-          note: 'Free topic pages on linear and binary search.',
+          title: 'Problem Solving with Algorithms and Data Structures: Sorting and Searching',
+          source: PYTHONDS,
+          url: `${PYTHONDS_BASE}/SortSearch/toctree.html`,
+          note: 'Sequential and Binary Search in Python, with analysis.',
         },
       ],
     },
@@ -129,10 +135,10 @@ export const REFERENCES: Record<ModuleId, ReferenceGroup[]> = {
           note: 'Recursion, the factorial function and recursive challenges.',
         },
         {
-          title: 'Recursion',
-          source: ISAAC,
-          url: `${ISAAC_BASE}/recursion`,
-          note: 'Recursion basics and worked examples.',
+          title: 'Problem Solving with Algorithms and Data Structures: Recursion',
+          source: PYTHONDS,
+          url: `${PYTHONDS_BASE}/Recursion/toctree.html`,
+          note: 'The three laws of recursion and how stack frames work.',
         },
       ],
     },
@@ -145,7 +151,13 @@ export const TEACHING_REFERENCES: Reference[] = [
   {
     title: 'Teaching computer programming with PRIMM: a sociocultural perspective',
     source: 'Sue Sentance, Jane Waite and Maria Kallia, Computer Science Education 29(2–3), 2019',
-    url: 'https://qmro.qmul.ac.uk/xmlui/handle/123456789/57800',
-    note: 'The Predict–Run–Investigate–Modify–Make approach the lesson stages are inspired by.',
+    url: 'https://doi.org/10.1080/08993408.2019.1608781',
+    note: 'The research behind PRIMM, which the lesson stages are inspired by (publisher page).',
+  },
+  {
+    title: 'PRIMM: Pedagogy Quick Read',
+    source: 'Raspberry Pi Foundation',
+    url: 'https://static.raspberrypi.org/files/curriculum/quickreads/11-Pedagogy_Summary_PRIMM_V4_2023.pdf',
+    note: 'A free, short summary of PRIMM for teachers (PDF).',
   },
 ]

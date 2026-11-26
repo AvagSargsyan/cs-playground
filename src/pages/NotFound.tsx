@@ -1,6 +1,10 @@
+import { useEffect } from 'react'
 import { ButtonLink } from '../components/ui'
 
 export function NotFound() {
+  useEffect(() => {
+    document.title = 'Page not found · CS Playground'
+  }, [])
   return (
     <section className="container" style={{ padding: 'var(--space-8) var(--gutter)' }}>
       <p className="eyebrow">Error 404</p>

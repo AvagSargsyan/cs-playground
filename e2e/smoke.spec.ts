@@ -106,3 +106,10 @@ test('the About page starts with the author’s contact details', async ({ page 
     'tel:+37477063645',
   )
 })
+
+test('an unknown lesson stage shows the 404 page without the stage bar', async ({ page }) => {
+  await page.goto('/sorting/unknown')
+  await expect(page.getByRole('heading', { name: 'This page went missing' })).toBeVisible()
+  await expect(page.getByRole('navigation', { name: 'Lesson stages' })).toHaveCount(0)
+  await expect(page).toHaveTitle(/Page not found/)
+})

@@ -149,6 +149,9 @@ export function makeMistakeTask(rand: Rand = Math.random, forced?: MistakeKind):
         ;[values[i], values[j]] = [values[j], values[i]]
       }
       if (values.every((v, i) => i === 0 || values[i - 1] < v)) continue
+      // Only keep lists where the search really goes wrong: the target is in the list but
+      // Binary Search misses it. Otherwise every row would look fine and the task would confuse.
+      if (searchFinds(values, target)) continue
     }
 
     const rows: TraceRow[] = [
@@ -190,9 +193,8 @@ export function makeMistakeTask(rand: Rand = Math.random, forced?: MistakeKind):
       if (value === target) break
       left = nextLeft
       right = nextRight
-      // Show a few rounds after an unsorted start (so it is not obvious), one after other mistakes.
-      const roundsAfter = kind === 'unsorted' ? 3 : 1
-      if (wrongRow >= 0 && rows.length - 1 >= wrongRow + roundsAfter) break
+      // An unsorted start runs to the end, so students see the search miss the target.
+      if (kind !== 'unsorted' && wrongRow >= 0 && rows.length - 1 >= wrongRow + 1) break
     }
     if (wrongRow < 0) continue
     if (kind !== 'unsorted' && wrongRow === rows.length - 1 && rows.length < 3) continue
@@ -200,7 +202,7 @@ export function makeMistakeTask(rand: Rand = Math.random, forced?: MistakeKind):
     const r = rows[wrongRow].round
     const why =
       kind === 'unsorted'
-        ? 'The list is not sorted, so Binary Search cannot be used at all: ruling out half of the list only works when everything to the left is smaller and everything to the right is larger.'
+        ? `The list is not sorted, so Binary Search cannot be used: ruling out half of the list only works when everything to the left is smaller and everything to the right is larger. That is why the search misses ${target}, even though it is in the list.`
         : kind === 'wrong-mid'
           ? `MID should be (${r!.left} + ${r!.right}) div 2 = ${midOf(r!.left, r!.right)}, not ${r!.mid}.${(r!.left + r!.right) % 2 === 1 ? ' "div" rounds down.' : ''}`
           : kind === 'wrong-direction'
@@ -211,6 +213,19 @@ export function makeMistakeTask(rand: Rand = Math.random, forced?: MistakeKind):
 }
 
 /* ------------------------------ Big arrays ------------------------------ */
+
+/** Does standard Binary Search find `target` in `values` (which may be unsorted)? */
+function searchFinds(values: number[], target: number): boolean {
+  let left = 0
+  let right = values.length - 1
+  while (left <= right) {
+    const mid = midOf(left, right)
+    if (values[mid] === target) return true
+    if (values[mid] < target) left = mid + 1
+    else right = mid - 1
+  }
+  return false
+}
 
 /**
  * Comparisons each search needs to find the item at `index` in a sorted array of size n,

@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { loadState, persistenceListener } from './persistence'
+import { loadState, persistenceListener, saveState } from './persistence'
 import preferences from './preferencesSlice'
 import progress from './progressSlice'
 
@@ -16,6 +16,11 @@ export function makeStore(preloadedState?: Partial<RootState>) {
 }
 
 export const store = makeStore(loadState())
+
+// Saves are debounced; write immediately when the tab is closed or hidden so nothing is lost.
+if (typeof window !== 'undefined') {
+  window.addEventListener('pagehide', () => saveState(store.getState()))
+}
 
 export type AppStore = ReturnType<typeof makeStore>
 export type AppDispatch = AppStore['dispatch']

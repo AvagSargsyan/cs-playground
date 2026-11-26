@@ -45,19 +45,26 @@ export function ExerciseShell({
   number,
   total,
   onNext,
+  fails = 0,
+  onFail,
 }: {
   moduleId: ModuleId
   def: ExerciseDef
   number: number
   total: number
   onNext?: () => void
+  /** Wrong answers so far on this exercise. Kept by the runner so it survives switching. */
+  fails?: number
+  onFail?: () => void
 }) {
   const dispatch = useAppDispatch()
   const [status, setStatus] = useState<Status>('answering')
   const [verdict, setVerdict] = useState<Verdict | null>(null)
   const [attempt, setAttempt] = useState(0)
-  const [fails, setFails] = useState(0)
   const [revealed, setRevealed] = useState(false)
+  // Used when the shell is rendered on its own (no runner keeping count).
+  const [localFails, setLocalFails] = useState(0)
+  const failCount = onFail ? fails : localFails
   const feedbackRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -69,7 +76,10 @@ export function ExerciseShell({
     const score = v.score ?? (v.correct ? 1 : 0)
     setVerdict(v)
     setStatus(v.correct ? 'correct' : 'incorrect')
-    if (!v.correct) setFails((f) => f + 1)
+    if (!v.correct) {
+      if (onFail) onFail()
+      else setLocalFails((f) => f + 1)
+    }
     dispatch(
       exerciseAttempted({ module: moduleId, exerciseId: def.id, score, completed: v.correct }),
     )
@@ -82,7 +92,7 @@ export function ExerciseShell({
     setAttempt((a) => a + 1)
   }
 
-  const canReveal = !!def.solution && status === 'incorrect' && fails >= FAILS_BEFORE_SOLUTION
+  const canReveal = !!def.solution && status === 'incorrect' && failCount >= FAILS_BEFORE_SOLUTION
 
   return (
     <article className={s.exercise} aria-labelledby={`${def.id}-title`}>
@@ -139,11 +149,14 @@ export function ExerciseShell({
             Show solution
           </Button>
         )}
-        {status === 'answering' && fails > 0 && fails < FAILS_BEFORE_SOLUTION && def.solution && (
-          <span className={s.hintText}>
-            The solution unlocks after {FAILS_BEFORE_SOLUTION} tries.
-          </span>
-        )}
+        {status === 'answering' &&
+          failCount > 0 &&
+          failCount < FAILS_BEFORE_SOLUTION &&
+          def.solution && (
+            <span className={s.hintText}>
+              The solution unlocks after {FAILS_BEFORE_SOLUTION} tries.
+            </span>
+          )}
         {onNext && status !== 'answering' && (
           <Button
             variant={status === 'correct' ? 'primary' : 'ghost'}
@@ -168,6 +181,7 @@ export function PracticeRunner({
 }) {
   const [current, setCurrent] = useState(0)
   const [finished, setFinished] = useState(false)
+  const [fails, setFails] = useState<Record<string, number>>({})
   const records = useAppSelector((st) => st.progress.modules[moduleId].exercises)
   const dispatch = useAppDispatch()
   const topRef = useRef<HTMLDivElement>(null)
@@ -233,6 +247,11 @@ export function PracticeRunner({
       ) : (
         <ExerciseShell
           key={exercises[current].id}
+          fails={fails[exercises[current].id] ?? 0}
+          onFail={() => {
+            const id = exercises[current].id
+            setFails((f) => ({ ...f, [id]: (f[id] ?? 0) + 1 }))
+          }}
           moduleId={moduleId}
           def={exercises[current]}
           number={current + 1}

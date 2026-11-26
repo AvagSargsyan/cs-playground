@@ -154,13 +154,14 @@ export function Segmented<T extends string | number>({
   label: string
 }) {
   return (
-    <div role="radiogroup" aria-label={label} className={s.segmented}>
+    // Toggle buttons (not radios): radios would need arrow-key navigation, which the
+    // Explore pages already use for stepping through the algorithm.
+    <div role="group" aria-label={label} className={s.segmented}>
       {options.map((o) => (
         <button
           key={String(o.value)}
           type="button"
-          role="radio"
-          aria-checked={o.value === value}
+          aria-pressed={o.value === value}
           className={s.segment}
           onClick={() => onChange(o.value)}
         >

@@ -358,7 +358,7 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
           </li>
           <li>
             <strong>O(n)</strong>: one quick look at every value. Bubble and Insertion Sort reach
-            this only when the list is already sorted.
+            this when the list is already sorted, and come close when it is nearly sorted.
           </li>
         </ul>
         <DataTable

@@ -22,7 +22,7 @@ Three foundational ideas, each taught in the same three stages:
 
 There are also short notes for teachers for each lesson: objectives, a 60-minute plan, misconceptions to watch for, questions to ask, and support and stretch ideas. Progress is saved in the browser. No accounts are needed.
 
-Each lesson ends with **references and further reading**: the IB DP Computer Science course (first assessment 2027), Harvard's CS50, Khan Academy's _Algorithms_ course, Isaac Computer Science, and the main IB textbooks. The teacher notes also cite the PRIMM research the lesson structure is inspired by.
+Each lesson ends with **references and further reading**: the IB DP Computer Science course (first assessment 2027), Harvard's CS50, Khan Academy's _Algorithms_ course, the free textbook _Problem Solving with Algorithms and Data Structures_, VisuAlgo, and the main IB textbooks. The teacher notes also cite the PRIMM research the lesson structure is inspired by.
 
 ## How it's built
 

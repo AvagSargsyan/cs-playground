@@ -42,6 +42,8 @@ export default function Explore({ moduleId }: { moduleId: ModuleId }) {
 
   const { state, stats, kind } = player.step
   const setTarget = (t: number) => {
+    // Same target: the trace does not change, so restart the player explicitly.
+    if (t === target) player.reset()
     setData((d) => ({ ...d, target: t }))
     setTargetText(String(t))
   }
@@ -99,7 +101,7 @@ export default function Explore({ moduleId }: { moduleId: ModuleId }) {
               onSubmit={(e) => {
                 e.preventDefault()
                 const t = Number(targetText)
-                if (Number.isInteger(t)) setTarget(t)
+                if (targetText.trim() !== '' && Number.isInteger(t)) setTarget(t)
               }}
             >
               <input
