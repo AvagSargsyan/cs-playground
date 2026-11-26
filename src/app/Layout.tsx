@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, NavLink, Outlet, ScrollRestoration, useLocation } from 'react-router'
+import { Link, NavLink, Outlet, ScrollRestoration, useLocation, useNavigation } from 'react-router'
 import { DEMO_NOTICE, SITE } from '../content/site'
 import { BrandMark } from '../illustrations/BrandMark'
 import s from './layout.module.css'
@@ -92,9 +92,21 @@ function Footer() {
   )
 }
 
+/** Thin bar at the top of the page while the next page is downloading. */
+function NavigationProgress() {
+  const navigation = useNavigation()
+  if (navigation.state === 'idle') return null
+  return (
+    <div className={s.progress} role="status" aria-label="Loading page">
+      <span className={s.progressBar} />
+    </div>
+  )
+}
+
 export function Layout() {
   return (
     <>
+      <NavigationProgress />
       <a href="#main" className="skip-link">
         Skip to content
       </a>

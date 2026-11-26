@@ -93,3 +93,16 @@ test('lessons and teacher notes list their references', async ({ page }) => {
     )
   }
 })
+
+test('the About page starts with the author’s contact details', async ({ page }) => {
+  await page.goto('/about')
+  const card = page.getByRole('region', { name: 'Avag Sargsyan' })
+  await expect(card.getByRole('link', { name: 'avagsargsyan01@gmail.com' })).toHaveAttribute(
+    'href',
+    'mailto:avagsargsyan01@gmail.com',
+  )
+  await expect(card.getByRole('link', { name: '+374 77 063 645' })).toHaveAttribute(
+    'href',
+    'tel:+37477063645',
+  )
+})

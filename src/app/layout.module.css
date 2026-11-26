@@ -133,7 +133,32 @@
 }
 
 .main {
-  min-height: 60vh;
+  /* Keeps the footer below the fold while a page is loading, so it never jumps into view. */
+  min-height: calc(100vh - 72px);
+}
+
+.progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  height: 3px;
+  overflow: hidden;
+  background: var(--uwc-blue-tint);
+}
+.progressBar {
+  display: block;
+  width: 40%;
+  height: 100%;
+  background: var(--uwc-orange);
+  animation: progress 1s ease-in-out infinite;
+}
+@keyframes progress {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(250%);
+  }
 }
 .main:focus {
   outline: none;

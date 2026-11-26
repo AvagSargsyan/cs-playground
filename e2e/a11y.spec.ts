@@ -22,6 +22,8 @@ for (const path of PAGES) {
   test(`accessibility: ${path}`, async ({ page }) => {
     await page.goto(path)
     await page.locator('h1').first().waitFor()
+    // Check the finished page, not the short loading state.
+    await expect(page.getByText('Loading…')).toHaveCount(0)
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
       .analyze()

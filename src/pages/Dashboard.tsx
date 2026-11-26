@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { Button, ButtonLink, Duration } from '../components/ui'
 import { MODULE_IDS, MODULES, STAGE_IDS, STAGE_LABELS } from '../content/modules'
-import { MOTIVATION, SITE } from '../content/site'
+import { SITE } from '../content/site'
 import { ModuleArt } from '../illustrations/ModuleArt'
 import { progressReset } from '../store/progressSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
@@ -19,12 +19,6 @@ function Intro() {
         <strong>Explore</strong> it step by step, and <strong>Practice</strong> with exercises. A
         lesson takes about 30 to 45 minutes, and your progress is saved as you go.
       </p>
-      <figure className={s.motivation}>
-        <blockquote>
-          <p>&ldquo;{MOTIVATION}&rdquo;</p>
-        </blockquote>
-        <figcaption>{SITE.author}</figcaption>
-      </figure>
       <p className={s.author}>
         Built by {SITE.author} for demo purposes for {SITE.school}.{' '}
         <Link to="/about">About this demo</Link>

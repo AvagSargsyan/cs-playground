@@ -14,6 +14,8 @@
   --uwc-orange-tint: #fff0e8;
   /* Orange is too light for text; use this darker shade for orange-coloured words. */
   --text-orange: #b23d0c;
+  /* Text on an orange background: near-black (navy is just under 4.5:1 there). */
+  --on-orange: #111418;
   --uwc-raspberry: #c83461;
   --uwc-raspberry-tint: #fbe9ef;
 
@@ -70,10 +72,10 @@
   --font-body: 'Noto Sans', system-ui, sans-serif;
   --font-code: 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Shape: crisp, lightly rounded */
-  --radius-sm: 4px;
-  --radius: 6px;
-  --radius-pill: 4px;
+  /* Shape: clean and softly rounded */
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-pill: 999px;
   --border-inset: inset 0 0 0 1px var(--border);
   --shadow-soft: 0 1px 2px rgba(14, 42, 71, 0.06);
   --shadow-lift: 0 2px 8px rgba(14, 42, 71, 0.1);

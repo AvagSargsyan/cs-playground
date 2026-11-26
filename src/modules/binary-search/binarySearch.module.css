@@ -106,7 +106,7 @@
 .cell-current {
   background: var(--uwc-orange);
   /* Dark text: white on orange is below 4.5:1. */
-  color: var(--ink-heading);
+  color: var(--on-orange);
   box-shadow: none;
 }
 .cell-found {
@@ -156,7 +156,7 @@
 }
 .marker-M {
   background: var(--uwc-orange);
-  color: var(--ink-heading);
+  color: var(--on-orange);
 }
 
 /* ---------------- Legend swatches ---------------- */

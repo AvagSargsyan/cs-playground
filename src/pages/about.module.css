@@ -2,10 +2,6 @@
   padding-top: var(--space-7);
   max-width: 760px;
 }
-.byline {
-  margin-bottom: var(--space-4);
-  line-height: 1.3;
-}
 .bylineNote {
   display: block;
   font-size: 0.88rem;
@@ -48,4 +44,34 @@
 }
 .ideaGroup ul {
   margin: 0;
+}
+
+.contactCard {
+  margin: 0 0 var(--space-6);
+  padding: var(--space-4) var(--space-5);
+  background: var(--surface-alt);
+  border-radius: var(--radius);
+}
+.contactName {
+  margin: 0;
+  font-size: 1.3rem;
+}
+.contactList {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+}
+.contactList > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-3);
+}
+.contactList dt {
+  min-width: 80px;
+  font-weight: 600;
+  color: var(--ink-heading);
+}
+.contactList dd {
+  margin: 0;
+  overflow-wrap: anywhere;
 }

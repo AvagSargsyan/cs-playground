@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router'
-import { MOTIVATION, SITE } from '../content/site'
+import { SITE } from '../content/site'
 import s from './about.module.css'
 
 const FUTURE_IDEAS: { heading: string; items: string[] }[] = [
@@ -35,11 +35,36 @@ export function About() {
 
   return (
     <article className={`container ${s.page}`}>
-      <p className={s.byline}>
-        <strong>{SITE.author}</strong>
-        <span className={s.bylineNote}>Built for demo purposes for {SITE.school}</span>
-      </p>
       <h1 className={s.title}>About this demo</h1>
+
+      <section className={s.contactCard} aria-labelledby="author">
+        <h2 id="author" className={s.contactName}>
+          {SITE.author}
+        </h2>
+        <p className={s.bylineNote}>Built for demo purposes for {SITE.school}</p>
+        <dl className={s.contactList}>
+          <div>
+            <dt>Email</dt>
+            <dd>
+              <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+            </dd>
+          </div>
+          <div>
+            <dt>Phone</dt>
+            <dd>
+              <a href={`tel:${SITE.phone}`}>{SITE.phoneDisplay}</a>
+            </dd>
+          </div>
+          <div>
+            <dt>LinkedIn</dt>
+            <dd>
+              <a href={SITE.linkedin} target="_blank" rel="noreferrer">
+                linkedin.com/in/avag-sargsyan
+              </a>
+            </dd>
+          </div>
+        </dl>
+      </section>
 
       <p className={s.lead}>
         CS Playground is a small set of interactive lessons on three basic computer science ideas:
@@ -48,7 +73,10 @@ export function About() {
 
       <section className={s.section} aria-labelledby="why">
         <h2 id="why">Why I built it</h2>
-        <p>{MOTIVATION}</p>
+        <p>
+          I believe students understand algorithms best when they can see every step, change the
+          input and try it themselves.
+        </p>
         <p>
           Algorithms are easy to memorise and hard to understand. Students can repeat that binary
           search is &ldquo;O(log n)&rdquo; without ever feeling why it is so fast. In these lessons
@@ -109,17 +137,6 @@ export function About() {
             </div>
           ))}
         </div>
-      </section>
-
-      <section className={s.section} aria-labelledby="contact">
-        <h2 id="contact">Contact</h2>
-        <p>
-          You can find me on{' '}
-          <a href={SITE.linkedin} target="_blank" rel="noreferrer">
-            LinkedIn
-          </a>
-          .
-        </p>
       </section>
     </article>
   )

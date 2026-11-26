@@ -186,3 +186,16 @@ export function ProgressBar({ value, label }: { value: number; label: string }) 
     </div>
   )
 }
+
+/**
+ * Placeholder while a page downloads. It keeps the page tall (so the footer does not jump up) and
+ * only shows the spinner after a short delay, so fast loads do not flash.
+ */
+export function PageLoader() {
+  return (
+    <div className={s.pageLoader} role="status" aria-live="polite">
+      <span className={s.spinner} aria-hidden="true" />
+      <span className={s.loaderText}>Loading…</span>
+    </div>
+  )
+}

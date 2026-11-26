@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, type ComponentType } from 'react'
 import { useParams } from 'react-router'
-import { ButtonLink } from '../components/ui'
+import { ButtonLink, PageLoader } from '../components/ui'
 import {
   isStageId,
   STAGE_IDS,
@@ -15,24 +15,42 @@ import { useAppDispatch } from '../store/hooks'
 import s from './module.module.css'
 
 type StageComponent = ComponentType<{ moduleId: ModuleId }>
+type Loader = () => Promise<{ default: StageComponent }>
 
 /** Each stage is its own chunk, so a student only downloads the lesson they open. */
-const STAGES: Record<ModuleId, Record<StageId, StageComponent>> = {
+const LOADERS: Record<ModuleId, Record<StageId, Loader>> = {
   sorting: {
-    learn: lazy(() => import('./sorting/Learn')),
-    explore: lazy(() => import('./sorting/Explore')),
-    practice: lazy(() => import('./sorting/Practice')),
+    learn: () => import('./sorting/Learn'),
+    explore: () => import('./sorting/Explore'),
+    practice: () => import('./sorting/Practice'),
   },
   'binary-search': {
-    learn: lazy(() => import('./binary-search/Learn')),
-    explore: lazy(() => import('./binary-search/Explore')),
-    practice: lazy(() => import('./binary-search/Practice')),
+    learn: () => import('./binary-search/Learn'),
+    explore: () => import('./binary-search/Explore'),
+    practice: () => import('./binary-search/Practice'),
   },
   recursion: {
-    learn: lazy(() => import('./recursion/Learn')),
-    explore: lazy(() => import('./recursion/Explore')),
-    practice: lazy(() => import('./recursion/Practice')),
+    learn: () => import('./recursion/Learn'),
+    explore: () => import('./recursion/Explore'),
+    practice: () => import('./recursion/Practice'),
   },
+}
+
+const lazyStages = (l: Record<StageId, Loader>): Record<StageId, StageComponent> => ({
+  learn: lazy(l.learn),
+  explore: lazy(l.explore),
+  practice: lazy(l.practice),
+})
+
+const STAGES: Record<ModuleId, Record<StageId, StageComponent>> = {
+  sorting: lazyStages(LOADERS.sorting),
+  'binary-search': lazyStages(LOADERS['binary-search']),
+  recursion: lazyStages(LOADERS.recursion),
+}
+
+/** Download the other stages of a lesson in the background, so switching stages is instant. */
+function preloadStages(moduleId: ModuleId) {
+  for (const load of Object.values(LOADERS[moduleId])) void load().catch(() => {})
 }
 
 function StageFooter({ moduleId, stage }: { moduleId: ModuleId; stage: StageId }) {
@@ -65,6 +83,7 @@ export function StagePage({ moduleId }: { moduleId: ModuleId }) {
   useEffect(() => {
     if (valid) {
       dispatch(stageVisited({ module: moduleId, stage }))
+      preloadStages(moduleId)
       document.title = `${STAGE_LABELS[stage]} · ${MODULES[moduleId].title} · CS Playground (Demo)`
     }
   }, [dispatch, moduleId, stage, valid])
@@ -73,12 +92,10 @@ export function StagePage({ moduleId }: { moduleId: ModuleId }) {
   const Stage = STAGES[moduleId][stage]
   return (
     <div className={s.stage}>
-      <Suspense
-        fallback={<div className="container" aria-busy="true" style={{ minHeight: '50vh' }} />}
-      >
+      <Suspense fallback={<PageLoader />}>
         <Stage moduleId={moduleId} />
+        <StageFooter moduleId={moduleId} stage={stage} />
       </Suspense>
-      <StageFooter moduleId={moduleId} stage={stage} />
     </div>
   )
 }
