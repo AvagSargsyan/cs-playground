@@ -64,43 +64,12 @@
   margin-top: var(--space-6);
 }
 
-/* Approach */
-.approach {
-  display: grid;
-  gap: var(--space-3);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-@media (min-width: 760px) {
-  .approach {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-.approach li {
-  padding: var(--space-4);
+.exitTicket {
+  margin: var(--space-4) 0 0;
+  padding: var(--space-3) var(--space-4);
   background: var(--surface);
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   box-shadow: var(--border-inset);
-}
-.approachStage {
-  margin: 0 0 var(--space-2);
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: var(--ink-heading);
-}
-.primm {
-  display: block;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 0.82rem;
-  color: var(--uwc-teal);
-}
-.approachText {
-  margin: 0;
-  font-size: 0.93rem;
-  color: var(--ink-muted);
 }
 
 /* Lesson links */
@@ -176,12 +145,6 @@
 .table tbody th {
   font-weight: 600;
   white-space: nowrap;
-}
-.theme {
-  display: block;
-  margin-top: 2px;
-  font-size: 0.82rem;
-  color: var(--ink-muted);
 }
 .note {
   margin-top: var(--space-3);
@@ -269,15 +232,6 @@
   margin: 0;
   font-size: 0.95rem;
 }
-.tag {
-  display: inline-block;
-  padding: 0 8px;
-  margin-right: var(--space-1);
-  border-radius: var(--radius-pill);
-  background: var(--surface-sunken);
-  font-size: 0.78rem;
-  font-weight: 600;
-}
 
 @media print {
   .page {
@@ -291,7 +245,6 @@
     margin-top: 14pt;
   }
   .misconceptions > div,
-  .approach li,
   .lessonLink,
   .tableWrap {
     box-shadow: none;

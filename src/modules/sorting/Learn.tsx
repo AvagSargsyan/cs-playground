@@ -18,7 +18,6 @@ import {
 import { MiniBars } from './MiniBars'
 import type { SortAlgorithmId } from './types'
 import { walkthroughFrames, WALKTHROUGH_INPUT } from './walkthrough'
-import { WorldSort } from './WorldSort'
 import s from './sorting.module.css'
 
 const line = (id: SortAlgorithmId, key: string) =>
@@ -93,7 +92,6 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
       intro="Computers sort things all the time: search results, playlists, prices, names. In this lesson you will see four different ways to put a list in order, and why some are much faster than others."
       toc={[
         ['what', 'What is sorting?'],
-        ['world', 'Sorting around the world'],
         ['bubble', 'Bubble Sort'],
         ['selection', 'Selection Sort'],
         ['insertion', 'Insertion Sort'],
@@ -130,26 +128,6 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
           Why bother? Sorted data makes many other jobs easy: finding the highest score is instant,
           duplicates end up next to each other, and you can search a sorted list very quickly (that
           is the next lesson, <Link to="/binary-search/learn">Binary Search</Link>).
-        </p>
-      </LessonSection>
-
-      <LessonSection id="world" title="Sorting around the world">
-        <p>
-          Before we sort numbers, a surprise: even &ldquo;alphabetical order&rdquo; is not the same
-          everywhere. Each language has its own rules for its letters.
-        </p>
-        <WorldSort />
-        <Callout kind="world" title="Talk about it">
-          <p>
-            How is alphabetical order taught in your language? Are there letters with accents,
-            letters made of two characters, or a different alphabet? What should a contact list app
-            do when it has names from many languages?
-          </p>
-        </Callout>
-        <p>
-          The big idea for computer science: the sorting <em>algorithm</em> stays the same. Only the{' '}
-          <strong>comparison rule</strong> (which of two items comes first) changes. In the rest of
-          this lesson we sort numbers, where the rule is simple: smaller comes first.
         </p>
       </LessonSection>
 

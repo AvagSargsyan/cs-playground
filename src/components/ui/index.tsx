@@ -26,6 +26,31 @@ export function ButtonLink({ variant, size, className, ...rest }: LinkProps & Bu
   return <Link className={buttonClass({ variant, size }, className)} {...rest} />
 }
 
+/**
+ * Estimated time. Shows a short visual label ("20 min") but gives screen readers the full words
+ * ("about 20 minutes"), because "min" is often read out as "minimum".
+ */
+export function Duration({
+  minutes,
+  prefix = '',
+  className,
+}: {
+  minutes: number
+  /** Visible text before the number, e.g. "About ". */
+  prefix?: string
+  className?: string
+}) {
+  return (
+    <span className={className}>
+      <span aria-hidden="true">
+        {prefix}
+        {minutes} min
+      </span>
+      <span className="visually-hidden">about {minutes} minutes</span>
+    </span>
+  )
+}
+
 type ChipTone = 'default' | 'demo' | 'ib' | 'success' | 'outline'
 const chipTone: Record<ChipTone, string | undefined> = {
   default: undefined,
@@ -47,13 +72,12 @@ export function Chip({
   return <span className={cx(s.chip, chipTone[tone], className)}>{children}</span>
 }
 
-type CalloutKind = 'info' | 'didyouknow' | 'warning' | 'tip' | 'world' | 'predict'
+type CalloutKind = 'info' | 'didyouknow' | 'warning' | 'tip' | 'predict'
 const calloutIcon: Record<CalloutKind, string> = {
   info: 'ℹ️',
   didyouknow: '💡',
   warning: '⚠️',
   tip: '✅',
-  world: '🌍',
   predict: '🤔',
 }
 const calloutDefaultTitle: Record<CalloutKind, string> = {
@@ -61,7 +85,6 @@ const calloutDefaultTitle: Record<CalloutKind, string> = {
   didyouknow: 'Did you know?',
   warning: 'Watch out',
   tip: 'Tip',
-  world: 'Around the world',
   predict: 'Predict first',
 }
 

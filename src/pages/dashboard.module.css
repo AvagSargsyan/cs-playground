@@ -22,6 +22,30 @@
   font-size: 1.12rem;
   margin-bottom: var(--space-4);
 }
+.motivation {
+  max-width: 680px;
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--uwc-teal);
+  background: var(--surface);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.motivation blockquote {
+  margin: 0;
+}
+.motivation p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--ink-heading);
+}
+.motivation figcaption {
+  margin-top: var(--space-1);
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+}
+.motivation figcaption::before {
+  content: '— ';
+}
 .author {
   max-width: 680px;
   font-size: 0.92rem;
@@ -105,6 +129,10 @@
 .stages .stageDone {
   color: #005e5a;
   font-weight: 600;
+}
+.stageTime {
+  font-size: 0.82rem;
+  color: var(--ink-muted);
 }
 .lessonButton {
   margin-top: var(--space-3);

@@ -15,7 +15,12 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-3);
-  margin-bottom: var(--space-5);
+  margin-bottom: var(--space-2);
+}
+.time {
+  margin: 0 0 var(--space-5);
+  font-size: 0.92rem;
+  color: var(--ink-muted);
 }
 .title {
   display: flex;
@@ -80,6 +85,16 @@
 .stepActive:hover {
   background: var(--module-color, var(--uwc-blue));
   color: #fff;
+}
+.stepTime {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+/* On narrow screens the stepper must fit: the total time is shown above it instead. */
+@media (max-width: 560px) {
+  .stepTime > [aria-hidden='true'] {
+    display: none;
+  }
 }
 .stepActive .stepNumber {
   background: rgba(255, 255, 255, 0.22);

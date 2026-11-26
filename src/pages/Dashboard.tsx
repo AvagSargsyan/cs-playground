@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
-import { Button, ButtonLink } from '../components/ui'
+import { Button, ButtonLink, Duration } from '../components/ui'
 import { MODULE_IDS, MODULES, STAGE_IDS, STAGE_LABELS } from '../content/modules'
-import { SITE } from '../content/site'
+import { MOTIVATION, SITE } from '../content/site'
 import { ModuleArt } from '../illustrations/ModuleArt'
 import { progressReset } from '../store/progressSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
@@ -16,8 +16,15 @@ function Intro() {
       <p className={s.lead}>
         An interactive demo for learning three computer science concepts: sorting, binary search and
         recursion. Each lesson has three stages: <strong>Learn</strong> the idea,{' '}
-        <strong>Explore</strong> it step by step, and <strong>Practice</strong> with exercises.
+        <strong>Explore</strong> it step by step, and <strong>Practice</strong> with exercises. A
+        lesson takes about 30 to 45 minutes, and your progress is saved as you go.
       </p>
+      <figure className={s.motivation}>
+        <blockquote>
+          <p>&ldquo;{MOTIVATION}&rdquo;</p>
+        </blockquote>
+        <figcaption>{SITE.author}</figcaption>
+      </figure>
       <p className={s.author}>
         Built by {SITE.author} for demo purposes for {SITE.school}.{' '}
         <Link to="/about">About this demo</Link>
@@ -57,7 +64,7 @@ function Lessons() {
               </div>
               <div className={s.lessonBody}>
                 <p className={s.lessonNumber}>
-                  Lesson {n + 1} · about {meta.minutes} min
+                  Lesson {n + 1} · <Duration minutes={meta.minutes} prefix="About " />
                 </p>
                 <h3 className={s.lessonTitle}>{meta.title}</h3>
                 <p className={s.lessonText}>{meta.description}</p>
@@ -69,7 +76,8 @@ function Lessons() {
                         <Link to={`/${id}/${x}`} className={done ? s.stageDone : undefined}>
                           {done && <span aria-hidden="true">✓ </span>}
                           {STAGE_LABELS[x]}
-                          {done && <span className="visually-hidden"> (completed)</span>}
+                          {done && <span className="visually-hidden"> (completed)</span>}{' '}
+                          <Duration minutes={meta.stageMinutes[x]} className={s.stageTime} />
                         </Link>
                       </li>
                     )
@@ -124,9 +132,8 @@ function ForTeachers() {
         For teachers
       </h2>
       <p className={s.teachersText}>
-        Each lesson comes with a short lesson plan: learning objectives, common misconceptions,
-        discussion questions and ideas for stronger and weaker students, linked to the IB Diploma
-        Programme Computer Science course.
+        A one-page, 60-minute lesson plan for each topic, linked to the IB Diploma Programme
+        Computer Science course.
       </p>
       <ButtonLink to="/teachers" variant="ghost">
         Open teacher notes

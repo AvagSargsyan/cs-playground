@@ -21,7 +21,10 @@ export type ModuleMeta = {
   title: string
   short: string
   description: string
+  /** Estimated total time in minutes (the sum of stageMinutes). */
   minutes: number
+  /** Estimated time for each stage, in minutes. */
+  stageMinutes: Record<StageId, number>
   /** CSS custom property holding the module color. */
   colorVar: string
   ibTag: string
@@ -37,6 +40,7 @@ export const MODULES: Record<ModuleId, ModuleMeta> = {
     description:
       'How do computers put things in order? Compare Bubble, Selection, Insertion and Merge Sort, and see why some are much faster than others.',
     minutes: 45,
+    stageMinutes: { learn: 20, explore: 10, practice: 15 },
     colorVar: 'var(--module-sorting)',
     ibTag: 'IB DP CS · Algorithms',
     exerciseIds: [
@@ -54,6 +58,7 @@ export const MODULES: Record<ModuleId, ModuleMeta> = {
     description:
       'Find anything in a sorted list in a few steps by throwing away half of the possibilities every time.',
     minutes: 30,
+    stageMinutes: { learn: 10, explore: 10, practice: 10 },
     colorVar: 'var(--module-search)',
     ibTag: 'IB DP CS · Algorithms',
     exerciseIds: [
@@ -71,6 +76,7 @@ export const MODULES: Record<ModuleId, ModuleMeta> = {
     description:
       'A function that calls itself? Discover base cases, recursive cases and the call stack with countdowns and factorials.',
     minutes: 30,
+    stageMinutes: { learn: 10, explore: 10, practice: 10 },
     colorVar: 'var(--module-recursion)',
     ibTag: 'IB DP CS · HL: Recursion',
     exerciseIds: [

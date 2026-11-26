@@ -9,44 +9,8 @@ import {
   SCENARIOS,
 } from './exercises/generators'
 import { walkthroughFrames } from './walkthrough'
-import { movedWords, sortWords, WORLD_RULES, WORLD_WORDS } from './worldRules'
 
 const REPEAT = 100
-
-describe('sorting around the world', () => {
-  it('puts Swedish Å, Ä and Ö after Z', () => {
-    const sv = sortWords(WORLD_WORDS, 'sv')
-    expect(sv.indexOf('Ångström')).toBeGreaterThan(sv.indexOf('Zebra'))
-    expect(sv.indexOf('Ärzte')).toBeGreaterThan(sv.indexOf('Zebra'))
-  })
-
-  it('files German Ä with A', () => {
-    const de = sortWords(WORLD_WORDS, 'de')
-    expect(de.indexOf('Ärzte')).toBeLessThan(de.indexOf('Cesta'))
-  })
-
-  it('puts Czech Ch after H', () => {
-    const cs = sortWords(WORLD_WORDS, 'cs')
-    expect(cs.indexOf('Chalupa')).toBeGreaterThan(cs.indexOf('Hotel'))
-  })
-
-  it('puts each language’s own script first for Armenian and Russian', () => {
-    expect(sortWords(WORLD_WORDS, 'hy')[0]).toMatch(/^[԰-֏]/)
-    expect(sortWords(WORLD_WORDS, 'ru')[0]).toMatch(/^[Ѐ-ӿ]/)
-  })
-
-  it('character-code order puts accented letters after Z', () => {
-    const codes = sortWords(WORLD_WORDS, 'codes')
-    expect(codes.indexOf('Ärzte')).toBeGreaterThan(codes.indexOf('Zebra'))
-  })
-
-  it('keeps every word and reports moved words', () => {
-    for (const r of WORLD_RULES)
-      expect(sortWords(WORLD_WORDS, r.id).slice().sort()).toEqual(WORLD_WORDS.slice().sort())
-    expect(movedWords(['a', 'b'], ['a', 'b']).size).toBe(0)
-    expect(movedWords(['a', 'b'], ['b', 'a'])).toEqual(new Set(['a', 'b']))
-  })
-})
 
 describe('walkthrough frames', () => {
   it('start unsorted and end sorted for every algorithm', () => {

@@ -10,17 +10,17 @@
 
 Three foundational ideas, each taught in the same three stages:
 
-| Lesson            | Learn                                                                                        | Explore                                                                           | Practice                                                                                                 |
-| ----------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| **Sorting**       | Why sorting matters, "sorting around the world", Bubble, Selection, Insertion and Merge Sort | Animated bars, presets, custom values, race two algorithms, work comparison chart | Predict the next step, sort it yourself, identify the algorithm, choose an algorithm, count comparisons  |
-| **Binary Search** | Linear vs binary, an illustrated walkthrough, a guess-my-number game, O(log n) by intuition  | Left / right / middle markers, custom sorted input, linear vs binary side by side | Find the midpoint, choose the direction, complete the search, find the mistake, complexity challenge     |
-| **Recursion**     | Nesting dolls, base and recursive cases, what happens with no base case, the call stack      | Animated call stack for countdown and factorial                                   | Predict the next call, find the base case, arrange the call stack, predict the result, fix the recursion |
+| Lesson            | Learn                                                                                       | Explore                                                                           | Practice                                                                                                 |
+| ----------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **Sorting**       | Why sorting matters, Bubble, Selection, Insertion and Merge Sort                            | Animated bars, presets, custom values, race two algorithms, work comparison chart | Predict the next step, sort it yourself, identify the algorithm, choose an algorithm, count comparisons  |
+| **Binary Search** | Linear vs binary, an illustrated walkthrough, a guess-my-number game, O(log n) by intuition | Left / right / middle markers, custom sorted input, linear vs binary side by side | Find the midpoint, choose the direction, complete the search, find the mistake, complexity challenge     |
+| **Recursion**     | Nesting dolls, base and recursive cases, what happens with no base case, the call stack     | Animated call stack for countdown and factorial                                   | Predict the next call, find the base case, arrange the call stack, predict the result, fix the recursion |
 
 - **Learn:** short explanations, real-world examples, illustrations, and "check yourself" questions.
 - **Explore:** run the algorithm step by step (play, pause, step back, speed). Pseudocode and Python are highlighted line by line, and the counters update live.
 - **Practice:** varied exercise formats (select, drag and arrange, match, numeric, step-by-step execution) with an explanation for every answer, retries with fresh problems, and solutions.
 
-There are also notes for teachers for each lesson: objectives, misconceptions, a 60-minute plan, discussion questions and differentiation. Progress is saved in the browser. No accounts are needed.
+There are also short notes for teachers for each lesson: objectives, a 60-minute plan, misconceptions to watch for, questions to ask, and support and stretch ideas. Progress is saved in the browser. No accounts are needed.
 
 Each lesson ends with **references and further reading**: the IB DP Computer Science course (first assessment 2027), Harvard's CS50, Khan Academy's _Algorithms_ course, Isaac Computer Science, and the main IB textbooks. The teacher notes also cite the PRIMM research the lesson structure is inspired by.
 

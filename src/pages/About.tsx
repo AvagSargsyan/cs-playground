@@ -1,8 +1,32 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router'
-import { SITE } from '../content/site'
-import { AuthorAvatar } from '../illustrations/BrandMark'
+import { MOTIVATION, SITE } from '../content/site'
 import s from './about.module.css'
+
+const FUTURE_IDEAS: { heading: string; items: string[] }[] = [
+  {
+    heading: 'For students',
+    items: [
+      'More IB topics: stacks and queues, linked lists, graphs and hashing.',
+      'A “write it yourself” stage: run your own Python in the browser and compare it with the visualisation.',
+      'Armenian and Russian versions alongside English.',
+    ],
+  },
+  {
+    heading: 'For teachers',
+    items: [
+      'Share a set of exercises with a class through a short code, and see which questions the class found hardest.',
+      'Printable worksheets and exam-style questions generated from the same exercises.',
+    ],
+  },
+  {
+    heading: 'For everyone',
+    items: [
+      'Spoken step-by-step descriptions for screen reader users.',
+      'Offline mode for classrooms with unreliable internet.',
+    ],
+  },
+]
 
 export function About() {
   useEffect(() => {
@@ -12,27 +36,23 @@ export function About() {
   return (
     <article className={`container ${s.page}`}>
       <p className={s.byline}>
-        <AuthorAvatar size={40} />
-        <span>
-          <strong>{SITE.author}</strong>
-          <span className={s.bylineNote}>Built for demo purposes for {SITE.school}</span>
-        </span>
+        <strong>{SITE.author}</strong>
+        <span className={s.bylineNote}>Built for demo purposes for {SITE.school}</span>
       </p>
       <h1 className={s.title}>About this demo</h1>
 
       <p className={s.lead}>
         CS Playground is a small set of interactive lessons on three basic computer science ideas:
-        sorting, binary search and recursion. I built it for demo purposes for {SITE.school}, to
-        show how I like to teach computer science.
+        sorting, binary search and recursion.
       </p>
 
       <section className={s.section} aria-labelledby="why">
         <h2 id="why">Why I built it</h2>
+        <p>{MOTIVATION}</p>
         <p>
           Algorithms are easy to memorise and hard to understand. Students can repeat that binary
-          search is &ldquo;O(log n)&rdquo; without ever feeling why it is so fast. I wanted lessons
-          where students see each step, change the input and try it themselves, so the idea makes
-          sense before the notation arrives.
+          search is &ldquo;O(log n)&rdquo; without ever feeling why it is so fast. In these lessons
+          the idea makes sense first, and the notation comes after.
         </p>
       </section>
 
@@ -57,43 +77,19 @@ export function About() {
           </li>
         </ul>
         <p>
-          There are also <Link to="/teachers">notes for teachers</Link> with lesson plans,
-          misconceptions and discussion questions.
-        </p>
-      </section>
-
-      <section className={s.section} aria-labelledby="world">
-        <h2 id="world">For an international classroom</h2>
-        <p>
-          The examples come from many languages and cultures: names from around the world, countries
-          by population, dictionaries in different alphabets. In &ldquo;Sorting around the
-          world&rdquo; students sort the same list of words with different language rules and find
-          that even &ldquo;alphabetical order&rdquo; depends on where you are from. It is a good
-          starting point for a class discussion.
+          There are also short <Link to="/teachers">notes for teachers</Link> with a lesson plan for
+          each topic.
         </p>
       </section>
 
       <section className={s.section} aria-labelledby="built">
         <h2 id="built">How it&rsquo;s built</h2>
-        <ul>
-          <li>React and TypeScript, built with Vite and hosted as a static site.</li>
-          <li>
-            Redux Toolkit keeps each student&rsquo;s progress and settings in their own browser.
-            There are no accounts and no server.
-          </li>
-          <li>
-            Every algorithm records a full list of its steps. The visualisations and exercises
-            replay that list, so stepping backwards and &ldquo;predict the next step&rdquo;
-            questions always match the real algorithm.
-          </li>
-          <li>
-            Unit tests check every algorithm; browser tests check every page on desktop and mobile.
-          </li>
-        </ul>
         <p>
-          The source code is on{' '}
+          I designed and built CS Playground myself, using my experience as a software engineer. It
+          runs in any browser, works on phones, needs no accounts or installation, and is tested for
+          accessibility. The{' '}
           <a href={SITE.github} target="_blank" rel="noreferrer">
-            GitHub
+            source code is on GitHub
           </a>
           .
         </p>
@@ -101,10 +97,18 @@ export function About() {
 
       <section className={s.section} aria-labelledby="next">
         <h2 id="next">Future ideas</h2>
-        <p>
-          An Armenian and English version, more lessons (for example graphs and hashing), and a
-          simple way for teachers to share a set of exercises with a class.
-        </p>
+        <div className={s.ideas}>
+          {FUTURE_IDEAS.map((g) => (
+            <div key={g.heading} className={s.ideaGroup}>
+              <h3 className={s.ideaHeading}>{g.heading}</h3>
+              <ul>
+                {g.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className={s.section} aria-labelledby="contact">

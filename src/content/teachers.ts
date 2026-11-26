@@ -1,12 +1,5 @@
 import type { ModuleId, StageId } from './modules'
 
-export type Misconception = {
-  /** What students often believe. */
-  belief: string
-  /** Why it's wrong and how the lesson tackles it. */
-  howAddressed: string
-}
-
 export type PlanStep = {
   minutes: number
   title: string
@@ -16,16 +9,17 @@ export type PlanStep = {
   stage?: StageId
 }
 
+/** Short, practical notes: one printed page per lesson. */
 export type TeacherNotes = {
   summary: string
   objectives: string[]
-  priorKnowledge: string[]
-  misconceptions: Misconception[]
   plan: PlanStep[]
-  discussion: { question: string; kind: 'concept' | 'intercultural' | 'ethical' }[]
-  differentiation: { support: string[]; stretch: string[] }
-  assessment: string[]
-  ibLinks: { tok?: string; cas?: string }
+  exitTicket: string
+  /** What students often believe, and what to do about it in the app. */
+  misconceptions: { belief: string; fix: string }[]
+  questions: string[]
+  support: string[]
+  stretch: string[]
 }
 
 export const LESSON_MINUTES = 60
@@ -33,330 +27,215 @@ export const LESSON_MINUTES = 60
 export const TEACHER_NOTES: Record<ModuleId, TeacherNotes> = {
   sorting: {
     summary:
-      'Students compare four sorting algorithms on the same data, see why some do far less work than others, and practise tracing them by hand.',
+      'Students compare four sorting algorithms, see why some do far less work than others, and trace them by hand.',
     objectives: [
-      'Describe how bubble, selection, Insertion Sort and Merge Sort put a list in order.',
-      'Trace one pass of Bubble Sort and one step of Selection Sort on a short list.',
-      'Count comparisons and swaps/writes, and use them to compare algorithms.',
-      'Explain O(n²) and O(n log n) in plain words and choose a sensible algorithm for a situation.',
+      'Trace Bubble Sort and Selection Sort on a short list.',
+      'Count comparisons and use them to compare algorithms.',
+      'Explain O(n²) and O(n log n) in plain words and choose an algorithm for a situation.',
     ],
-    priorKnowledge: [
-      'What a list (array) and an index are.',
-      'Comparing two values with < and >.',
-      'Reading simple pseudocode with loops and if statements.',
+    plan: [
+      {
+        minutes: 5,
+        title: 'Hook',
+        activity:
+          'Pairs sort 8 numbered cards and write down their method. Collect two different methods on the board.',
+      },
+      {
+        minutes: 10,
+        title: 'Learn',
+        activity:
+          'Students read the introduction and one algorithm, and answer the “Check yourself” questions. Match the card methods to algorithm names.',
+        stage: 'learn',
+      },
+      {
+        minutes: 15,
+        title: 'Explore in pairs',
+        activity:
+          'Run each algorithm on the same array, then on “Reversed” and “Nearly sorted”. Predict before pressing Play and record the comparisons.',
+        stage: 'explore',
+      },
+      {
+        minutes: 20,
+        title: 'Practice',
+        activity:
+          'Individual work on the five exercises. Ask students to explain a wrong answer out loud before they retry.',
+        stage: 'practice',
+      },
+      {
+        minutes: 10,
+        title: 'Wrap-up',
+        activity: 'Compare the pairs’ results: which algorithm for 10 items, and for 1 million?',
+      },
     ],
+    exitTicket: 'Show the list after the first pass of Bubble Sort on [5, 1, 4, 2].',
     misconceptions: [
       {
         belief: 'Bubble Sort is always slow.',
-        howAddressed:
-          'With the early-exit check, Bubble Sort finishes in one pass on data that is already sorted (O(n)). Students try the "Nearly sorted" preset in Explore and watch the comparison count stay low.',
+        fix: 'Run the “Nearly sorted” preset in Explore: with the early exit it finishes in one pass.',
+      },
+      {
+        belief: 'More code means a slower algorithm.',
+        fix: 'Race Merge Sort against Bubble Sort on a large random list in Explore.',
       },
       {
         belief: 'Merge Sort sorts the list in place.',
-        howAddressed:
-          'The Explore view shows the extra buffer Merge Sort writes into, and the stats count "writes" instead of swaps. The Learn page lists its O(n) extra memory.',
-      },
-      {
-        belief: 'Longer or cleverer code always runs slower.',
-        howAddressed:
-          'Merge Sort has the most code but the fewest comparisons on large random lists. The “Race two algorithms” view in Explore puts two algorithms side by side on the same array.',
-      },
-      {
-        belief: 'Alphabetical order is the same in every language.',
-        howAddressed:
-          '"Sorting around the world" sorts one list of words with different language rules, showing that the comparison rule decides the order, not the algorithm.',
+        fix: 'Point to the extra buffer in Explore and the “writes” counter.',
       },
     ],
-    plan: [
-      {
-        minutes: 5,
-        title: 'Hook',
-        activity:
-          'Give each pair 8 numbered cards and ask them to sort them and write down the steps they used. Collect two different strategies on the board.',
-      },
-      {
-        minutes: 10,
-        title: 'Learn',
-        activity:
-          'Students read the introduction and one algorithm of their choice, answering the "Check yourself" questions. Link their card strategies to the algorithm names.',
-        stage: 'learn',
-      },
-      {
-        minutes: 15,
-        title: 'Explore in pairs',
-        activity:
-          'Pairs run each algorithm on the same array, then on "Reversed" and "Nearly sorted". They record comparisons and swaps/writes in a table and predict before pressing Play.',
-        stage: 'explore',
-      },
-      {
-        minutes: 20,
-        title: 'Practice',
-        activity:
-          'Individual work on the five exercises. Circulate and ask students to explain a wrong answer out loud before they retry.',
-        stage: 'practice',
-      },
-      {
-        minutes: 10,
-        title: 'Plenary',
-        activity:
-          'Compare the pairs’ tables. Ask: which algorithm would you use for 10 items? For 1 million? Finish with the exit ticket.',
-      },
+    questions: [
+      'Why does a nearly sorted list help Insertion Sort but not Selection Sort?',
+      'Which algorithm would you choose for 10 items? For 1 million? Why?',
+      'Online shops sort by “relevance”. Who decides what is relevant?',
     ],
-    discussion: [
-      {
-        question:
-          'Why does a nearly sorted list make Insertion Sort fast but barely helps Selection Sort?',
-        kind: 'concept',
-      },
-      {
-        question:
-          'In your language, how are words ordered alphabetically? What would a program need to know to sort names from every student in this class correctly?',
-        kind: 'intercultural',
-      },
-      {
-        question:
-          'Online shops let you sort products by "relevance". Who decides what is relevant, and is that sorting neutral?',
-        kind: 'ethical',
-      },
+    support: [
+      'Use 5–6 values and a slow speed in Explore.',
+      'Start with Bubble Sort and Selection Sort only.',
     ],
-    differentiation: {
-      support: [
-        'Use arrays of 5–6 values and the 0.5× speed in Explore.',
-        'Focus on Bubble Sort and Selection Sort first; leave Merge Sort for later.',
-        'Give a printed table for recording comparisons and swaps/writes.',
-      ],
-      stretch: [
-        'Explain why Merge Sort is O(n log n) by counting the levels of splitting.',
-        'Find an input where Insertion Sort beats Merge Sort on comparisons, and explain why.',
-        'Research stable vs unstable sorts and test stability on paper with labelled cards (5a, 5b): which algorithms keep 5a before 5b?',
-      ],
-    },
-    assessment: [
-      'Exit ticket: show the list after the first pass of Bubble Sort on [5, 1, 4, 2].',
-      'Practice exercises "Predict the next step" and "Count the comparisons" as a quick check.',
-      'Short written answer: choose an algorithm for a nearly sorted class list and justify it.',
+    stretch: [
+      'Explain why Merge Sort is O(n log n) by counting the levels of splitting.',
+      'Find an input where Insertion Sort beats Merge Sort on comparisons.',
     ],
-    ibLinks: {
-      tok: 'Is an algorithm "better" in itself, or only for a particular kind of data and purpose?',
-    },
   },
   'binary-search': {
     summary:
-      'Students discover why Binary Search needs sorted data, run it step by step, and compare how many guesses it needs against checking every item.',
+      'Students find out why Binary Search needs sorted data, trace it step by step, and compare it with checking every item.',
     objectives: [
-      'Explain Linear Search and Binary Search in their own words.',
       'Explain why Binary Search only works on sorted data.',
-      'Trace Binary Search: find the middle, compare, and update the left and right bounds.',
+      'Trace Binary Search using left, mid and right.',
       'Compare O(n) and O(log n) using real numbers of comparisons.',
     ],
-    priorKnowledge: [
-      'Lists and indices, starting at 0.',
-      'Integer division / rounding down.',
-      'What a sorted list is (from the Sorting lesson).',
+    plan: [
+      {
+        minutes: 5,
+        title: 'Hook',
+        activity:
+          'Play “Guess my number between 1 and 100” with the class. What is the best first guess, and why?',
+      },
+      {
+        minutes: 10,
+        title: 'Learn',
+        activity:
+          'Students read Linear vs Binary Search and the walkthrough, and answer the “Check yourself” questions.',
+        stage: 'learn',
+      },
+      {
+        minutes: 15,
+        title: 'Explore in pairs',
+        activity:
+          'One student predicts the next middle, the other steps forward; then swap. Compare linear and binary on the same target.',
+        stage: 'explore',
+      },
+      {
+        minutes: 20,
+        title: 'Practice',
+        activity:
+          'Individual work on the five exercises, especially “Complete the search” and “Find the mistake”.',
+        stage: 'practice',
+      },
+      {
+        minutes: 10,
+        title: 'Wrap-up',
+        activity: 'How many guesses for a list of 1 million names? Link it to contact lists.',
+      },
     ],
+    exitTicket:
+      'Trace Binary Search for 23 in [2, 5, 8, 12, 16, 23, 38, 56, 72], listing left, mid and right.',
     misconceptions: [
       {
         belief: 'Binary Search works on any list.',
-        howAddressed:
-          'The Learn page runs Binary Search on an unsorted list and it fails to find a value that is there. Custom input in Explore is checked and rejected if it is not sorted.',
+        fix: 'Learn shows it failing on an unsorted list, and Explore rejects unsorted input.',
       },
       {
-        belief: 'The middle is always exactly in the middle.',
-        howAddressed:
-          'With an even number of items there are two middles. The app always uses mid = floor((left + right) / 2), and the "Find the midpoint" exercise practises it.',
+        belief: 'Binary Search is about twice as fast.',
+        fix: 'For 1,000 items: up to 1,000 linear checks, but only 10 binary ones.',
       },
       {
-        belief: 'Binary Search is about twice as fast as Linear Search.',
-        howAddressed:
-          'The comparison feature shows 1,000 items need up to 1,000 linear checks but only 10 binary ones. The "Complexity challenge" exercise matches sizes to comparisons.',
-      },
-      {
-        belief: 'If the value is not found, the search broke.',
-        howAddressed:
-          'Explore lets students search for missing values and shows the range becoming empty (left > right), which is the correct "not found" ending.',
+        belief: '“Not found” means the search broke.',
+        fix: 'Search for a missing value in Explore and watch the range become empty.',
       },
     ],
-    plan: [
-      {
-        minutes: 5,
-        title: 'Hook',
-        activity:
-          '"Guess my number between 1 and 100" with the class. Count the guesses. Ask: what is the best first guess, and why?',
-      },
-      {
-        minutes: 10,
-        title: 'Learn',
-        activity:
-          'Students read linear vs Binary Search and the walkthrough, then answer the "Check yourself" questions.',
-        stage: 'learn',
-      },
-      {
-        minutes: 15,
-        title: 'Explore in pairs',
-        activity:
-          'One student predicts the next middle index, the other steps the visualisation. Swap roles. Then run linear vs binary on the same target and record both counts.',
-        stage: 'explore',
-      },
-      {
-        minutes: 20,
-        title: 'Practice',
-        activity:
-          'Individual work on the five exercises, especially "Complete the search" and "Find the mistake".',
-        stage: 'practice',
-      },
-      {
-        minutes: 10,
-        title: 'Plenary',
-        activity:
-          'How many guesses for a list of 1 million names? Link the answer to the phone contact list and dictionaries. Exit ticket.',
-      },
+    questions: [
+      'Why does doubling the list size add only one more comparison?',
+      'Where do you use a “halving” search in everyday life?',
+      'Fast search lets organisations find anyone in huge databases. What should limit that?',
     ],
-    discussion: [
-      {
-        question:
-          'Each comparison halves the remaining list. Why does doubling the list size add only one more comparison?',
-        kind: 'concept',
-      },
-      {
-        question:
-          'Paper dictionaries in different languages are ordered differently. How would Binary Search work in a dictionary of a language you speak?',
-        kind: 'intercultural',
-      },
-      {
-        question:
-          'Fast search lets organisations look people up in huge databases in milliseconds. What should limit who can search for whom?',
-        kind: 'ethical',
-      },
+    support: [
+      'Start with 7 or 15 items so the middle is easy to find.',
+      'Students write left, mid and right on mini whiteboards at each step.',
     ],
-    differentiation: {
-      support: [
-        'Start with 7 or 15 items so the middle is easy to find.',
-        'Let students write left, mid and right on mini whiteboards at each step.',
-        'Use the "Choose the next direction" exercise before "Complete the search".',
-      ],
-      stretch: [
-        'Show why the maximum number of comparisons is floor(log₂ n) + 1.',
-        'Change the algorithm to find the first of several equal values.',
-        'Write Binary Search recursively (links to the Recursion lesson).',
-      ],
-    },
-    assessment: [
-      'Exit ticket: trace Binary Search for 23 in [2, 5, 8, 12, 16, 23, 38, 56, 72], listing left, mid and right.',
-      'Practice exercise "Find the mistake" as evidence of understanding the bounds.',
-      'Explain in two sentences why Binary Search cannot be used on an unsorted list.',
+    stretch: [
+      'Show why the maximum number of comparisons is ⌊log₂ n⌋ + 1.',
+      'Write Binary Search recursively.',
     ],
-    ibLinks: {
-      tok: 'When we say an algorithm is "efficient", efficient for whom and by what measure?',
-    },
   },
   recursion: {
     summary:
-      'An introduction to recursion with two small examples, countdown and factorial. Students see each call as a frame on the call stack and watch the results return.',
+      'Students meet recursion through countdown and factorial, and see each call as a frame on the call stack.',
     objectives: [
-      'Explain what it means for a function to call itself.',
       'Identify the base case and the recursive case in a short function.',
-      'Trace the call stack for countdown(n) and factorial(n), including the return order.',
+      'Trace the call stack for factorial(n), including the order of returns.',
       'Explain what goes wrong without a correct base case.',
-    ],
-    priorKnowledge: [
-      'What a function, a parameter and a return value are.',
-      'Simple if/else statements.',
-      'Multiplication, and the idea of factorial (4! = 4 × 3 × 2 × 1).',
-    ],
-    misconceptions: [
-      {
-        belief: 'Recursion is just a loop.',
-        howAddressed:
-          'Factorial needs each call to wait for the result of the next one. The call stack view shows the pending "4 × ?" frames that a simple loop does not need.',
-      },
-      {
-        belief: 'The function runs once and finishes.',
-        howAddressed:
-          'Each call appears as its own frame with its own value of n. The stats show the number of calls and the stack depth.',
-      },
-      {
-        belief: 'The base case is optional.',
-        howAddressed:
-          'The Learn page animates a stack that keeps growing without a base case. The "Fix the recursion" exercise asks students to find a wrong base case or a recursive call that never reaches it.',
-      },
-      {
-        belief: 'Results come back in the same order the calls were made.',
-        howAddressed:
-          'The return phase pops frames from the top: the last call returns first. The "Arrange the call stack" exercise practises the order.',
-      },
     ],
     plan: [
       {
         minutes: 5,
         title: 'Hook',
         activity:
-          'Show nesting dolls (or a picture). Ask: how do you count the dolls if you can only open one at a time? Agree on a rule that stops.',
+          'Show nesting dolls. How do you count them if you can open only one at a time? Agree on when to stop.',
       },
       {
         minutes: 10,
         title: 'Learn',
         activity:
-          'Students read base case and recursive case, then the countdown and factorial walkthroughs, answering the "Check yourself" questions.',
+          'Students read base case and recursive case and the walkthroughs, and answer the “Check yourself” questions.',
         stage: 'learn',
       },
       {
         minutes: 15,
         title: 'Explore in pairs',
         activity:
-          'Pairs step through countdown(4) and factorial(4). In factorial(4), before each return they predict the value that comes back. Then try n = 0.',
+          'Step through countdown(4) and factorial(4). Predict each value before it returns, then try n = 0.',
         stage: 'explore',
       },
       {
         minutes: 20,
         title: 'Practice',
-        activity:
-          'Individual work on the five exercises. "Fix the recursion" is good for pair talk.',
+        activity: 'Individual work on the five exercises. “Fix the recursion” works well in pairs.',
         stage: 'practice',
       },
       {
         minutes: 10,
-        title: 'Plenary',
-        activity:
-          'Role-play the call stack: each student is a frame and passes a value back. Exit ticket.',
+        title: 'Wrap-up',
+        activity: 'Role-play the call stack: each student is a frame and passes a value back.',
       },
     ],
-    discussion: [
+    exitTicket: 'What does factorial(3) return, and in what order do the calls return?',
+    misconceptions: [
       {
-        question:
-          'Every recursive function could be written with a loop. When would you still choose recursion?',
-        kind: 'concept',
+        belief: 'Recursion is just a loop.',
+        fix: 'Show the waiting “4 × ?” frames in the factorial call stack.',
       },
       {
-        question:
-          'Nesting dolls, stories inside stories, repeating patterns in carpets and buildings: what "recursive" patterns do you know from your own culture?',
-        kind: 'intercultural',
+        belief: 'The base case is optional.',
+        fix: 'Run the “no base case” demo in Learn, then the “Fix the recursion” exercise.',
       },
       {
-        question:
-          'A program with a missing base case can crash a system. Who is responsible when code like this causes harm: the programmer, the tester or the company?',
-        kind: 'ethical',
+        belief: 'Calls return in the order they were made.',
+        fix: 'Watch frames leave from the top in Explore, then practise with “Arrange the call stack”.',
       },
     ],
-    differentiation: {
-      support: [
-        'Stay with countdown and inputs of 3–4.',
-        'Give a printed stack diagram to fill in while stepping through Explore.',
-        'Use the "Predict the next call" exercise first.',
-      ],
-      stretch: [
-        'Write a recursive sum of a list and trace its stack.',
-        'Compare recursive and loop versions of factorial for memory use.',
-        'Write Binary Search recursively and identify its base cases.',
-      ],
-    },
-    assessment: [
-      'Exit ticket: what does factorial(3) return, and in what order do the calls return?',
-      'Practice exercise "Identify the base case" as a quick check.',
-      'Explain in one sentence what would happen to countdown without its base case.',
+    questions: [
+      'What does each frame on the stack need to remember?',
+      'When would you choose recursion over a loop?',
+      'Where do you see patterns inside patterns in art, language or nature?',
     ],
-    ibLinks: {
-      tok: 'Can something be defined in terms of itself? How do recursive definitions in mathematics and language avoid being circular?',
-      cas: 'Students could run a short "unplugged" recursion workshop for younger students using nesting dolls or a human call stack.',
-    },
+    support: [
+      'Stay with countdown and n = 3 or 4.',
+      'Give a printed stack diagram to fill in while stepping through.',
+    ],
+    stretch: [
+      'Write a recursive sum of a list and trace its stack.',
+      'Write Binary Search recursively and find its base cases.',
+    ],
   },
 }

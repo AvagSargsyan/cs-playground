@@ -1,5 +1,5 @@
 import { Link, Navigate, NavLink, Outlet, useParams } from 'react-router'
-import { Chip } from '../components/ui'
+import { Chip, Duration } from '../components/ui'
 import { MODULES, STAGE_IDS, STAGE_LABELS, type ModuleId } from '../content/modules'
 import { useAppSelector } from '../store/hooks'
 import s from './module.module.css'
@@ -13,6 +13,7 @@ export function ModuleIndex({ moduleId }: { moduleId: ModuleId }) {
 
 export function StageStepper({ moduleId }: { moduleId: ModuleId }) {
   const stages = useAppSelector((st) => st.progress.modules[moduleId].stages)
+  const minutes = MODULES[moduleId].stageMinutes
   return (
     <nav aria-label="Lesson stages" className={s.stepperWrap}>
       <ol className={s.stepper}>
@@ -30,6 +31,7 @@ export function StageStepper({ moduleId }: { moduleId: ModuleId }) {
                   {status === 'done' ? '✓' : i + 1}
                 </span>
                 <span className={s.stepLabel}>{STAGE_LABELS[stage]}</span>
+                <Duration minutes={minutes[stage]} className={s.stepTime} />
                 <span className="visually-hidden">
                   {status === 'done' ? '(completed)' : status === 'in-progress' ? '(started)' : ''}
                 </span>
@@ -56,6 +58,10 @@ export function ModuleLayout({ moduleId }: { moduleId: ModuleId }) {
             <h1 className={s.title}>{meta.title}</h1>
             <Chip tone="ib">{meta.ibTag}</Chip>
           </div>
+          <p className={s.time}>
+            <Duration minutes={meta.minutes} prefix="About " /> in total. Your progress is saved, so
+            you can stop and come back later.
+          </p>
           {stage && <StageStepper moduleId={moduleId} />}
         </div>
       </section>

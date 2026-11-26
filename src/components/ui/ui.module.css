@@ -140,10 +140,6 @@
   box-shadow: inset 4px 0 0 var(--uwc-teal);
   background: var(--uwc-teal-tint);
 }
-.callout-world {
-  box-shadow: inset 4px 0 0 var(--tile-ochre);
-  background: #fbefe6;
-}
 .callout-predict {
   box-shadow: inset 4px 0 0 var(--uwc-orange);
   background: var(--uwc-orange-tint);

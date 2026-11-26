@@ -9,12 +9,6 @@ import { ReferenceList } from '../modules/shared/lesson'
 import { NotFound } from './NotFound'
 import s from './teachers.module.css'
 
-const DISCUSSION_LABEL = {
-  concept: 'Concept',
-  intercultural: 'Intercultural',
-  ethical: 'Ethics',
-} as const
-
 function Notes({ moduleId }: { moduleId: ModuleId }) {
   const meta = MODULES[moduleId]
   const notes = TEACHER_NOTES[moduleId]
@@ -40,6 +34,11 @@ function Notes({ moduleId }: { moduleId: ModuleId }) {
       <p className={s.kicker}>Teacher notes · {LESSON_MINUTES}-minute lesson</p>
       <h1 className={s.title}>{meta.title}</h1>
       <p className={s.lead}>{notes.summary}</p>
+      {ib && (
+        <p className={s.text}>
+          <strong>IB DP Computer Science:</strong> {ib.topic} ({ib.level}).
+        </p>
+      )}
 
       <div className={`${s.actions} no-print`}>
         <span className={s.actionsLabel}>Open the lesson:</span>
@@ -53,47 +52,20 @@ function Notes({ moduleId }: { moduleId: ModuleId }) {
         </Button>
       </div>
 
-      <div className={s.twoCol}>
-        <section className={s.block} aria-labelledby="objectives">
-          <h2 id="objectives" className={s.h2}>
-            Learning objectives
-          </h2>
-          <p className={s.text}>Students will be able to:</p>
-          <ul className={s.list}>
-            {notes.objectives.map((o) => (
-              <li key={o}>{o}</li>
-            ))}
-          </ul>
-        </section>
-        <section className={s.block} aria-labelledby="prior">
-          <h2 id="prior" className={s.h2}>
-            Prior knowledge
-          </h2>
-          <ul className={s.list}>
-            {notes.priorKnowledge.map((p) => (
-              <li key={p}>{p}</li>
-            ))}
-          </ul>
-        </section>
-      </div>
-
-      <section className={s.block} aria-labelledby="misconceptions">
-        <h2 id="misconceptions" className={s.h2}>
-          Common misconceptions
+      <section className={s.block} aria-labelledby="objectives">
+        <h2 id="objectives" className={s.h2}>
+          Students will be able to
         </h2>
-        <dl className={s.misconceptions}>
-          {notes.misconceptions.map((m) => (
-            <div key={m.belief}>
-              <dt>&ldquo;{m.belief}&rdquo;</dt>
-              <dd>{m.howAddressed}</dd>
-            </div>
+        <ul className={s.list}>
+          {notes.objectives.map((o) => (
+            <li key={o}>{o}</li>
           ))}
-        </dl>
+        </ul>
       </section>
 
       <section className={s.block} aria-labelledby="plan">
         <h2 id="plan" className={s.h2}>
-          Lesson plan ({LESSON_MINUTES} minutes)
+          Lesson plan
         </h2>
         <ol className={s.plan}>
           {notes.plan.map((step, i) => {
@@ -118,30 +90,45 @@ function Notes({ moduleId }: { moduleId: ModuleId }) {
             )
           })}
         </ol>
+        <p className={s.exitTicket}>
+          <strong>Exit ticket:</strong> {notes.exitTicket}
+        </p>
       </section>
 
-      <section className={s.block} aria-labelledby="discussion">
-        <h2 id="discussion" className={s.h2}>
-          Discussion questions
+      <section className={s.block} aria-labelledby="misconceptions">
+        <h2 id="misconceptions" className={s.h2}>
+          Watch out for
+        </h2>
+        <dl className={s.misconceptions}>
+          {notes.misconceptions.map((m) => (
+            <div key={m.belief}>
+              <dt>&ldquo;{m.belief}&rdquo;</dt>
+              <dd>{m.fix}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section className={s.block} aria-labelledby="questions">
+        <h2 id="questions" className={s.h2}>
+          Questions to ask
         </h2>
         <ol className={s.list}>
-          {notes.discussion.map((d) => (
-            <li key={d.question}>
-              <span className={s.tag}>{DISCUSSION_LABEL[d.kind]}</span> {d.question}
-            </li>
+          {notes.questions.map((q) => (
+            <li key={q}>{q}</li>
           ))}
         </ol>
       </section>
 
       <section className={s.block} aria-labelledby="differentiation">
         <h2 id="differentiation" className={s.h2}>
-          Differentiation
+          Support and stretch
         </h2>
         <div className={s.twoCol}>
           <div>
             <h3 className={s.h3}>Support</h3>
             <ul className={s.list}>
-              {notes.differentiation.support.map((x) => (
+              {notes.support.map((x) => (
                 <li key={x}>{x}</li>
               ))}
             </ul>
@@ -149,48 +136,12 @@ function Notes({ moduleId }: { moduleId: ModuleId }) {
           <div>
             <h3 className={s.h3}>Stretch</h3>
             <ul className={s.list}>
-              {notes.differentiation.stretch.map((x) => (
+              {notes.stretch.map((x) => (
                 <li key={x}>{x}</li>
               ))}
             </ul>
           </div>
         </div>
-      </section>
-
-      <section className={s.block} aria-labelledby="assessment">
-        <h2 id="assessment" className={s.h2}>
-          Assessment ideas
-        </h2>
-        <ul className={s.list}>
-          {notes.assessment.map((a) => (
-            <li key={a}>{a}</li>
-          ))}
-        </ul>
-        <p className={`${s.text} no-print`}>
-          The <Link to={`/${moduleId}/practice`}>Practice stage</Link> gives instant feedback on
-          every exercise and can be used as a formative check.
-        </p>
-      </section>
-
-      <section className={s.block} aria-labelledby="ib-links">
-        <h2 id="ib-links" className={s.h2}>
-          IB connections
-        </h2>
-        {ib && (
-          <p className={s.text}>
-            <strong>Course topic:</strong> {ib.topic} ({ib.level}).
-          </p>
-        )}
-        {notes.ibLinks.tok && (
-          <p className={s.text}>
-            <strong>Theory of Knowledge:</strong> {notes.ibLinks.tok}
-          </p>
-        )}
-        {notes.ibLinks.cas && (
-          <p className={s.text}>
-            <strong>CAS:</strong> {notes.ibLinks.cas}
-          </p>
-        )}
       </section>
 
       <ReferenceList

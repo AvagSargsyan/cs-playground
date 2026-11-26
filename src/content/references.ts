@@ -84,18 +84,6 @@ export const REFERENCES: Record<ModuleId, ReferenceGroup[]> = {
           url: `${ISAAC_BASE}/sorting`,
           note: 'Free topic pages on Bubble, Insertion and Merge Sort.',
         },
-        {
-          title: 'Unicode Collation Algorithm (UTS #10)',
-          source: 'Unicode Consortium',
-          url: 'https://www.unicode.org/reports/tr10/',
-          note: 'The standard behind “sorting around the world”: how languages order text.',
-        },
-        {
-          title: 'Intl.Collator',
-          source: 'MDN Web Docs',
-          url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator',
-          note: 'The browser feature this lesson uses to sort names by each language’s rules.',
-        },
       ],
     },
     TEXTBOOKS,
