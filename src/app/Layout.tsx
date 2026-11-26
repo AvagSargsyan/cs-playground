@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, NavLink, Outlet, ScrollRestoration, useLocation } from 'react-router'
 import { DEMO_NOTICE, SITE } from '../content/site'
-import { BrandMark } from '../illustrations/BrandMark'
+import { AuthorAvatar, BrandMark } from '../illustrations/BrandMark'
 import { bannerDismissed } from '../store/preferencesSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import s from './layout.module.css'
@@ -15,20 +15,24 @@ const NAV = [
   { to: '/about', label: 'About' },
 ]
 
-function DemoBanner() {
+/** A personal note from the author, shown on every page so the site is never taken for a UWC page. */
+function DemoNote() {
   const dismissed = useAppSelector((st) => st.preferences.bannerDismissed)
   const dispatch = useAppDispatch()
   if (dismissed) return null
   return (
-    <div className={`${s.banner} no-print`} role="region" aria-label="Demo notice">
-      <div className={`container ${s.bannerInner}`}>
-        <p className={s.bannerText}>
-          {DEMO_NOTICE} <Link to="/about">About this demo →</Link>
+    <div className={`${s.note} no-print`} role="region" aria-label="Demo notice">
+      <div className={`container ${s.noteInner}`}>
+        <AuthorAvatar size={28} />
+        <p className={s.noteText}>
+          <strong>Hi, I&rsquo;m {SITE.author}.</strong> This is my personal teaching demo for the{' '}
+          {SITE.school} {SITE.role} application. It is not an official {SITE.school} website.{' '}
+          <Link to="/about">Why I built it →</Link>
         </p>
         <button
           type="button"
-          className={s.bannerClose}
-          aria-label="Hide demo notice for this visit"
+          className={s.noteClose}
+          aria-label="Hide this note for this visit"
           onClick={() => dispatch(bannerDismissed())}
         >
           ×
@@ -58,8 +62,6 @@ function Header() {
   const { pathname } = useLocation()
   const [openOn, setOpenOn] = useState<string | null>(null)
   const open = openOn === pathname
-  const setOpen = (v: boolean | ((o: boolean) => boolean)) =>
-    setOpenOn((typeof v === 'function' ? v(open) : v) ? pathname : null)
 
   return (
     <header className={`${s.header} no-print`}>
@@ -68,7 +70,7 @@ function Header() {
           <BrandMark className={s.brandMark} />
           <span className={s.brandName}>
             {SITE.name}
-            <small>Demo · for {SITE.school}</small>
+            <small>by {SITE.author}</small>
           </span>
         </Link>
         <ul className={s.navList}>
@@ -80,13 +82,13 @@ function Header() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? 'Close menu' : 'Open menu'}
-          onClick={() => setOpen((o) => !o)}
+          onClick={() => setOpenOn(open ? null : pathname)}
         >
           <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
             {open ? (
               <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2.2" />
             ) : (
-              <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2.2" />
+              <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2.2" />
             )}
           </svg>
         </button>
@@ -94,7 +96,7 @@ function Header() {
       {open && (
         <div id="mobile-menu" className={s.mobileMenu}>
           <ul className="container">
-            <NavLinks onNavigate={() => setOpen(false)} />
+            <NavLinks onNavigate={() => setOpenOn(null)} />
           </ul>
         </div>
       )}
@@ -106,12 +108,24 @@ function Footer() {
   return (
     <footer className={s.footer}>
       <div className={`container ${s.footerGrid}`}>
-        <div>
-          <p className={s.footerTitle}>{SITE.name}</p>
-          <p>
-            {SITE.tagline}. Learn, explore and practise sorting, binary search and recursion through
-            interactive visualizations.
-          </p>
+        <div className={s.author}>
+          <AuthorAvatar size={56} />
+          <div>
+            <p className={s.authorName}>Made by {SITE.author}</p>
+            <p className={s.authorText}>
+              I designed and built CS Playground to show how I would teach computer science:
+              students predict, experiment and run the algorithms themselves.
+            </p>
+            <p className={s.authorLinks}>
+              <a href={SITE.linkedin} target="_blank" rel="noreferrer">
+                LinkedIn
+              </a>
+              <a href={SITE.github} target="_blank" rel="noreferrer">
+                Source code
+              </a>
+              <Link to="/about">About this demo</Link>
+            </p>
+          </div>
         </div>
         <div>
           <p className={s.footerHeading}>Lessons</p>
@@ -127,24 +141,6 @@ function Footer() {
             </li>
             <li>
               <Link to="/teachers">For Teachers</Link>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <p className={s.footerHeading}>Made by {SITE.author}</p>
-          <ul className={s.footerList}>
-            <li>
-              <Link to="/about">About this demo</Link>
-            </li>
-            <li>
-              <a href={SITE.linkedin} target="_blank" rel="noreferrer">
-                LinkedIn
-              </a>
-            </li>
-            <li>
-              <a href={SITE.github} target="_blank" rel="noreferrer">
-                Source code on GitHub
-              </a>
             </li>
           </ul>
         </div>
@@ -164,7 +160,7 @@ export function Layout() {
       <a href="#main" className="skip-link">
         Skip to content
       </a>
-      <DemoBanner />
+      <DemoNote />
       <Header />
       <main id="main" className={s.main} tabIndex={-1}>
         <Outlet />

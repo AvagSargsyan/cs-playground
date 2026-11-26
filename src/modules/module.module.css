@@ -1,13 +1,14 @@
 .header {
-  background: var(--surface-alt);
-  border-top: 6px solid var(--module-color, var(--uwc-blue));
-  padding: var(--space-5) 0 0;
-  box-shadow: inset 0 -1px 0 var(--border);
+  padding: var(--space-5) 0 var(--space-5);
+  border-bottom: 1px solid var(--border);
+  background-color: var(--paper);
+  background-image: radial-gradient(var(--grid-dot) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
 }
 .crumbs {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--ink-muted);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
 }
 .crumbs a {
   color: var(--ink-muted);
@@ -17,69 +18,78 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-3);
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-5);
 }
 .title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
   margin: 0;
-  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+}
+.title::before {
+  content: '';
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--module-color, var(--uwc-blue));
 }
 
-/* Stage stepper */
+/* Stage stepper: three connected pills */
 .stepperWrap {
   overflow-x: auto;
   scrollbar-width: none;
 }
 .stepper {
-  display: flex;
+  display: inline-flex;
   list-style: none;
   margin: 0;
-  padding: 0;
-  gap: var(--space-1);
-}
-.stepper li {
-  flex: 1;
-  min-width: 0;
+  padding: 4px;
+  gap: 4px;
+  background: var(--surface);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--border-inset), var(--shadow-soft);
 }
 .step {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: var(--space-2);
-  min-height: 52px;
-  padding: 0 var(--space-3);
+  min-height: 42px;
+  padding: 0 var(--space-4) 0 6px;
+  border-radius: var(--radius-pill);
   text-decoration: none;
   color: var(--ink-muted);
-  border-bottom: 4px solid transparent;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 0.82rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
 }
 .step:hover {
   color: var(--ink-heading);
-  background: rgba(0, 0, 0, 0.03);
+  background: var(--surface-alt);
 }
 .stepNumber {
   display: inline-grid;
   place-items: center;
   flex: none;
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  box-shadow: inset 0 0 0 2px currentColor;
-  font-size: 0.8rem;
-  letter-spacing: 0;
+  background: var(--surface-alt);
+  font-size: 0.85rem;
+  font-weight: 700;
 }
-.stepActive {
-  color: var(--module-color, var(--uwc-blue));
-  border-bottom-color: var(--module-color, var(--uwc-blue));
-  background: var(--surface);
+.stepActive,
+.stepActive:hover {
+  background: var(--module-color, var(--uwc-blue));
+  color: #fff;
+}
+.stepActive .stepNumber {
+  background: rgba(255, 255, 255, 0.22);
 }
 .stepDone .stepNumber {
   background: var(--uwc-teal);
   color: #fff;
-  box-shadow: none;
 }
 
 /* Shared stage page layout */

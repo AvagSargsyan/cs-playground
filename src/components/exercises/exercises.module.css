@@ -95,7 +95,6 @@
   background: var(--surface);
   box-shadow: var(--border-inset);
   border-radius: var(--radius);
-  border-top: 4px solid var(--module-color, var(--uwc-blue));
   min-width: 0;
 }
 .header {
@@ -111,9 +110,7 @@
 .counter {
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.9rem;
   color: var(--ink-muted);
 }
 .title {
@@ -153,7 +150,7 @@
 }
 .feedbackTitle {
   font-family: var(--font-heading);
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: var(--space-2);
 }
 .score {
@@ -196,7 +193,7 @@
 }
 .markIcon {
   margin-left: auto;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 /* ---------------- Multiple choice ---------------- */
@@ -427,9 +424,7 @@
 .matchHeading {
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.9rem;
   color: var(--ink-muted);
   margin-bottom: var(--space-2);
 }

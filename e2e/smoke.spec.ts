@@ -31,9 +31,11 @@ test('the demo notice is shown on every page', async ({ page }) => {
   for (const path of ['/', '/sorting/learn', '/about']) {
     await page.goto(path)
     await expect(page.getByRole('region', { name: 'Demo notice' })).toContainText(
-      'Not an official UWC Dilijan website',
+      'not an official UWC Dilijan website',
     )
-    await expect(page.locator('footer')).toContainText('Not an official UWC Dilijan website')
+    await expect(page.locator('footer')).toContainText(
+      'not affiliated with or endorsed by UWC Dilijan',
+    )
   }
 })
 
@@ -44,7 +46,7 @@ test('unknown pages show a friendly 404', async ({ page }) => {
 
 test('a module link opens its Learn stage and progress is remembered', async ({ page }) => {
   await page.goto('/')
-  await page.getByRole('link', { name: 'Start learning' }).first().click()
+  await page.getByRole('link', { name: 'Start the first lesson' }).first().click()
   await expect(page).toHaveURL(/\/sorting\/learn$/)
   // Progress is saved shortly after a change (debounced), so wait for it before reloading.
   await expect

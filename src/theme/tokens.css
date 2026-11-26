@@ -1,20 +1,20 @@
 /*
- * Design tokens. The palette and typography follow the UWC Dilijan website
- * (uwcdilijan.org: theme main.css + custom.css). See .claude/PLAN.md §2.
+ * Design tokens. The color accents come from the UWC Dilijan palette (blue, teal, orange,
+ * raspberry and the fact-tile colors). Typography, shapes and layout are CS Playground's own,
+ * so the site reads as a personal demo rather than a UWC page. See .claude/PLAN.md §2.
  */
 :root {
-  /* Core brand */
+  /* Accents (UWC Dilijan palette) */
   --uwc-blue: #0064a7;
   --uwc-blue-dark: #004f84;
-  --uwc-blue-tint: #e5eff6;
+  --uwc-blue-tint: #e8f1f8;
   --uwc-teal: #00807b;
-  --uwc-teal-tint: #e0f0ef;
+  --uwc-teal-tint: #e3f3f1;
   --uwc-orange: #f45b21;
-  --uwc-orange-tint: #fde9e0;
+  --uwc-orange-tint: #fff0e8;
   --uwc-raspberry: #c83461;
-  --uwc-raspberry-tint: #f8e4ea;
+  --uwc-raspberry-tint: #fbe9ef;
 
-  /* Fact-tile palette, used as module identity colors */
   --tile-bordo: #901c45;
   --tile-green: #00918b;
   --tile-purple: #69256d;
@@ -22,17 +22,18 @@
   --tile-ochre: #c06331;
   --tile-yellow: #fcbc05;
 
-  /* Neutrals */
-  --ink: #252525;
-  --ink-heading: #252b33;
-  --ink-muted: #5c5c5c;
-  --navy-deep: #0c161f;
-  --border: #dce0e9;
-  --border-strong: #cfcfcf;
+  /* Neutrals: warm "paper" tones, CS Playground's own */
+  --ink: #26292e;
+  --ink-heading: #1b1e23;
+  --ink-muted: #62666d;
+  --paper: #fbfaf7;
   --surface: #ffffff;
-  --surface-alt: #f7f8fb;
-  --surface-sunken: #eceef0;
+  --surface-alt: #f4f2ee;
+  --surface-sunken: #ebe8e2;
+  --border: #e4e0d8;
+  --border-strong: #cfcac0;
   --muted: #cfcfcf;
+  --grid-dot: #e2ddd3;
 
   /* Semantic */
   --color-link: var(--uwc-blue);
@@ -43,7 +44,7 @@
   --focus-ring: var(--uwc-orange);
 
   /* Algorithm visual states (same in every module, §2.1) */
-  --state-default: #99c1dc;
+  --state-default: #9fc2dc;
   --state-active: var(--uwc-blue);
   --state-compare: var(--uwc-orange);
   --state-swap: var(--uwc-raspberry);
@@ -61,15 +62,17 @@
   --module-about: var(--tile-ochre);
 
   /* Typography */
-  --font-heading: 'Raleway', Georgia, serif;
-  --font-body: 'Cabin', system-ui, sans-serif;
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
   --font-code: 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Shape: square-ish like the UWC site */
-  --radius-sm: 2px;
-  --radius: 4px;
+  /* Shape: soft and rounded */
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-pill: 999px;
   --border-inset: inset 0 0 0 1px var(--border);
-  --shadow-lift: 0 6px 20px rgba(12, 22, 31, 0.08);
+  --shadow-soft: 0 1px 2px rgba(27, 30, 35, 0.05), 0 4px 16px rgba(27, 30, 35, 0.05);
+  --shadow-lift: 0 2px 4px rgba(27, 30, 35, 0.06), 0 12px 32px rgba(27, 30, 35, 0.09);
 
   /* Spacing & layout */
   --space-1: 4px;
@@ -79,12 +82,10 @@
   --space-5: 24px;
   --space-6: 32px;
   --space-7: 48px;
-  --space-8: 64px;
-  --content-width: 1200px;
-  --reading-width: 760px;
+  --space-8: 72px;
+  --content-width: 1160px;
+  --reading-width: 720px;
   --gutter: 16px;
-
-  --hero-gradient: linear-gradient(180deg, rgba(12, 22, 31, 0) 0%, #0c161f 100%);
 }
 
 @media (min-width: 768px) {

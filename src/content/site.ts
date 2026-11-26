@@ -2,6 +2,7 @@ export const SITE = {
   name: 'CS Playground',
   tagline: 'Interactive Computer Science Lessons',
   author: 'Avag Sargsyan',
+  authorInitials: 'AS',
   linkedin: 'https://www.linkedin.com/in/avag-sargsyan/',
   github: 'https://github.com/AvagSargsyan/cs-playground',
   school: 'UWC Dilijan',
@@ -9,4 +10,5 @@ export const SITE = {
   year: 2026,
 } as const
 
-export const DEMO_NOTICE = `Demo project by ${SITE.author}, prepared for the ${SITE.role} application at ${SITE.school}. Not an official ${SITE.school} website.`
+/** Formal wording, used in the footer and page metadata. */
+export const DEMO_NOTICE = `CS Playground is a personal demo project by ${SITE.author}, made as part of an application for the ${SITE.role} position at ${SITE.school}. It is not affiliated with or endorsed by ${SITE.school}.`
