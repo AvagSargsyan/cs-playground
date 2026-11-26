@@ -56,7 +56,12 @@ export function RaceMode({
                     </option>
                   ))}
                 </select>
-                {done && <span className={s.finished}>✓ Finished in {trace.length} steps</span>}
+                {done && (
+                  <span className={s.finished}>
+                    ✓ Finished: {step.stats.comparisons} comparisons + {step.stats.moves}{' '}
+                    {algo.statLabels.moves.toLowerCase()}
+                  </span>
+                )}
               </div>
               <Bars state={step.state} max={max} compact order={order} />
               <p className={s.racerStats} aria-live="polite">

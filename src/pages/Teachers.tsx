@@ -5,7 +5,8 @@ import { MODULE_IDS, MODULES } from '../content/modules'
 import { TEACHER_NOTES } from '../content/teachers'
 import s from './teachers.module.css'
 
-const APPROACH = [
+/** Learn and Explore map onto PRIMM stages; Practice is students applying the algorithm. */
+const APPROACH: { stage: string; primm: string | null; text: string }[] = [
   {
     stage: 'Learn',
     primm: 'Predict',
@@ -18,14 +19,14 @@ const APPROACH = [
   },
   {
     stage: 'Practice',
-    primm: 'Modify, Make',
+    primm: null,
     text: 'Students carry out the algorithm themselves, find mistakes and choose between algorithms, with feedback on every answer.',
   },
 ]
 
 export function Teachers() {
   useEffect(() => {
-    document.title = 'For Teachers · CS Playground'
+    document.title = 'For teachers · CS Playground'
   }, [])
 
   return (
@@ -43,14 +44,16 @@ export function Teachers() {
           Teaching approach
         </h2>
         <p className={s.text}>
-          Every lesson follows the same three stages. They map onto PRIMM (Predict, Run,
-          Investigate, Modify, Make), a well-known approach to teaching programming.
+          Every lesson follows the same three stages, inspired by PRIMM (Predict, Run, Investigate,
+          Modify, Make), a well-known approach to teaching programming. Learn asks for predictions,
+          Explore is for running and investigating, and in Practice students carry out and check the
+          algorithm themselves.
         </p>
         <ul className={s.approach}>
           {APPROACH.map((a) => (
             <li key={a.stage}>
               <p className={s.approachStage}>
-                {a.stage} <span className={s.primm}>PRIMM: {a.primm}</span>
+                {a.stage} {a.primm && <span className={s.primm}>PRIMM: {a.primm}</span>}
               </p>
               <p className={s.approachText}>{a.text}</p>
             </li>

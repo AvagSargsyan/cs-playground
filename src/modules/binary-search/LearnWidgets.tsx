@@ -147,7 +147,7 @@ export function GuessGame() {
           Always guessing the middle of what is still possible finds {secret} in{' '}
           <strong>{halvingGuesses}</strong> guess{halvingGuesses === 1 ? '' : 'es'}. With halving,
           no number from 1 to 100 ever needs more than <strong>7</strong> guesses. That strategy is
-          binary search.
+          Binary Search.
         </p>
       )}
     </div>
@@ -190,7 +190,7 @@ export function GrowthChart() {
     <svg
       viewBox={`0 0 ${W} ${H}`}
       role="img"
-      aria-label="Chart: for 64 items, linear search needs up to 64 comparisons, binary search at most 7."
+      aria-label="Chart: for 64 items, Linear Search needs up to 64 comparisons, Binary Search at most 7."
       style={{ width: '100%', maxWidth: W }}
     >
       {ticks.map((t) => (
@@ -229,10 +229,10 @@ export function GrowthChart() {
       <polyline points={linear} fill="none" stroke="var(--uwc-raspberry)" strokeWidth="3" />
       <polyline points={binary} fill="none" stroke="var(--uwc-teal)" strokeWidth="3" />
       <text x={x(40)} y={y(46)} fontSize="12" fontWeight="700" fill="var(--uwc-raspberry)">
-        Linear search: n
+        Linear Search: n
       </text>
       <text x={x(30)} y={y(12)} fontSize="12" fontWeight="700" fill="var(--uwc-teal)">
-        Binary search: about log₂ n
+        Binary Search: about log₂ n
       </text>
     </svg>
   )

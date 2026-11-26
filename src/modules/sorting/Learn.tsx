@@ -178,7 +178,7 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
             notes={[
               {
                 line: line('bubble', 'pass'),
-                text: 'One pass through the list. After pass I, the last I values are in place.',
+                text: 'One pass through the list. After pass I, the last I + 1 values are in place.',
               },
               { line: line('bubble', 'compare'), text: 'Compare two neighbours.' },
               { line: line('bubble', 'swap'), text: 'Swap them if they are in the wrong order.' },
@@ -198,7 +198,7 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
               'Learning how sorting works',
             ]}
             limits={[
-              'Very slow on big lists: about n² comparisons',
+              'Very slow on big lists: about n²/2 comparisons',
               'Lots of swaps when the list is reversed',
             ]}
           />
@@ -214,7 +214,6 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
           <p>
             Look through the unsorted part and <strong>select the smallest</strong> value. Swap it
             into the first unsorted position. Now the first value is done; repeat with the rest.
-            This is how many people sort cards by hand.
           </p>
           <p>
             <strong>Main idea:</strong> find the smallest remaining value and put it next.
@@ -236,7 +235,7 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
               },
               {
                 line: line('selection', 'swap'),
-                text: 'One swap per pass puts the smallest value in place.',
+                text: 'At most one swap per pass puts the smallest value in place.',
               },
             ]}
           >
@@ -250,7 +249,7 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
               'Simple to write and explain',
             ]}
             limits={[
-              'Always about n² comparisons, even if the list is already sorted',
+              'Always about n²/2 comparisons, even if the list is already sorted',
               'Not stable: equal values can change their order',
             ]}
           />
@@ -360,7 +359,7 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
               'Merge Sort never compares values',
             ]}
             correct={0}
-            explanation="Because both halves are sorted, the next smallest value is always at the front of one of them. Each value is compared and copied only once per merge."
+            explanation="Because both halves are sorted, the next smallest value is always at the front of one of them. Each comparison sends one value into the merged list, so merging k values takes at most k − 1 comparisons."
           />
         </SubSection>
       </LessonSection>
@@ -405,7 +404,7 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
         <Callout kind="didyouknow">
           <p>
             Python&rsquo;s built-in <code>sorted()</code> uses <strong>Timsort</strong>, a mix of
-            Merge Sort and Insertion Sort. It uses insertion sort for small pieces (where it is
+            Merge Sort and Insertion Sort. It uses Insertion Sort for small pieces (where it is
             fast) and merging for the big picture.
           </p>
         </Callout>

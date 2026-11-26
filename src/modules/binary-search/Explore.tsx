@@ -174,7 +174,7 @@ export default function Explore({ moduleId }: { moduleId: ModuleId }) {
             listing={SEARCH_ALGORITHMS.binary.code}
             line={player.step.line}
             pyLine={player.step.pyLine}
-            title="Binary search"
+            title="Binary Search"
           />
           <StatsPanel
             items={[
@@ -183,7 +183,7 @@ export default function Explore({ moduleId }: { moduleId: ModuleId }) {
               { label: 'Middle', value: state.mid ?? '–' },
               { label: 'Comparisons', value: stats.comparisons, emphasis: true },
               {
-                label: 'Items left',
+                label: 'Items remaining',
                 value: stats.remaining,
                 hint: 'How many items are still inside the search range',
               },
@@ -191,7 +191,7 @@ export default function Explore({ moduleId }: { moduleId: ModuleId }) {
               {
                 label: 'Worst case',
                 value: maxBinaryComparisons(values.length),
-                hint: 'Most comparisons binary search can need for this array size: floor(log₂ n) + 1. Binary search is O(log n).',
+                hint: 'Most comparisons Binary Search can need for this array size: floor(log₂ n) + 1. Binary Search is O(log n).',
               },
             ]}
           />
@@ -232,31 +232,31 @@ function LinearVsBinary({ values, target }: { values: number[]; target: number }
 
   return (
     <section className={s.compareSection} aria-labelledby="race-title">
-      <h2 id="race-title">Linear search vs binary search</h2>
+      <h2 id="race-title">Linear Search vs Binary Search</h2>
       <p className={s.compareLead}>
-        Both searches run on the same array and look for the same target ({target}). Linear search
-        checks one item at a time from the left. Binary search jumps to the middle. Count the
+        Both searches run on the same array and look for the same target ({target}). Linear Search
+        checks one item at a time from the left. Binary Search jumps to the middle. Count the
         comparisons.
       </p>
       <div className={s.raceRows}>
         <div className={s.raceRow}>
           <div className={s.raceHeader}>
-            <p className={s.raceTitle}>Linear search</p>
+            <p className={s.raceTitle}>Linear Search</p>
             <span className={s.raceCount}>
               {stats.linear} <small>comparisons</small>
             </span>
           </div>
-          <CellArray view={state.linear} size="sm" label="Linear search" />
+          <CellArray view={state.linear} size="sm" label="Linear Search" />
           <p className={s.raceMessage}>{state.linMsg}</p>
         </div>
         <div className={s.raceRow}>
           <div className={s.raceHeader}>
-            <p className={s.raceTitle}>Binary search</p>
+            <p className={s.raceTitle}>Binary Search</p>
             <span className={s.raceCount}>
               {stats.binary} <small>comparisons</small>
             </span>
           </div>
-          <CellArray view={state.binary} size="sm" label="Binary search" />
+          <CellArray view={state.binary} size="sm" label="Binary Search" />
           <p className={s.raceMessage}>{state.binMsg}</p>
         </div>
       </div>
@@ -301,16 +301,16 @@ function BigArrays() {
               <dd>#{(result.index + 1).toLocaleString('en-US')}</dd>
             </div>
             <div className={s.bigResult}>
-              <dt>Linear search</dt>
+              <dt>Linear Search</dt>
               <dd>{result.linear.toLocaleString('en-US')}</dd>
             </div>
             <div className={s.bigResult}>
-              <dt>Binary search</dt>
+              <dt>Binary Search</dt>
               <dd>{result.binary}</dd>
             </div>
           </dl>
           <p className={s.raceMessage}>
-            In an array of {result.n.toLocaleString('en-US')} items binary search never needs more
+            In an array of {result.n.toLocaleString('en-US')} items Binary Search never needs more
             than {maxBinaryComparisons(result.n)} comparisons.
           </p>
         </div>

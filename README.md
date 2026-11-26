@@ -30,7 +30,7 @@ There are also notes for teachers for each lesson: objectives, misconceptions, a
 - Vitest + Testing Library for unit tests; Playwright for smoke tests and axe-core accessibility checks (WCAG 2.1 AA) on desktop and mobile
 - GitHub Actions CI: typecheck, lint (oxlint), format (Prettier), tests, build, browser tests
 
-**Key idea:** every algorithm is a pure function that returns a full **trace** of its steps (state snapshot, highlighted code line, explanation, counters). Visualizers and exercises only move through that trace. As a result, stepping backwards, scrubbing and "predict the next step" exercises always match the real algorithm.
+**Key idea:** every algorithm is a pure function that returns a full **trace** of its steps (state snapshot, highlighted code line, explanation, counters). Visualisations and exercises only move through that trace. As a result, stepping backwards, scrubbing and "predict the next step" exercises always match the real algorithm.
 
 ```
 src/

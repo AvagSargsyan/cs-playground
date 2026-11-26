@@ -39,8 +39,8 @@ export function About() {
       <section className={s.section} aria-labelledby="approach">
         <h2 id="approach">How the lessons teach</h2>
         <p>
-          Every lesson has the same three stages, based on PRIMM (Predict, Run, Investigate, Modify,
-          Make):
+          Every lesson has the same three stages, inspired by PRIMM (Predict, Run, Investigate,
+          Modify, Make), a well-known approach to teaching programming:
         </p>
         <ul>
           <li>
@@ -67,7 +67,7 @@ export function About() {
         <p>
           The examples come from many languages and cultures: names from around the world, countries
           by population, dictionaries in different alphabets. In &ldquo;Sorting around the
-          world&rdquo; students sort the same list of names with different language rules and find
+          world&rdquo; students sort the same list of words with different language rules and find
           that even &ldquo;alphabetical order&rdquo; depends on where you are from. It is a good
           starting point for a class discussion.
         </p>
@@ -82,7 +82,7 @@ export function About() {
             There are no accounts and no server.
           </li>
           <li>
-            Every algorithm records a full list of its steps. The visualizations and exercises
+            Every algorithm records a full list of its steps. The visualisations and exercises
             replay that list, so stepping backwards and &ldquo;predict the next step&rdquo;
             questions always match the real algorithm.
           </li>

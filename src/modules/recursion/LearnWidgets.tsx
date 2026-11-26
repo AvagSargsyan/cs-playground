@@ -170,6 +170,11 @@ export function StackOverflowDemo() {
             RecursionError: maximum recursion depth exceeded
           </p>
         )}
+        {crashed && (
+          <p className={s.overflowNote}>
+            (The demo stops at {DEMO_LIMIT} calls; Python&rsquo;s real limit is about 1,000.)
+          </p>
+        )}
       </div>
     </div>
   )

@@ -35,9 +35,9 @@ export const TEACHER_NOTES: Record<ModuleId, TeacherNotes> = {
     summary:
       'Students compare four sorting algorithms on the same data, see why some do far less work than others, and practise tracing them by hand.',
     objectives: [
-      'Describe how bubble, selection, insertion and merge sort put a list in order.',
-      'Trace one pass of bubble sort and one step of selection sort on a short list.',
-      'Count comparisons and swaps, and use them to compare algorithms.',
+      'Describe how bubble, selection, Insertion Sort and Merge Sort put a list in order.',
+      'Trace one pass of Bubble Sort and one step of Selection Sort on a short list.',
+      'Count comparisons and swaps/writes, and use them to compare algorithms.',
       'Explain O(n²) and O(n log n) in plain words and choose a sensible algorithm for a situation.',
     ],
     priorKnowledge: [
@@ -47,24 +47,24 @@ export const TEACHER_NOTES: Record<ModuleId, TeacherNotes> = {
     ],
     misconceptions: [
       {
-        belief: 'Bubble sort is always slow.',
+        belief: 'Bubble Sort is always slow.',
         howAddressed:
-          'With the early-exit check, bubble sort finishes in one pass on data that is already sorted (O(n)). Students try the "Nearly sorted" preset in Explore and watch the comparison count stay low.',
+          'With the early-exit check, Bubble Sort finishes in one pass on data that is already sorted (O(n)). Students try the "Nearly sorted" preset in Explore and watch the comparison count stay low.',
       },
       {
-        belief: 'Merge sort sorts the list in place.',
+        belief: 'Merge Sort sorts the list in place.',
         howAddressed:
-          'The Explore view shows the extra buffer merge sort writes into, and the stats count "writes" instead of swaps. The Learn page lists its O(n) extra memory.',
+          'The Explore view shows the extra buffer Merge Sort writes into, and the stats count "writes" instead of swaps. The Learn page lists its O(n) extra memory.',
       },
       {
         belief: 'Longer or cleverer code always runs slower.',
         howAddressed:
-          'Merge sort has the most code but the fewest comparisons on large random lists. The “Race two algorithms” view in Explore puts two algorithms side by side on the same array.',
+          'Merge Sort has the most code but the fewest comparisons on large random lists. The “Race two algorithms” view in Explore puts two algorithms side by side on the same array.',
       },
       {
         belief: 'Alphabetical order is the same in every language.',
         howAddressed:
-          '"Sorting around the world" sorts one list of names with different language rules, showing that the comparison rule decides the order, not the algorithm.',
+          '"Sorting around the world" sorts one list of words with different language rules, showing that the comparison rule decides the order, not the algorithm.',
       },
     ],
     plan: [
@@ -85,7 +85,7 @@ export const TEACHER_NOTES: Record<ModuleId, TeacherNotes> = {
         minutes: 15,
         title: 'Explore in pairs',
         activity:
-          'Pairs run each algorithm on the same array, then on "Reversed" and "Nearly sorted". They record comparisons and swaps in a table and predict before pressing Play.',
+          'Pairs run each algorithm on the same array, then on "Reversed" and "Nearly sorted". They record comparisons and swaps/writes in a table and predict before pressing Play.',
         stage: 'explore',
       },
       {
@@ -105,7 +105,7 @@ export const TEACHER_NOTES: Record<ModuleId, TeacherNotes> = {
     discussion: [
       {
         question:
-          'Why does a nearly sorted list make insertion sort fast but barely helps selection sort?',
+          'Why does a nearly sorted list make Insertion Sort fast but barely helps Selection Sort?',
         kind: 'concept',
       },
       {
@@ -122,17 +122,17 @@ export const TEACHER_NOTES: Record<ModuleId, TeacherNotes> = {
     differentiation: {
       support: [
         'Use arrays of 5–6 values and the 0.5× speed in Explore.',
-        'Focus on bubble and selection sort first; leave merge sort for later.',
-        'Give a printed table for recording comparisons and swaps.',
+        'Focus on Bubble Sort and Selection Sort first; leave Merge Sort for later.',
+        'Give a printed table for recording comparisons and swaps/writes.',
       ],
       stretch: [
-        'Explain why merge sort is O(n log n) by counting the levels of splitting.',
-        'Find an input where insertion sort beats merge sort on comparisons, and explain why.',
-        'Research a stable vs unstable sort and test stability with "Few unique values".',
+        'Explain why Merge Sort is O(n log n) by counting the levels of splitting.',
+        'Find an input where Insertion Sort beats Merge Sort on comparisons, and explain why.',
+        'Research stable vs unstable sorts and test stability on paper with labelled cards (5a, 5b): which algorithms keep 5a before 5b?',
       ],
     },
     assessment: [
-      'Exit ticket: show the list after the first pass of bubble sort on [5, 1, 4, 2].',
+      'Exit ticket: show the list after the first pass of Bubble Sort on [5, 1, 4, 2].',
       'Practice exercises "Predict the next step" and "Count the comparisons" as a quick check.',
       'Short written answer: choose an algorithm for a nearly sorted class list and justify it.',
     ],
@@ -142,23 +142,23 @@ export const TEACHER_NOTES: Record<ModuleId, TeacherNotes> = {
   },
   'binary-search': {
     summary:
-      'Students discover why binary search needs sorted data, run it step by step, and compare how many guesses it needs against checking every item.',
+      'Students discover why Binary Search needs sorted data, run it step by step, and compare how many guesses it needs against checking every item.',
     objectives: [
-      'Explain linear and binary search in their own words.',
-      'Explain why binary search only works on sorted data.',
-      'Trace binary search: find the middle, compare, and update the left and right bounds.',
+      'Explain Linear Search and Binary Search in their own words.',
+      'Explain why Binary Search only works on sorted data.',
+      'Trace Binary Search: find the middle, compare, and update the left and right bounds.',
       'Compare O(n) and O(log n) using real numbers of comparisons.',
     ],
     priorKnowledge: [
-      'Lists and indexes, starting at 0.',
+      'Lists and indices, starting at 0.',
       'Integer division / rounding down.',
       'What a sorted list is (from the Sorting lesson).',
     ],
     misconceptions: [
       {
-        belief: 'Binary search works on any list.',
+        belief: 'Binary Search works on any list.',
         howAddressed:
-          'The Learn page runs binary search on an unsorted list and it fails to find a value that is there. Custom input in Explore is checked and rejected if it is not sorted.',
+          'The Learn page runs Binary Search on an unsorted list and it fails to find a value that is there. Custom input in Explore is checked and rejected if it is not sorted.',
       },
       {
         belief: 'The middle is always exactly in the middle.',
@@ -166,7 +166,7 @@ export const TEACHER_NOTES: Record<ModuleId, TeacherNotes> = {
           'With an even number of items there are two middles. The app always uses mid = floor((left + right) / 2), and the "Find the midpoint" exercise practises it.',
       },
       {
-        belief: 'Binary search is about twice as fast as linear search.',
+        belief: 'Binary Search is about twice as fast as Linear Search.',
         howAddressed:
           'The comparison feature shows 1,000 items need up to 1,000 linear checks but only 10 binary ones. The "Complexity challenge" exercise matches sizes to comparisons.',
       },
@@ -187,14 +187,14 @@ export const TEACHER_NOTES: Record<ModuleId, TeacherNotes> = {
         minutes: 10,
         title: 'Learn',
         activity:
-          'Students read linear vs binary search and the walkthrough, then answer the "Check yourself" questions.',
+          'Students read linear vs Binary Search and the walkthrough, then answer the "Check yourself" questions.',
         stage: 'learn',
       },
       {
         minutes: 15,
         title: 'Explore in pairs',
         activity:
-          'One student predicts the next middle index, the other steps the visualization. Swap roles. Then run linear vs binary on the same target and record both counts.',
+          'One student predicts the next middle index, the other steps the visualisation. Swap roles. Then run linear vs binary on the same target and record both counts.',
         stage: 'explore',
       },
       {
@@ -219,7 +219,7 @@ export const TEACHER_NOTES: Record<ModuleId, TeacherNotes> = {
       },
       {
         question:
-          'Paper dictionaries in different languages are ordered differently. How would binary search work in a dictionary of a language you speak?',
+          'Paper dictionaries in different languages are ordered differently. How would Binary Search work in a dictionary of a language you speak?',
         kind: 'intercultural',
       },
       {
@@ -237,13 +237,13 @@ export const TEACHER_NOTES: Record<ModuleId, TeacherNotes> = {
       stretch: [
         'Show why the maximum number of comparisons is floor(log₂ n) + 1.',
         'Change the algorithm to find the first of several equal values.',
-        'Write binary search recursively (links to the Recursion lesson).',
+        'Write Binary Search recursively (links to the Recursion lesson).',
       ],
     },
     assessment: [
-      'Exit ticket: trace binary search for 23 in [2, 5, 8, 12, 16, 23, 38, 56, 72], listing left, mid and right.',
+      'Exit ticket: trace Binary Search for 23 in [2, 5, 8, 12, 16, 23, 38, 56, 72], listing left, mid and right.',
       'Practice exercise "Find the mistake" as evidence of understanding the bounds.',
-      'Explain in two sentences why binary search cannot be used on an unsorted list.',
+      'Explain in two sentences why Binary Search cannot be used on an unsorted list.',
     ],
     ibLinks: {
       tok: 'When we say an algorithm is "efficient", efficient for whom and by what measure?',
@@ -277,7 +277,7 @@ export const TEACHER_NOTES: Record<ModuleId, TeacherNotes> = {
       {
         belief: 'The base case is optional.',
         howAddressed:
-          'The Learn page animates a stack that keeps growing without a base case. The "Fix the recursion" exercise asks students to find the missing or wrong base case.',
+          'The Learn page animates a stack that keeps growing without a base case. The "Fix the recursion" exercise asks students to find a wrong base case or a recursive call that never reaches it.',
       },
       {
         belief: 'Results come back in the same order the calls were made.',
@@ -303,7 +303,7 @@ export const TEACHER_NOTES: Record<ModuleId, TeacherNotes> = {
         minutes: 15,
         title: 'Explore in pairs',
         activity:
-          'Pairs step through countdown(4) and factorial(4). Before each return, they predict the value that comes back. Then try n = 0.',
+          'Pairs step through countdown(4) and factorial(4). In factorial(4), before each return they predict the value that comes back. Then try n = 0.',
         stage: 'explore',
       },
       {
@@ -346,7 +346,7 @@ export const TEACHER_NOTES: Record<ModuleId, TeacherNotes> = {
       stretch: [
         'Write a recursive sum of a list and trace its stack.',
         'Compare recursive and loop versions of factorial for memory use.',
-        'Write binary search recursively and identify its base cases.',
+        'Write Binary Search recursively and identify its base cases.',
       ],
     },
     assessment: [

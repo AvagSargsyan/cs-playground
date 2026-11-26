@@ -30,13 +30,22 @@ function isKeyStep(id: SortAlgorithmId, step: SortStep): boolean {
 
 export type Frame = { state: SortState; note: string }
 
+/** A finished merge is easier to read as its result than as its last single write. */
+function noteFor(id: SortAlgorithmId, step: SortStep): string {
+  const range = step.state.activeRange
+  if (id === 'merge' && step.kind === 'write' && range) {
+    return `Merged into [${step.state.values.slice(range[0], range[1] + 1).join(', ')}].`
+  }
+  return step.message
+}
+
 /** Real states from the real trace, so the illustration can never disagree with the algorithm. */
 export function walkthroughFrames(id: SortAlgorithmId): Frame[] {
   const trace = SORT_ALGORITHMS[id].trace(WALKTHROUGH_INPUT[id], 'asc')
   const start: Frame = { state: trace[0].state, note: 'Start.' }
   const middle = trace
     .filter((st) => isKeyStep(id, st))
-    .map((st) => ({ state: st.state, note: st.message }))
+    .map((st) => ({ state: st.state, note: noteFor(id, st) }))
   const last = trace[trace.length - 1]
   // Bubble Sort's early exit already shows the sorted list, so a "Sorted!" frame would repeat it.
   const endsSorted = middle.at(-1)?.state.sorted.length === last.state.values.length

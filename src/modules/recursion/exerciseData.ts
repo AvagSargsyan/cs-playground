@@ -170,7 +170,8 @@ export type FixVariant = {
 const FIX_VARIANTS: FixVariant[] = [
   {
     id: 'same-n',
-    intro: 'This countdown never stops. Calling countdown(3) prints 3, 3, 3, 3… forever.',
+    intro:
+      'This countdown never stops by itself. Calling countdown(3) prints 3, 3, 3, 3… until Python crashes with RecursionError.',
     code: `def countdown(n):
     if n == 0:
         print("Done")
@@ -225,14 +226,15 @@ const FIX_VARIANTS: FixVariant[] = [
       {
         id: 'print',
         label: 'Move print(n) after the call',
-        why: 'That changes the order of output, but n still grows forever.',
+        why: 'That changes the order of output, but n still keeps growing until Python crashes.',
       },
     ],
     correctFix: 'minus',
   },
   {
     id: 'skips-base',
-    intro: 'factorial(3) works, but factorial(0) runs forever: 0, -1, -2, -3…',
+    intro:
+      'factorial(3) works, but factorial(0) never stops by itself: 0, -1, -2, -3… until Python crashes with RecursionError.',
     code: `def factorial(n):
     if n == 1:
         return 1

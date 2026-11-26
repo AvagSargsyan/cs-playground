@@ -20,7 +20,7 @@ export const RECURSION_EXAMPLES: Record<RecursionExampleId, RecursionExample> = 
     name: 'Countdown',
     trace: countdown,
     code: { pseudocode: countdownPseudocode.text, python: countdownPython.text },
-    idea: 'Print N, then count down from N - 1. Stop at 0.',
+    idea: 'Print N, then count down from N - 1. At 0, print "Done" and stop.',
     defaultInput: 5,
   },
   factorial: {

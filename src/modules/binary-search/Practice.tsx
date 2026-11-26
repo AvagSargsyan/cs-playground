@@ -73,7 +73,7 @@ function MidpointExercise(p: ExerciseRenderProps) {
             }
           const hint =
             i === t.mid + 1 && len % 2 === 0
-              ? 'You picked the right-hand of the two middles. div rounds down, so binary search uses the left one.'
+              ? 'You picked the right-hand of the two middles. div rounds down, so Binary Search uses the left one.'
               : i < t.left || i > t.right
                 ? 'That cell is outside the range from LEFT to RIGHT.'
                 : 'Use the indices (the small numbers), not the values.'
@@ -359,7 +359,7 @@ function ComplexityExercise(p: ExerciseRenderProps) {
     <DragMatch
       {...p}
       promptHeading="Sorted array size"
-      answerHeading="Most comparisons binary search needs"
+      answerHeading="Most comparisons Binary Search needs"
       pairs={COMPLEXITY_PAIRS.map((c) => ({
         id: String(c.size),
         prompt: c.label,
@@ -376,8 +376,8 @@ function ComplexityExercise(p: ExerciseRenderProps) {
           explanation: (
             <p>
               {right} of {COMPLEXITY_PAIRS.length} correct. Each comparison halves the range, so the
-              maximum is the number of halvings plus one: 10 → 4, 100 → 7, 1,000 → 10 and 1,000,000
-              → 20. Making the array 1,000 times bigger only adds about 10 comparisons.
+              maximum is the number of halvings plus one last check: 10 → 4, 100 → 7, 1,000 → 10 and
+              1,000,000 → 20. Making the array 1,000 times bigger only adds about 10 comparisons.
             </p>
           ),
         }
@@ -395,8 +395,8 @@ const EXERCISES: ExerciseDef[] = [
     format: 'Select an element',
     instructions: (
       <p>
-        Binary search is working on the range from LEFT to RIGHT (faded cells are outside it). Click
-        the cell binary search checks next. Small numbers are the indices.
+        Binary Search is working on the range from LEFT to RIGHT (faded cells are outside it). Click
+        the cell Binary Search checks next. Small numbers are the indices.
       </p>
     ),
     render: (p) => <MidpointExercise {...p} />,
@@ -412,7 +412,7 @@ const EXERCISES: ExerciseDef[] = [
     title: 'Choose the next direction',
     format: 'Predict the next step',
     instructions: (
-      <p>Binary search has just read the middle value (orange). What should it do next?</p>
+      <p>Binary Search has just read the middle value (orange). What should it do next?</p>
     ),
     render: (p) => <DirectionExercise {...p} />,
     solution: (
@@ -448,7 +448,7 @@ const EXERCISES: ExerciseDef[] = [
     format: 'Select a step',
     instructions: (
       <p>
-        Someone ran binary search by hand and made exactly one mistake. Click the first wrong line.
+        Someone ran Binary Search by hand and made exactly one mistake. Click the first wrong line.
       </p>
     ),
     render: (p) => <MistakeExercise {...p} />,
@@ -465,7 +465,7 @@ const EXERCISES: ExerciseDef[] = [
     format: 'Drag and match',
     instructions: (
       <p>
-        Match each sorted array size with the largest number of comparisons binary search could need
+        Match each sorted array size with the largest number of comparisons Binary Search could need
         to find an item in it.
       </p>
     ),

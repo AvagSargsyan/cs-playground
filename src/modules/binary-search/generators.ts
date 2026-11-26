@@ -200,9 +200,9 @@ export function makeMistakeTask(rand: Rand = Math.random, forced?: MistakeKind):
     const r = rows[wrongRow].round
     const why =
       kind === 'unsorted'
-        ? 'The list is not sorted, so binary search cannot be used at all: ruling out half of the list only works when everything to the left is smaller and everything to the right is larger.'
+        ? 'The list is not sorted, so Binary Search cannot be used at all: ruling out half of the list only works when everything to the left is smaller and everything to the right is larger.'
         : kind === 'wrong-mid'
-          ? `MID should be (${r!.left} + ${r!.right}) div 2 = ${midOf(r!.left, r!.right)}, not ${r!.mid}. "div" rounds down.`
+          ? `MID should be (${r!.left} + ${r!.right}) div 2 = ${midOf(r!.left, r!.right)}, not ${r!.mid}.${(r!.left + r!.right) % 2 === 1 ? ' "div" rounds down.' : ''}`
           : kind === 'wrong-direction'
             ? `${r!.value} ${r!.value < target ? '<' : '>'} ${target}, so the target can only be to the ${r!.value < target ? 'right' : 'left'}. The search went the wrong way.`
             : `The middle item was already checked, so it must be ruled out too: the new bound should be ${r!.value < target ? `LEFT = MID + 1 = ${r!.mid + 1}` : `RIGHT = MID - 1 = ${r!.mid - 1}`}.`

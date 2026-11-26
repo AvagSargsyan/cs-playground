@@ -130,7 +130,7 @@ export function binarySearch(values: number[], target: number): SearchTrace {
         'go-right',
         { ...base(), mid },
         'goRight',
-        `Move LEFT to ${left}. Indices up to ${mid} are ruled out; ${size()} item${size() === 1 ? '' : 's'} left to search.`,
+        `Move LEFT to ${left}. Indices up to ${mid} are ruled out; ${size()} item${size() === 1 ? '' : 's'} remaining.`,
         size(),
       )
     } else {
@@ -140,7 +140,7 @@ export function binarySearch(values: number[], target: number): SearchTrace {
         'go-left',
         { ...base(), mid },
         'goLeft',
-        `Move RIGHT to ${right}. Indices from ${mid} on are ruled out; ${size()} item${size() === 1 ? '' : 's'} left to search.`,
+        `Move RIGHT to ${right}. Indices from ${mid} on are ruled out; ${size()} item${size() === 1 ? '' : 's'} remaining.`,
         size(),
       )
     }

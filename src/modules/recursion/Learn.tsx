@@ -129,11 +129,11 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
         </ul>
         <AnnotatedCode
           notes={[
-            { line: 'line 2', text: 'The base case check. When N reaches 0 there is no new call.' },
-            { line: 'line 3', text: 'What to do in the base case: print “Done”.' },
-            { line: 'line 5', text: 'Recursive case: do a little bit of work (print N)…' },
+            { line: 'Line 2', text: 'The base case check. When N reaches 0 there is no new call.' },
+            { line: 'Line 3', text: 'What to do in the base case: print “Done”.' },
+            { line: 'Line 5', text: 'Recursive case: do a little bit of work (print N)…' },
             {
-              line: 'line 6',
+              line: 'Line 6',
               text: '…then call the same procedure with N - 1, a smaller problem that is one step closer to 0.',
             },
           ]}
@@ -166,12 +166,12 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
           <p>
             Python stops a program after about 1,000 nested calls and shows{' '}
             <code>RecursionError: maximum recursion depth exceeded</code>. The website Stack
-            Overflow, where programmers ask questions, is named after this error.
+            Overflow, where programmers ask questions, is named after the stack overflow error.
           </p>
         </Callout>
         <p>
-          A base case can also be <em>wrong</em> instead of missing. If countdown started at 3 but
-          stepped by 2 (3, 1, -1, …), it would jump right over 0 and never stop.
+          A base case can also be <em>unreachable</em>. If countdown started at 3 but stepped by 2
+          (3, 1, -1, …), it would jump right over 0 and never stop.
         </p>
       </LessonSection>
 
@@ -244,9 +244,9 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
         </p>
         <AnnotatedCode
           notes={[
-            { line: 'line 2–3', text: 'Base case: 0! is 1, so return 1 without another call.' },
+            { line: 'Lines 2–3', text: 'Base case: 0! is 1, so return 1 without another call.' },
             {
-              line: 'line 5',
+              line: 'Line 5',
               text: 'Recursive case: N! is N times (N - 1)!. The multiplication has to wait until FACTORIAL(N - 1) gives back its answer.',
             },
           ]}

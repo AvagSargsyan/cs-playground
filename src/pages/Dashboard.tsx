@@ -15,7 +15,7 @@ function Intro() {
       <h1 className={s.title}>{SITE.name}</h1>
       <p className={s.lead}>
         An interactive demo for learning three computer science concepts: sorting, binary search and
-        recursion. Each lesson has three steps: <strong>Learn</strong> the idea,{' '}
+        recursion. Each lesson has three stages: <strong>Learn</strong> the idea,{' '}
         <strong>Explore</strong> it step by step, and <strong>Practice</strong> with exercises.
       </p>
       <p className={s.author}>

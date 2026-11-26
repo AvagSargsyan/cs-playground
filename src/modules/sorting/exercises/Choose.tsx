@@ -11,7 +11,7 @@ const ALGOS: SortAlgorithmId[] = ['bubble', 'selection', 'insertion', 'merge']
 
 const WHY: Record<string, string> = {
   'nearly-sorted':
-    'The list is almost sorted: each new result only moves a short distance, so Insertion Sort does close to n steps.',
+    'Only 3 values are out of place. The 2,000 sorted ones need one comparison each, and the 3 new ones move into place, so the total work stays close to n.',
   huge: 'Merge Sort is O(n log n) for every input, so it never becomes very slow, even for 10 million songs.',
   'few-writes':
     'Selection Sort makes at most n − 1 swaps (one per pass), far fewer writes than Bubble or Insertion Sort.',

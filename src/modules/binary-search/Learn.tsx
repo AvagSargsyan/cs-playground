@@ -29,15 +29,15 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
       intro={
         <>
           How do you find one item among thousands, or millions, without checking them all? In this
-          lesson you will learn binary search: a way to find things in sorted data by throwing away
+          lesson you will learn Binary Search: a way to find things in sorted data by throwing away
           half of the possibilities with every question.
         </>
       }
       toc={[
         ['searching', 'What is searching?'],
         ['sorted', 'Sorted vs unsorted data'],
-        ['linear-vs-binary', 'Linear vs binary search'],
-        ['how-it-works', 'How binary search works'],
+        ['linear-vs-binary', 'Linear vs Binary Search'],
+        ['how-it-works', 'How Binary Search works'],
         ['game', 'Guess my number'],
         ['complexity', 'How fast is it?'],
       ]}
@@ -78,8 +78,8 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
         />
         <Callout kind="predict">
           <p>
-            Your friend opens a 1,000-page dictionary and you want the word “moon”. What do you do
-            first? Think about it before reading on.
+            You have a 1,000-page dictionary and need the word “moon”. Where do you open it first?
+            Think about it before reading on.
           </p>
         </Callout>
       </LessonSection>
@@ -113,17 +113,17 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
         </p>
       </LessonSection>
 
-      <LessonSection id="linear-vs-binary" title="Linear search vs binary search">
-        <SubSection title="Linear search: one by one">
+      <LessonSection id="linear-vs-binary" title="Linear Search vs Binary Search">
+        <SubSection title="Linear Search: one by one">
           <p>
-            <strong>Linear search</strong> checks the items one at a time, from the first to the
+            <strong>Linear Search</strong> checks the items one at a time, from the first to the
             last, until it finds the target or runs out of items. It works on any data, sorted or
             not. But with 1,000 items it may need 1,000 checks.
           </p>
         </SubSection>
-        <SubSection title="Binary search: check the middle, throw away half">
+        <SubSection title="Binary Search: check the middle, throw away half">
           <p>
-            <strong>Binary search</strong> only works on sorted data. It looks at the{' '}
+            <strong>Binary Search</strong> only works on sorted data. It looks at the{' '}
             <strong>middle</strong> item first:
           </p>
           <ul>
@@ -142,7 +142,7 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
         <SubSection title="Why the data must be sorted">
           <p>
             Ruling out half of the data only makes sense if everything on the left is smaller and
-            everything on the right is bigger. Watch what goes wrong when we use binary search to
+            everything on the right is bigger. Watch what goes wrong when we use Binary Search to
             look for <strong>2</strong> in an unsorted list:
           </p>
           <Walkthrough
@@ -150,7 +150,7 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
               {
                 title: 'Middle is 1, and 1 < 2, so go right',
                 view: { values: UNSORTED, left: 0, right: 6, mid: 3 },
-                note: 'Binary search assumes everything left of the middle is smaller than 1, so it rules out indices 0–3.',
+                note: 'Binary Search assumes everything left of the middle is smaller than 1, so also smaller than 2, and rules out indices 0–3.',
               },
               {
                 title: 'Middle is 14, and 14 > 2, so go left',
@@ -170,17 +170,17 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
               },
             ]}
           />
-          <Callout kind="warning" title="Binary search needs sorted data">
+          <Callout kind="warning" title="Binary Search needs sorted data">
             <p>
-              On unsorted data binary search can give the wrong answer. Sort first (see the Sorting
-              lesson), or use linear search.
+              On unsorted data Binary Search can give the wrong answer. Sort first (see the Sorting
+              lesson), or use Linear Search.
             </p>
           </Callout>
         </SubSection>
       </LessonSection>
 
-      <LessonSection id="how-it-works" title="How binary search works">
-        <p>Binary search keeps track of a few things while it works:</p>
+      <LessonSection id="how-it-works" title="How Binary Search works">
+        <p>Binary Search keeps track of a few things while it works:</p>
         <ul className={s.termList}>
           <li>
             <span className={s.term}>Target</span>
@@ -252,7 +252,7 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
           question="In [2, 5, 9, 13, 20, 27], LEFT = 0 and RIGHT = 5. Which index is MID?"
           options={['2', '3', '2.5']}
           correct={0}
-          explanation="(0 + 5) div 2 = 5 div 2 = 2, because div rounds down. Index 2 holds 9. Indexes are always whole numbers, so 2.5 is impossible."
+          explanation="(0 + 5) div 2 = 5 div 2 = 2, because div rounds down. Index 2 holds 9. Indices are always whole numbers, so 2.5 is impossible."
         />
         <SubSection title="The algorithm in pseudocode">
           <AnnotatedCode
@@ -303,7 +303,7 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
 
       <LessonSection id="complexity" title="How fast is it?">
         <p>
-          Every comparison in binary search cuts the range in half. So the question “how many
+          Every comparison in Binary Search cuts the range in half. So the question “how many
           comparisons?” becomes “how many times can I halve the list before one item is left?”
         </p>
         <ul className={s.halving} aria-label="Halving 1,000 items">
@@ -312,9 +312,10 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
           ))}
         </ul>
         <p>
-          Starting from 1,000 items, you only need about <strong>10</strong> halvings. Double the
-          list to 2,000 items and you need just <strong>one</strong> more step. Linear search, in
-          the worst case, needs 1,000 and then 2,000 checks.
+          Starting from 1,000 items, you only need about <strong>10</strong> comparisons (9
+          halvings, then one last check). Double the list to 2,000 items and you need just{' '}
+          <strong>one</strong> more step. Linear Search, in the worst case, needs 1,000 and then
+          2,000 checks.
         </p>
         <Figure caption="Worst-case number of comparisons as the list grows.">
           <GrowthChart />
@@ -325,16 +326,16 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
         </p>
         <ul>
           <li>
-            Linear search is <strong>O(n)</strong>: twice as many items, about twice as much work.
+            Linear Search is <strong>O(n)</strong>: twice as many items, about twice as much work.
           </li>
           <li>
-            Binary search is <strong>O(log n)</strong>: twice as many items, just one more step.
+            Binary Search is <strong>O(log n)</strong>: twice as many items, just one more step.
             log₂ n means “how many times can you halve n”.
           </li>
         </ul>
         <DataTable
           caption="Worst-case comparisons"
-          head={['Items (n)', 'Linear search', 'Binary search']}
+          head={['Items (n)', 'Linear Search', 'Binary Search']}
           rows={[10, 100, 1000, 1_000_000].map((n) => [
             fmt(n),
             fmt(n),
@@ -348,7 +349,7 @@ export default function Learn({ moduleId }: { moduleId: ModuleId }) {
           </p>
         </Callout>
         <CheckYourself
-          question="Binary search needs at most 10 comparisons for 1,000 sorted items. About how many does it need for 2,000?"
+          question="Binary Search needs at most 10 comparisons for 1,000 sorted items. About how many does it need for 2,000?"
           options={['11', '20', '2,000']}
           correct={0}
           explanation="Doubling the list adds just one halving step: the first comparison cuts 2,000 down to 1,000, then it is the same as before."

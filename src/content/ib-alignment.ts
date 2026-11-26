@@ -26,16 +26,17 @@ export const IB_ALIGNMENT: IbAlignmentRow[] = [
   {
     module: 'sorting',
     theme: 'Computational thinking and problem-solving',
-    topic: 'Algorithms: sorting (bubble and selection sort, plus insertion and merge sort)',
+    topic:
+      'Algorithms: sorting (Bubble Sort and Selection Sort, plus Insertion Sort and Merge Sort)',
     level: 'SL and HL',
     skills: 'Trace an algorithm, count comparisons, compare efficiency with Big O',
   },
   {
     module: 'binary-search',
     theme: 'Computational thinking and problem-solving',
-    topic: 'Algorithms: searching (linear and binary search)',
+    topic: 'Algorithms: searching (Linear Search and Binary Search)',
     level: 'SL and HL',
-    skills: 'Trace binary search, explain why it needs sorted data, compare O(n) and O(log n)',
+    skills: 'Trace Binary Search, explain why it needs sorted data, compare O(n) and O(log n)',
   },
   {
     module: 'recursion',

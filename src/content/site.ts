@@ -1,6 +1,5 @@
 export const SITE = {
   name: 'CS Playground',
-  tagline: 'Interactive Computer Science Lessons',
   author: 'Avag Sargsyan',
   authorInitials: 'AS',
   linkedin: 'https://www.linkedin.com/in/avag-sargsyan/',

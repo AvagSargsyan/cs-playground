@@ -32,7 +32,7 @@ const SORT_LEGEND: LegendItem[] = [
   { label: 'Comparing', swatch: <Swatch color="var(--state-compare)" symbol="▲" /> },
   { label: 'Swapping / writing', swatch: <Swatch color="var(--state-swap)" symbol="⇄" /> },
   { label: 'Sorted', swatch: <Swatch color="var(--state-sorted)" symbol="✓" /> },
-  { label: 'Smallest so far', swatch: <Swatch color="var(--uwc-blue)" symbol="◆" /> },
+  { label: 'Smallest/largest so far', swatch: <Swatch color="var(--uwc-blue)" symbol="◆" /> },
   { label: 'Being merged', swatch: <Swatch color="#d9c6db" symbol="┆" /> },
   { label: 'Active section', swatch: <Swatch color="var(--state-active)" symbol="⌴" /> },
 ]
@@ -211,8 +211,8 @@ export default function Explore({ moduleId }: { moduleId: ModuleId }) {
           <section className={s.belowSection} aria-labelledby="race-title">
             <h2 id="race-title">Race two algorithms</h2>
             <p>
-              Both algorithms sort the same array. Each press of a button moves both one step, so
-              you can see which one needs fewer steps to finish.
+              Both algorithms sort the same array and move one step at a time. Steps include
+              explanation steps, so compare the real work: comparisons plus swaps or writes.
             </p>
             <RaceMode values={values} order={order} max={max} />
           </section>
