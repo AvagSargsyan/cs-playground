@@ -89,17 +89,14 @@ describe('selectors', () => {
 })
 
 describe('persistence', () => {
-  it('round-trips progress and preferences but not the session-only banner flag', () => {
+  it('round-trips progress and preferences', () => {
     const storage = memoryStorage()
     const progress = reducer(undefined, stageCompleted({ module: 'binary-search', stage: 'learn' }))
-    saveState(
-      { progress, preferences: { ...initialPreferences(), speed: 2, bannerDismissed: true } },
-      storage,
-    )
+    saveState({ progress, preferences: { ...initialPreferences(), speed: 2 } }, storage)
     const loaded = loadState(storage)!
     expect(loaded.progress.modules['binary-search'].stages.learn).toBe('done')
     expect(loaded.preferences.speed).toBe(2)
-    expect(loaded.preferences.bannerDismissed).toBe(false)
+    expect(loaded.preferences.codeTab).toBe('pseudocode')
   })
 
   it('survives corrupted storage', () => {

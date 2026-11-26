@@ -24,7 +24,7 @@ export const SCHEMA_VERSION = 1
 type Saved = {
   version: number
   progress: ProgressState
-  preferences: Omit<PreferencesState, 'bannerDismissed'>
+  preferences: PreferencesState
 }
 
 const isObject = (v: unknown): v is Record<string, unknown> =>

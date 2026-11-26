@@ -1,243 +1,137 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
-import { Button, ButtonLink, Chip, ProgressBar } from '../components/ui'
+import { Button, ButtonLink } from '../components/ui'
 import { MODULE_IDS, MODULES, STAGE_IDS, STAGE_LABELS } from '../content/modules'
 import { SITE } from '../content/site'
-import { AuthorAvatar } from '../illustrations/BrandMark'
-import { HeroPreview, ModuleArt } from '../illustrations/ModuleArt'
+import { ModuleArt } from '../illustrations/ModuleArt'
 import { progressReset } from '../store/progressSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
-import {
-  selectContinueTarget,
-  selectModuleStatuses,
-  selectOverallProgress,
-} from '../store/selectors'
 import s from './dashboard.module.css'
 
-function Hero() {
-  const overall = useAppSelector(selectOverallProgress)
-  const target = useAppSelector(selectContinueTarget)
-  const last = useAppSelector((st) => st.progress.last)
-  const started = overall.stagesDone > 0 || last !== null
+function Intro() {
   return (
-    <section className={s.hero}>
-      <div className={`container ${s.heroGrid}`}>
-        <div className={s.heroText}>
-          <p className={s.byline}>
-            <AuthorAvatar size={32} />
-            <span>
-              A teaching demo by <strong>{SITE.author}</strong>
-            </span>
-          </p>
-          <h1 className={s.heroTitle}>
-            Computer science you can <span className={s.highlight}>see</span> and{' '}
-            <span className={s.highlight}>try</span>.
-          </h1>
-          <p className={s.heroLead}>
-            {SITE.name} is a set of short, interactive lessons on sorting, binary search and
-            recursion. Students predict what an algorithm will do, watch it run step by step, and
-            then run it themselves.
-          </p>
-          <div className={s.heroActions}>
-            {started ? (
-              <ButtonLink to={`/${target.module}/${target.stage}`}>
-                Continue: {MODULES[target.module].short} · {STAGE_LABELS[target.stage]}
-              </ButtonLink>
-            ) : (
-              <ButtonLink to="/sorting/learn">Start the first lesson</ButtonLink>
-            )}
-            <ButtonLink to="/about" variant="ghost">
-              Why I built this
-            </ButtonLink>
-          </div>
-          <ul className={s.facts} aria-label="At a glance">
-            <li>3 lessons</li>
-            <li>15 exercises</li>
-            <li>No sign-up</li>
-            <li>Works on phones</li>
-          </ul>
-        </div>
-        <div className={s.heroVisual}>
-          <HeroPreview />
-        </div>
-      </div>
+    <section className={`container ${s.intro}`}>
+      <p className={s.demoLabel}>Demo</p>
+      <h1 className={s.title}>{SITE.name}</h1>
+      <p className={s.lead}>
+        An interactive demo for learning three computer science concepts: sorting, binary search and
+        recursion. Each lesson has three steps: <strong>Learn</strong> the idea,{' '}
+        <strong>Explore</strong> it step by step, and <strong>Practice</strong> with exercises.
+      </p>
+      <p className={s.author}>
+        Made by {SITE.author} as part of an application for the {SITE.role} position at{' '}
+        {SITE.school}. Not an official {SITE.school} website.{' '}
+        <Link to="/about">About this demo</Link>
+      </p>
     </section>
   )
 }
 
-function ModuleCards() {
-  const statuses = useAppSelector(selectModuleStatuses)
-  const stages = useAppSelector((st) => st.progress.modules)
+function Lessons() {
+  const modules = useAppSelector((st) => st.progress.modules)
   const last = useAppSelector((st) => st.progress.last)
+  const anyStarted = MODULE_IDS.some((id) => modules[id].started)
+  const dispatch = useAppDispatch()
+  const [confirming, setConfirming] = useState(false)
+
   return (
-    <section className={`container ${s.section}`} aria-labelledby="modules-title">
-      <p className="eyebrow">Lessons</p>
-      <h2 id="modules-title">Three big ideas, one way of learning</h2>
-      <p className={`reading ${s.sectionLead}`}>
-        Every lesson follows the same path: <strong>Learn</strong> the idea,{' '}
-        <strong>Explore</strong> it in an interactive playground, then <strong>Practice</strong>{' '}
-        with exercises that explain every answer.
-      </p>
-      <div className={s.cards}>
+    <section className={`container ${s.section}`} aria-labelledby="lessons-title">
+      <h2 id="lessons-title" className={s.sectionTitle}>
+        Lessons
+      </h2>
+      <ol className={s.lessons}>
         {MODULE_IDS.map((id, n) => {
           const meta = MODULES[id]
-          const st = statuses[id]
+          const m = modules[id]
           const resume =
             last?.module === id
               ? last.stage
-              : (STAGE_IDS.find((x) => stages[id].stages[x] !== 'done') ?? 'learn')
+              : (STAGE_IDS.find((x) => m.stages[x] !== 'done') ?? 'learn')
           return (
-            <article
+            <li
               key={id}
-              className={s.card}
+              className={s.lesson}
               style={{ '--module-color': meta.colorVar } as React.CSSProperties}
             >
-              <div className={s.cardArt}>
+              <div className={s.lessonArt}>
                 <ModuleArt id={id} />
               </div>
-              <div className={s.cardBody}>
-                <div className={s.cardMeta}>
-                  <span>
-                    Lesson {n + 1} · {meta.minutes} min
-                  </span>
-                  {st.completed ? (
-                    <Chip tone="success">✓ Completed</Chip>
-                  ) : st.started ? (
-                    <Chip tone="ib">In progress</Chip>
-                  ) : null}
-                </div>
-                <h3 className={s.cardTitle}>{meta.title}</h3>
-                <p className={s.cardText}>{meta.description}</p>
-                <ol className={s.cardStages} aria-label="Stages">
-                  {STAGE_IDS.map((x) => (
-                    <li key={x} data-status={stages[id].stages[x]}>
-                      <span aria-hidden="true">{stages[id].stages[x] === 'done' ? '✓' : '○'}</span>{' '}
-                      {STAGE_LABELS[x]}
-                      <span className="visually-hidden">
-                        {stages[id].stages[x] === 'done' ? ' (completed)' : ''}
-                      </span>
-                    </li>
-                  ))}
-                </ol>
-                {st.started && (
-                  <ProgressBar
-                    value={st.stagesDone / STAGE_IDS.length}
-                    label={`${meta.title} progress`}
-                  />
-                )}
+              <div className={s.lessonBody}>
+                <p className={s.lessonNumber}>
+                  Lesson {n + 1} · about {meta.minutes} min
+                </p>
+                <h3 className={s.lessonTitle}>{meta.title}</h3>
+                <p className={s.lessonText}>{meta.description}</p>
+                <ul className={s.stages} aria-label={`${meta.title} stages`}>
+                  {STAGE_IDS.map((x) => {
+                    const done = m.stages[x] === 'done'
+                    return (
+                      <li key={x}>
+                        <Link to={`/${id}/${x}`} className={done ? s.stageDone : undefined}>
+                          {done && <span aria-hidden="true">✓ </span>}
+                          {STAGE_LABELS[x]}
+                          {done && <span className="visually-hidden"> (completed)</span>}
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
                 <ButtonLink
                   to={`/${id}/${resume}`}
-                  variant={st.started ? 'primary' : 'secondary'}
-                  className={s.cardButton}
+                  variant={m.started ? 'primary' : 'secondary'}
+                  className={s.lessonButton}
                 >
-                  {st.completed ? 'Review lesson' : st.started ? 'Continue' : 'Start lesson'} →
+                  {m.started ? 'Continue' : 'Start'}
                 </ButtonLink>
               </div>
-            </article>
+            </li>
           )
         })}
-      </div>
-    </section>
-  )
-}
-
-function OverallProgress() {
-  const o = useAppSelector(selectOverallProgress)
-  const dispatch = useAppDispatch()
-  const [confirming, setConfirming] = useState(false)
-  const [message, setMessage] = useState('')
-  useEffect(() => {
-    if (!message) return
-    const t = setTimeout(() => setMessage(''), 4000)
-    return () => clearTimeout(t)
-  }, [message])
-
-  return (
-    <section className={`container ${s.section}`} aria-labelledby="progress-title">
-      <div className={s.progressPanel}>
-        <div>
-          <p className="eyebrow">Your progress</p>
-          <h2 id="progress-title" className={s.progressTitle}>
-            {o.percent}% complete
-          </h2>
-          <ProgressBar value={o.percent / 100} label="Overall progress" />
-          <p className={s.progressNote}>Saved in this browser only. No account needed.</p>
-        </div>
-        <dl className={s.progressStats}>
-          <div>
-            <dt>Lessons completed</dt>
-            <dd>
-              {o.modulesCompleted}/{o.modulesTotal}
-            </dd>
-          </div>
-          <div>
-            <dt>Stages completed</dt>
-            <dd>
-              {o.stagesDone}/{o.stagesTotal}
-            </dd>
-          </div>
-          <div>
-            <dt>Exercises solved</dt>
-            <dd>
-              {o.exercisesCompleted}/{o.exercisesTotal}
-            </dd>
-          </div>
-        </dl>
-        <div className={s.resetRow}>
+      </ol>
+      {anyStarted && (
+        <p className={s.reset}>
+          Your progress is saved in this browser.{' '}
           {confirming ? (
             <>
-              <span>Delete all saved progress in this browser?</span>
+              Delete it?{' '}
               <Button
                 size="small"
                 onClick={() => {
                   dispatch(progressReset())
                   setConfirming(false)
-                  setMessage('Progress reset.')
                 }}
               >
                 Yes, reset
-              </Button>
+              </Button>{' '}
               <Button size="small" variant="ghost" onClick={() => setConfirming(false)}>
                 Cancel
               </Button>
             </>
           ) : (
-            <Button size="small" variant="ghost" onClick={() => setConfirming(true)}>
+            <button type="button" className={s.linkButton} onClick={() => setConfirming(true)}>
               Reset progress
-            </Button>
+            </button>
           )}
-          <span role="status" className={s.resetMessage}>
-            {message}
-          </span>
-        </div>
-      </div>
+        </p>
+      )}
     </section>
   )
 }
 
-function TeachersCorner() {
+function ForTeachers() {
   return (
-    <section className={`container ${s.section}`}>
-      <div className={s.teachers}>
-        <div>
-          <p className="eyebrow">For teachers</p>
-          <h2 className={s.teachersTitle}>Using CS Playground in class</h2>
-          <p>
-            Lesson plans, learning objectives, common misconceptions and discussion questions for
-            each lesson, linked to the IB Diploma Programme Computer Science course.
-          </p>
-        </div>
-        <ButtonLink to="/teachers" variant="secondary">
-          Open teacher notes →
-        </ButtonLink>
-      </div>
-      <p className={s.aside}>
-        Curious how it works? Read <Link to="/about">about this demo</Link> or browse the{' '}
-        <a href={SITE.github} target="_blank" rel="noreferrer">
-          source code
-        </a>
-        .
+    <section className={`container ${s.section}`} aria-labelledby="teachers-title">
+      <h2 id="teachers-title" className={s.sectionTitle}>
+        For teachers
+      </h2>
+      <p className={s.teachersText}>
+        Each lesson comes with a short lesson plan: learning objectives, common misconceptions,
+        discussion questions and ideas for stronger and weaker students, linked to the IB Diploma
+        Programme Computer Science course.
       </p>
+      <ButtonLink to="/teachers" variant="ghost">
+        Open teacher notes
+      </ButtonLink>
     </section>
   )
 }
@@ -248,10 +142,9 @@ export function Dashboard() {
   }, [])
   return (
     <>
-      <Hero />
-      <ModuleCards />
-      <OverallProgress />
-      <TeachersCorner />
+      <Intro />
+      <Lessons />
+      <ForTeachers />
     </>
   )
 }

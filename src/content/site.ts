@@ -11,4 +11,4 @@ export const SITE = {
 } as const
 
 /** Formal wording, used in the footer and page metadata. */
-export const DEMO_NOTICE = `CS Playground is a personal demo project by ${SITE.author}, made as part of an application for the ${SITE.role} position at ${SITE.school}. It is not affiliated with or endorsed by ${SITE.school}.`
+export const DEMO_NOTICE = `CS Playground is a demo by ${SITE.author}, made as part of an application for the ${SITE.role} position at ${SITE.school}. It is not an official ${SITE.school} website and is not endorsed by ${SITE.school}.`

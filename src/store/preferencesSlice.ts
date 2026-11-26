@@ -10,15 +10,12 @@ export type PreferencesState = {
   speed: Speed
   codeTab: CodeTab
   sortOrder: SortOrder
-  /** Session-only: never written to localStorage, so the demo notice returns on reload. */
-  bannerDismissed: boolean
 }
 
 export const initialPreferences = (): PreferencesState => ({
   speed: 1,
   codeTab: 'pseudocode',
   sortOrder: 'asc',
-  bannerDismissed: false,
 })
 
 const preferencesSlice = createSlice({
@@ -34,12 +31,8 @@ const preferencesSlice = createSlice({
     sortOrderChanged(state, { payload }: PayloadAction<SortOrder>) {
       state.sortOrder = payload
     },
-    bannerDismissed(state) {
-      state.bannerDismissed = true
-    },
   },
 })
 
-export const { speedChanged, codeTabChanged, sortOrderChanged, bannerDismissed } =
-  preferencesSlice.actions
+export const { speedChanged, codeTabChanged, sortOrderChanged } = preferencesSlice.actions
 export default preferencesSlice.reducer

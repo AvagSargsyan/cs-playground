@@ -1,244 +1,133 @@
-/* ---------------- Hero ---------------- */
-.hero {
-  /* Dotted "graph paper" background: CS Playground's own signature. */
-  background-color: var(--paper);
-  background-image: radial-gradient(var(--grid-dot) 1.2px, transparent 1.2px);
-  background-size: 22px 22px;
-  border-bottom: 1px solid var(--border);
-}
-.heroGrid {
-  display: grid;
-  gap: var(--space-6);
-  align-items: center;
+/* ---------------- Intro ---------------- */
+.intro {
   padding-top: var(--space-7);
-  padding-bottom: var(--space-7);
+  padding-bottom: var(--space-2);
 }
-@media (min-width: 940px) {
-  .heroGrid {
-    grid-template-columns: 1.1fr 1fr;
-    gap: var(--space-7);
-    padding-top: var(--space-8);
-    padding-bottom: var(--space-8);
-  }
-}
-.byline {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: 4px 14px 4px 4px;
-  margin-bottom: var(--space-5);
-  background: var(--surface);
+.demoLabel {
+  display: inline-block;
+  margin: 0 0 var(--space-3);
+  padding: 2px 10px;
   border-radius: var(--radius-pill);
-  box-shadow: var(--border-inset), var(--shadow-soft);
-  font-size: 0.9rem;
+  background: var(--uwc-orange-tint);
+  color: #a63a0f;
+  font-weight: 600;
+  font-size: 0.82rem;
 }
-.heroTitle {
-  font-size: clamp(2.2rem, 5.6vw, 3.6rem);
+.title {
+  font-size: clamp(2.2rem, 6vw, 3.2rem);
   margin-bottom: var(--space-4);
 }
-.highlight {
-  background: linear-gradient(transparent 62%, rgba(244, 91, 33, 0.28) 62%);
-  padding: 0 2px;
+.lead {
+  max-width: 680px;
+  font-size: 1.12rem;
+  margin-bottom: var(--space-4);
 }
-.heroLead {
-  max-width: 560px;
-  font-size: 1.1rem;
-  color: var(--ink);
-}
-.heroActions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-top: var(--space-5);
-}
-.facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2) var(--space-4);
-  list-style: none;
-  margin: var(--space-5) 0 0;
-  padding: 0;
-  font-size: 0.9rem;
+.author {
+  max-width: 680px;
+  font-size: 0.92rem;
   color: var(--ink-muted);
-}
-.facts li::before {
-  content: '✓';
-  color: var(--uwc-teal);
-  font-weight: 700;
-  margin-right: 6px;
-}
-.heroVisual {
-  min-width: 0;
+  margin: 0;
 }
 
 /* ---------------- Sections ---------------- */
 .section {
-  padding-top: var(--space-8);
+  padding-top: var(--space-7);
 }
-.sectionLead {
-  margin-bottom: var(--space-6);
-  font-size: 1.05rem;
+.sectionTitle {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-4);
 }
 
-/* ---------------- Module cards ---------------- */
-.cards {
+/* ---------------- Lessons ---------------- */
+.lessons {
   display: grid;
-  gap: var(--space-5);
-}
-@media (min-width: 720px) {
-  .cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (min-width: 1040px) {
-  .cards {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-.card {
-  display: flex;
-  flex-direction: column;
-  background: var(--surface);
-  box-shadow: var(--border-inset), var(--shadow-soft);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition:
-    box-shadow 0.2s,
-    transform 0.2s;
-}
-.card:hover {
-  box-shadow: var(--border-inset), var(--shadow-lift);
-  transform: translateY(-2px);
-}
-.cardArt {
-  padding: var(--space-3) var(--space-3) 0;
-}
-.cardArt svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: calc(var(--radius) - 6px);
-}
-.cardBody {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-4) var(--space-5) var(--space-5);
-  flex: 1;
-}
-.cardMeta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 26px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--module-color);
-}
-.cardTitle {
-  margin: 0;
-}
-.cardText {
-  margin: 0;
-  flex: 1;
-  color: var(--ink-muted);
-}
-.cardStages {
-  display: flex;
   gap: var(--space-4);
   list-style: none;
   margin: 0;
   padding: 0;
-  font-size: 0.85rem;
-  color: var(--ink-muted);
-}
-.cardStages li[data-status='done'] {
-  color: #005e5a;
-  font-weight: 600;
-}
-.cardButton {
-  margin-top: var(--space-2);
-  align-self: flex-start;
-}
-
-/* ---------------- Progress panel ---------------- */
-.progressPanel {
-  display: grid;
-  gap: var(--space-5);
-  padding: var(--space-6);
-  background: var(--surface);
-  box-shadow: var(--border-inset), var(--shadow-soft);
-  border-radius: var(--radius);
 }
 @media (min-width: 860px) {
-  .progressPanel {
-    grid-template-columns: 1fr 1.4fr;
-    align-items: center;
+  .lessons {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
-.progressTitle {
-  margin-bottom: var(--space-3);
+.lesson {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--border-inset);
+  overflow: hidden;
 }
-.progressNote {
-  margin: var(--space-3) 0 0;
+.lessonArt svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.lessonBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5) var(--space-5);
+  flex: 1;
+}
+.lessonNumber {
+  margin: 0;
   font-size: 0.85rem;
-  color: var(--ink-muted);
+  font-weight: 500;
+  color: var(--module-color);
 }
-.progressStats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-3);
+.lessonTitle {
   margin: 0;
+  font-size: 1.3rem;
 }
-.progressStats > div {
-  padding: var(--space-3) var(--space-4);
-  background: var(--surface-alt);
-  border-radius: var(--radius-sm);
-}
-.progressStats dt {
-  font-size: 0.8rem;
-  color: var(--ink-muted);
-}
-.progressStats dd {
+.lessonText {
   margin: 0;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: var(--ink-heading);
+  flex: 1;
+  color: var(--ink-muted);
+  font-size: 0.95rem;
 }
-.resetRow {
-  grid-column: 1 / -1;
+.stages {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-1) var(--space-4);
+  list-style: none;
+  margin: var(--space-2) 0 0;
+  padding: 0;
   font-size: 0.9rem;
 }
-.resetMessage {
+.stages a {
+  color: var(--ink);
+}
+.stages a:hover {
+  color: var(--uwc-blue);
+}
+.stages .stageDone {
   color: #005e5a;
   font-weight: 600;
 }
-
-/* ---------------- Teachers corner ---------------- */
-.teachers {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-5);
-  padding: var(--space-6);
-  background: var(--uwc-teal-tint);
-  border-radius: var(--radius);
+.lessonButton {
+  margin-top: var(--space-3);
+  align-self: flex-start;
 }
-.teachers p {
-  max-width: 620px;
-  margin-bottom: 0;
-}
-.teachersTitle {
-  margin-bottom: var(--space-2);
-}
-.aside {
-  margin: var(--space-5) 0 0;
-  font-size: 0.92rem;
+.reset {
+  margin: var(--space-4) 0 0;
+  font-size: 0.88rem;
   color: var(--ink-muted);
+}
+.linkButton {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--uwc-blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+/* ---------------- For teachers ---------------- */
+.teachersText {
+  max-width: 680px;
+  margin-bottom: var(--space-4);
 }
