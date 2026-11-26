@@ -76,3 +76,20 @@ test.describe('every playground steps forward and back', () => {
     })
   }
 })
+
+test('lessons and teacher notes list their references', async ({ page }) => {
+  for (const path of [
+    '/sorting/learn',
+    '/binary-search/learn',
+    '/recursion/learn',
+    '/teachers/recursion',
+  ]) {
+    await page.goto(path)
+    const refs = page.getByRole('region', { name: 'References and further reading' })
+    await expect(refs).toBeVisible()
+    await expect(refs.getByRole('link', { name: /CS50x, Week 3/ })).toHaveAttribute(
+      'href',
+      'https://cs50.harvard.edu/x/weeks/3/',
+    )
+  }
+})

@@ -405,3 +405,49 @@
 .below {
   margin-top: var(--space-7);
 }
+
+/* References */
+.references {
+  margin-top: var(--space-7);
+}
+.refGroup + .refGroup {
+  margin-top: var(--space-5);
+}
+.refHeading {
+  margin: 0 0 var(--space-3);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+.refList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+  max-width: var(--reading-width);
+}
+.prose .refList li + li,
+.refList li + li {
+  margin-top: 0;
+}
+.refItem {
+  display: grid;
+  gap: 2px;
+  padding-left: var(--space-3);
+  border-left: 3px solid var(--module-color, var(--uwc-teal));
+}
+.refTitle {
+  font-weight: 600;
+  color: var(--ink-heading);
+}
+.refTitle cite {
+  font-style: italic;
+}
+.refSource {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+}
+.refNote {
+  font-size: 0.92rem;
+}

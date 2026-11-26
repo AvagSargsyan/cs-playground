@@ -3,7 +3,9 @@ import { Link, useParams } from 'react-router'
 import { Button } from '../components/ui'
 import { IB_ALIGNMENT } from '../content/ib-alignment'
 import { isModuleId, MODULES, STAGE_IDS, STAGE_LABELS, type ModuleId } from '../content/modules'
+import { REFERENCES, TEACHING_REFERENCES } from '../content/references'
 import { LESSON_MINUTES, TEACHER_NOTES } from '../content/teachers'
+import { ReferenceList } from '../modules/shared/lesson'
 import { NotFound } from './NotFound'
 import s from './teachers.module.css'
 
@@ -190,6 +192,14 @@ function Notes({ moduleId }: { moduleId: ModuleId }) {
           </p>
         )}
       </section>
+
+      <ReferenceList
+        id="teacher-references"
+        groups={[
+          { heading: 'Teaching approach', items: TEACHING_REFERENCES },
+          ...REFERENCES[moduleId],
+        ]}
+      />
     </article>
   )
 }

@@ -19,6 +19,7 @@ import {
 import { Button } from '../../components/ui'
 import { cx } from '../../components/ui/cx'
 import type { ModuleId } from '../../content/modules'
+import { REFERENCES, type Reference, type ReferenceGroup } from '../../content/references'
 import { useMarkStageDone } from './useMarkStageDone'
 import s from './lesson.module.css'
 
@@ -59,6 +60,7 @@ export function LearnPage({
         <div className={s.learnMain}>
           <p className={s.stageIntro}>{intro}</p>
           {children}
+          <ReferenceList id="references" groups={REFERENCES[moduleId]} />
           <EndMarker onReach={() => setReachedEnd(true)} />
           {reachedEnd && !allAnswered && (
             <p className={s.endHint} role="status">
@@ -70,7 +72,7 @@ export function LearnPage({
           <nav className={s.toc} aria-label="On this page">
             <p className={s.tocTitle}>On this page</p>
             <ol>
-              {toc.map(([id, label]) => (
+              {[...toc, ['references', 'References'] as [string, string]].map(([id, label]) => (
                 <li key={id}>
                   <a href={`#${id}`}>{label}</a>
                 </li>
@@ -99,6 +101,54 @@ function EndMarker({ onReach }: { onReach: () => void }) {
     return () => io.disconnect()
   }, [onReach])
   return <div ref={ref} aria-hidden="true" style={{ height: 1 }} />
+}
+
+/** "References and further reading" block: grouped list of sources with links. */
+export function ReferenceList({
+  id,
+  groups,
+  title = 'References and further reading',
+}: {
+  id: string
+  groups: ReferenceGroup[]
+  title?: string
+}) {
+  return (
+    <section id={id} className={cx(s.section, s.references)} aria-labelledby={`${id}-h`}>
+      <h2 id={`${id}-h`} className={s.sectionTitle}>
+        {title}
+      </h2>
+      {groups.map((g) => (
+        <div key={g.heading} className={s.refGroup}>
+          <h3 className={s.refHeading}>{g.heading}</h3>
+          <ul className={s.refList}>
+            {g.items.map((r) => (
+              <ReferenceItem key={r.title} reference={r} />
+            ))}
+          </ul>
+        </div>
+      ))}
+    </section>
+  )
+}
+
+function ReferenceItem({ reference: r }: { reference: Reference }) {
+  return (
+    <li className={s.refItem}>
+      <span className={s.refTitle}>
+        {r.url ? (
+          <a href={r.url} target="_blank" rel="noopener noreferrer">
+            {r.title}
+            <span className="visually-hidden"> (opens in a new tab)</span>
+          </a>
+        ) : (
+          <cite>{r.title}</cite>
+        )}
+      </span>
+      <span className={s.refSource}>{r.source}</span>
+      <span className={s.refNote}>{r.note}</span>
+    </li>
+  )
 }
 
 /** A titled part of a Learn page. `id` is used for the "On this page" links. */
